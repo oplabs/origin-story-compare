@@ -8,7 +8,10 @@ import { ProjectSelector } from "../components/ProjectSelector";
 
 const Index: NextPage = () => (
   <Layout>
-    <Seo title="Home" description="This is the home page" />
+    <Seo
+      title="Compare Top NFT Projects | Data by Origin Protocol"
+      description="See how your favourite collection is doing and make informed buying decisions with side-by-side project data"
+    />
     <PageHeader>
       <PageTitle>Compare Top NFT Projects</PageTitle>
       <PageDescription>

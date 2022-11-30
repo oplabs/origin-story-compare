@@ -16,9 +16,9 @@ const ProjectSelect: FunctionComponent<ProjectSelectProps> = ({
     <select
       className="select select-primary select-bordered"
       onChange={(e) => onChange(e.target.value)}
-      value={value}
+      defaultValue={value}
     >
-      <option disabled selected value="">
+      <option disabled value="">
         {placeholder ? placeholder : `Select Project`}
       </option>
       {sortedProjects.map((project) => (

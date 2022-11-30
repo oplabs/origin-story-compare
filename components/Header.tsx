@@ -17,6 +17,7 @@ const Header: FunctionComponent = () => (
             alt="Origin Protocol"
             width={80}
             height={20}
+            style={{ width: "80px", height: "20px" }}
           />
         </a>
       </div>

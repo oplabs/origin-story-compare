@@ -1,7 +1,15 @@
 import { FunctionComponent, useState } from "react";
 import { ProjectSelect } from "./ProjectSelect";
 
-const ProjectSelector: FunctionComponent = () => {
+interface ProjectSelectorProps {
+  projectAPlaceholder?: string;
+  projectBPlaceholder?: string;
+}
+
+const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
+  projectAPlaceholder,
+  projectBPlaceholder,
+}) => {
   const [projectA, setProjectA] = useState("");
   const [projectB, setProjectB] = useState("");
 
@@ -12,7 +20,9 @@ const ProjectSelector: FunctionComponent = () => {
           <div className="text-neutral w-24 md:w-auto">Compare</div>
           <div className="w-full">
             <ProjectSelect
-              placeholder="Project A"
+              placeholder={
+                projectAPlaceholder ? projectAPlaceholder : "Project A"
+              }
               onChange={setProjectA}
               value={projectA}
             />
@@ -22,7 +32,9 @@ const ProjectSelector: FunctionComponent = () => {
           <div className="text-neutral w-24 md:w-auto">With</div>
           <div className="w-full">
             <ProjectSelect
-              placeholder="Project B"
+              placeholder={
+                projectBPlaceholder ? projectBPlaceholder : "Project B"
+              }
               onChange={setProjectB}
               value={projectB}
             />

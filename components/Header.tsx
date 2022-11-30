@@ -10,7 +10,7 @@ const Header: FunctionComponent = () => (
         <a
           className="text-black"
           href="https://originprotocol.com"
-          title="Origin Protcol"
+          title="Origin Protocol"
         >
           <Image
             src="/origin-logo.svg"

@@ -13,7 +13,7 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   projectBData,
   projectBLoading,
 }) => (
-  <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8">
+  <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
     <div className="flex-1">
       <Project data={projectAData} loading={projectALoading} />
     </div>

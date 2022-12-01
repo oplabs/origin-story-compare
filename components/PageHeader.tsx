@@ -1,13 +1,12 @@
 import type { FunctionComponent, ReactNode } from "react";
-import { Wrapper } from "./Wrapper";
 
 interface PageHeaderProps {
   children: ReactNode;
 }
 
 const PageHeader: FunctionComponent<PageHeaderProps> = ({ children }) => (
-  <header className="text-center space-y-4">
-    <Wrapper>{children}</Wrapper>
+  <header className="text-center space-y-4 max-w-2xl mx-auto px-6">
+    {children}
   </header>
 );
 

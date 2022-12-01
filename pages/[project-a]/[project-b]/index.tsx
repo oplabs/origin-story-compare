@@ -78,8 +78,8 @@ const Index: NextPage<IndexProps> = ({ projectA, projectB }) => {
       </PageHeader>
       <div className="mt-8">
         <ProjectSelector
-          projectAPlaceholder={projectA?.name}
-          projectBPlaceholder={projectB?.name}
+          projectAValue={projectA?.name}
+          projectBValue={projectB?.name}
         />
       </div>
       <div className="mt-8">

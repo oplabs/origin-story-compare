@@ -1,5 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { ProjectSelect } from "./ProjectSelect";
+import { useRouter } from "next/router";
+import { projects } from "../lib/projects";
 
 interface ProjectSelectorProps {
   projectAPlaceholder?: string;
@@ -12,6 +14,7 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
 }) => {
   const [projectA, setProjectA] = useState("");
   const [projectB, setProjectB] = useState("");
+  const router = useRouter();
 
   return (
     <div className="flex justify-center w-full md:w-auto">
@@ -41,7 +44,18 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
           </div>
         </div>
         <div>
-          <button className="btn btn-primary whitespace-nowrap w-full md:w-[110px]">
+          <button
+            className="btn btn-primary whitespace-nowrap w-full md:w-[110px]"
+            onClick={() => {
+              const projectAAddress = projects.find(
+                (project) => project.name === projectA
+              )?.address;
+              const projectBAddress = projects.find(
+                (project) => project.name === projectB
+              )?.address;
+              router.push(`/${projectAAddress}/${projectBAddress}`);
+            }}
+          >
             Get data
           </button>
         </div>

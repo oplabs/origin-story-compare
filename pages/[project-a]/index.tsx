@@ -38,13 +38,14 @@ interface IndexProps {
 }
 
 const Index: NextPage<IndexProps> = ({ projectA }) => {
-  const projectAData = useProjectData(projectA.address);
-  console.log(projectAData);
+  const { projectData: projectAData, loading: projectALoading } =
+    useProjectData(projectA.address);
+
   return (
     <Layout>
       <Seo
-        title="Compare Top NFT Projects | Data by Origin Protocol"
-        description="See how your favourite collection is doing and make informed buying decisions with side-by-side project data"
+        title={`Comparing ${projectA?.name} with... | Data by Origin Protocol`}
+        description={`See how your ${projectA?.name} is doing and make informed buying decisions with side-by-side project data`}
       />
       <PageHeader>
         <PageTitle>Comparing {projectA?.name} with...</PageTitle>
@@ -53,7 +54,10 @@ const Index: NextPage<IndexProps> = ({ projectA }) => {
         <ProjectSelector projectAPlaceholder={projectA?.name} />
       </div>
       <div className="mt-8">
-        <ProjectComparison projectAData={projectAData} />
+        <ProjectComparison
+          projectAData={projectAData}
+          projectALoading={projectALoading}
+        />
       </div>
     </Layout>
   );

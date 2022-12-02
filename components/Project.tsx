@@ -60,7 +60,9 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
             />
           </figure>
           <div className="space-y-2 lg:space-y-1">
-            <div className="card-title">{data?.contract?.collection?.name}</div>
+            <div className="font-medium text-2xl">
+              {data?.contract?.collection?.name}
+            </div>
             <div className="-ml-4 flex justify-start divide-x">
               <Stat
                 value={formatNumber(data?.contractStats?.totalSupply)}

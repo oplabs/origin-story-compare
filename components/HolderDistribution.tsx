@@ -1,8 +1,5 @@
 import React from "react";
 import { ParentSize } from "@visx/responsive";
-
-import { formatNumber } from "../lib/utils";
-
 import { BarChart } from "./BarChart";
 
 export const HolderDistribution = ({
@@ -12,7 +9,7 @@ export const HolderDistribution = ({
 }) => {
   return (
     <div>
-      <div className="text-xl font-medium mb-2">Distribution of holders</div>
+      <div className="text-xl font-medium mb-2">Distribution Of Holders</div>
       <div className="p-4 card border rounded-xl border-gray-150 dark:border-dark-700 bg-white dark:bg-black">
         <ParentSize>
           {(parent) => (

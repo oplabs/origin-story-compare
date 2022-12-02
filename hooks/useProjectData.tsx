@@ -6,6 +6,7 @@ const useProjectData = (address:string) => {
     const [projectData, setProjectData] = useState({})
     
     useEffect(() => {
+        setLoading(true)
         const fetchProject = async () => {
             let projectData = {}
             await Promise.all(API_PROJECT_URLS.map(async (project) => {

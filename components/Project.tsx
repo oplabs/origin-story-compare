@@ -2,6 +2,8 @@ import type { FunctionComponent } from "react";
 import Image from "next/image";
 import { ethers } from "ethers";
 import { formatNumber } from "../lib/utils";
+import { AveragePrice } from "./AveragePrice";
+import { HolderStats } from "./HolderStats";
 interface StatProps {
   value: number | string;
   label: string;
@@ -10,14 +12,14 @@ interface StatProps {
 
 const Stat: FunctionComponent<StatProps> = ({ value, label, showEth }) => {
   return (
-    <div className="pl-4">
-      <div className="flex space-x-1 items-center ">
+    <div className="px-4">
+      <div className="flex space-x-1 items-center">
         {showEth && (
           <div className="flex-shrink-0">
             <Image src="/eth-icon.svg" alt={label} width={9} height={9} />
           </div>
         )}
-        <div className="text-xl text-primary font-medium">{value}</div>
+        <div className="text-lg text-primary font-medium">{value}</div>
       </div>
       <div className="text-xs text-neutral">{label}</div>
     </div>
@@ -36,11 +38,13 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
     );
   }
 
+  console.log(data);
+
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">
       <div className="card-body space-y-6">
-        <div className="flex space-x-4 items-center">
-          <figure className="rounded-full border flex-shrink-0">
+        <div className="space-y-2 lg:flex lg:space-x-4 items-center">
+          <figure className="w-24 h-24 rounded-full border flex-shrink-0">
             <Image
               src={data?.contract?.collection?.image_url}
               alt={data?.contract?.collection?.name}
@@ -48,9 +52,9 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
               height={100}
             />
           </figure>
-          <div className="space-y-2">
+          <div className="space-y-2 lg:space-y-1">
             <div className="card-title">{data?.contract?.collection?.name}</div>
-            <div className="-ml-4 flex space-x-4 justify-start divide-x">
+            <div className="-ml-4 flex justify-start divide-x">
               <Stat
                 value={formatNumber(data?.contractStats?.totalSupply)}
                 label="Items"
@@ -76,10 +80,8 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
             </div>
           </div>
         </div>
-        <div className="card border p-4">
-          <div>1234</div>
-          <div>Items</div>
-        </div>
+        <AveragePrice allSalesByDay={data?.salesByDay} />
+        <HolderStats highConvictionHolders={data?.highConvictionHolders} />
       </div>
     </div>
   );

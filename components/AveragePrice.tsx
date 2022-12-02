@@ -3,14 +3,25 @@ import Image from "next/image";
 import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 
+interface AllSalesByDay {
+    byDay: SalesByDay[];
+    stats: object;
+}
+
+interface SalesByDay {
+    date: string;
+    averagePrice: number;
+    value: number;
+}
+
 export const AveragePrice = ({
   allSalesByDay,
 }: {
-  allSalesByDay: object | undefined;
+  allSalesByDay: AllSalesByDay;
 }) => {
   const [range, setRange] = useState("1M");
 
-  let salesByDay;
+  let salesByDay:SalesByDay[];
   if (range === "3M") {
     salesByDay = allSalesByDay?.byDay.slice(-90);
   } else if (range === "1M") {
@@ -22,6 +33,7 @@ export const AveragePrice = ({
   }
   salesByDay = salesByDay?.map(({ date, averagePrice }) => ({
     date,
+    averagePrice,
     value: Math.round(averagePrice * 10000) / 10000,
   }));
 

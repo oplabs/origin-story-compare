@@ -37,9 +37,9 @@ interface IndexProps {
   projectA: Project;
 }
 
-const Index: NextPage<IndexProps> = ({ projectA }) => {
+const Index: NextPage<IndexProps> = ({ projectA = {} }) => {
   const { projectData: projectAData, loading: projectALoading } =
-    useProjectData(projectA.address);
+    useProjectData(projectA?.address);
 
   return (
     <Layout>

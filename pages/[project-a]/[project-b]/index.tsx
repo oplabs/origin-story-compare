@@ -58,12 +58,12 @@ interface IndexProps {
   projectB: Project;
 }
 
-const Index: NextPage<IndexProps> = ({ projectA, projectB }) => {
+const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
   const { projectData: projectAData, loading: projectALoading } =
-    useProjectData(projectA.address);
+    useProjectData(projectA?.address);
 
   const { projectData: projectBData, loading: projectBLoading } =
-    useProjectData(projectB.address);
+    useProjectData(projectB?.address);
 
   return (
     <Layout>

@@ -18,7 +18,7 @@ export const HolderStats = ({
           <>{formatNumber(totalHolders)}</>
         </Stat>
         <Stat label="Unique holders">
-          <>{formatNumber(uniqueHolders)}</>
+          <>{uniqueHolders}%</>
         </Stat>
         <Stat label="High conviction holders" description="(10+ holdings)">
           <>{formatNumber(highConvictionHolders)}</>

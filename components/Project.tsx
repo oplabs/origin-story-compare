@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { formatNumber } from "../lib/utils";
 import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
+import { HolderDistribution } from "./HolderDistribution";
 interface StatProps {
   value: number | string;
   label: string;
@@ -38,7 +39,13 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
     );
   }
 
-  console.log(data);
+  //console.log(data);
+
+  const totalHolders = data?.holderDistribution?.reduce((m, o) => m + o[1], 0);
+  const uniqueHoldersPercentage = (
+    (totalHolders / data?.contractStats?.totalSupply) *
+    100
+  ).toFixed(0);
 
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">
@@ -81,7 +88,12 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
           </div>
         </div>
         <AveragePrice allSalesByDay={data?.salesByDay} />
-        <HolderStats highConvictionHolders={data?.highConvictionHolders} />
+        <HolderStats
+          totalHolders={totalHolders}
+          uniqueHolders={uniqueHoldersPercentage}
+          highConvictionHolders={data?.highConvictionHolders}
+        />
+        <HolderDistribution data={data?.holderDistribution} />
       </div>
     </div>
   );

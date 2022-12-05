@@ -10,8 +10,8 @@ import {
 } from "@visx/xychart";
 
 interface Item {
-    date: Date;
-    value: number;
+  date: Date;
+  value: number;
 }
 
 const accessors = {
@@ -19,7 +19,7 @@ const accessors = {
   yAccessor: (d: Item) => d.value,
 };
 
-export const AreaChart = ({ data } : {data: Array<Item>}) => {
+export const AreaChart = ({ data }: { data: Array<Item> }) => {
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
     colors: ["hsl(var(--p))"],
@@ -73,14 +73,14 @@ export const AreaChart = ({ data } : {data: Array<Item>}) => {
           if (!tooltipData?.nearestDatum?.key || !colorScale) return null;
           return (
             <>
-            <div>
+              <div>
                 <>
-              <div>{tooltipData.nearestDatum.key}</div>
-              {accessors.xAccessor(tooltipData.nearestDatum.datum as Item)}
-              {": "}
-              {accessors.yAccessor(tooltipData.nearestDatum.datum as Item)}
-              </>
-            </div>
+                  <div>{tooltipData.nearestDatum.key}</div>
+                  {accessors.xAccessor(tooltipData.nearestDatum.datum as Item)}
+                  {": "}
+                  {accessors.yAccessor(tooltipData.nearestDatum.datum as Item)}
+                </>
+              </div>
             </>
           );
         }}

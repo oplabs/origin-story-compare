@@ -1,10 +1,14 @@
-import type { FunctionComponent } from "react";
+import type { FunctionComponent, PropsWithChildren } from "react";
 import Image from "next/image";
 import { ethers } from "ethers";
+import Skeleton from "react-loading-skeleton";
 import { formatNumber } from "../lib/utils";
 import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
+
+import "react-loading-skeleton/dist/skeleton.css";
+
 interface StatProps {
   value: number | string;
   label: string;
@@ -27,6 +31,54 @@ const Stat: FunctionComponent<StatProps> = ({ value, label, showEth }) => {
   );
 };
 
+function InlineWrapperWithMargin({ children }: PropsWithChildren<unknown>) {
+  return <span className="px-1">{children}</span>;
+}
+
+const ProjectSkeleton: FunctionComponent = () => (
+  <div className="card border bg-base-100 w-full min-h-[200px]">
+    <div className="card-body space-y-6">
+      <div className="space-y-2 lg:flex lg:space-x-4 lg:space-y-0 items-center">
+        <figure className="w-24 h-24 rounded-full border flex-shrink-0">
+          <Skeleton circle height={100} width={100} />
+        </figure>
+        <div className="space-y-2 lg:space-y-1">
+          <div className="font-medium text-2xl w-[48.5%]">
+            <Skeleton />
+          </div>
+          <div className="-ml-1 flex justify-start divide-x">
+            <Skeleton
+              count={4}
+              wrapper={InlineWrapperWithMargin}
+              inline
+              width={100}
+              height={45}
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="font-medium text-2xl w-[48.5%] mb-1">
+          <Skeleton />
+        </div>
+        <Skeleton height={290} width={"100%"} />
+      </div>
+      <div>
+        <div className="font-medium text-2xl w-[48.5%] mb-1">
+          <Skeleton />
+        </div>
+        <Skeleton height={90} width={"100%"} />
+      </div>
+      <div>
+        <div className="font-medium text-2xl w-[48.5%] mb-1">
+          <Skeleton />
+        </div>
+        <Skeleton height={290} width={"100%"} />
+      </div>
+    </div>
+  </div>
+);
+
 interface ProjectProps {
   data: object | undefined;
   loading: boolean | undefined;
@@ -34,9 +86,7 @@ interface ProjectProps {
 
 const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
   if (loading || (!loading && !data)) {
-    return (
-      <div className="card border w-full bg-gray-100 min-h-[200px] md:h-full" />
-    );
+    return <ProjectSkeleton />;
   }
 
   //console.log(data);

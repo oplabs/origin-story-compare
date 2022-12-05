@@ -4,7 +4,6 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Text } from "@visx/text";
 import { AxisBottom, AxisLeft } from "@visx/axis";
-import { GridRows } from "@visx/grid";
 
 const verticalMargin = 60;
 const horizontalMargin = 20;

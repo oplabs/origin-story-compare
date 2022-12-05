@@ -4,14 +4,14 @@ import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 
 interface AllSalesByDay {
-    byDay: SalesByDay[];
-    stats: object;
+  byDay: SalesByDay[];
+  stats: object;
 }
 
 interface SalesByDay {
-    date: string;
-    averagePrice: number;
-    value: number;
+  date: string;
+  averagePrice: number;
+  value: number;
 }
 
 export const AveragePrice = ({
@@ -21,7 +21,7 @@ export const AveragePrice = ({
 }) => {
   const [range, setRange] = useState("1M");
 
-  let salesByDay:SalesByDay[];
+  let salesByDay: SalesByDay[];
   if (range === "3M") {
     salesByDay = allSalesByDay?.byDay.slice(-90);
   } else if (range === "1M") {

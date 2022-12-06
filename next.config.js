@@ -14,7 +14,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'i.seadn.io',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.story.xyz',
+      },
     ]
   }
 }

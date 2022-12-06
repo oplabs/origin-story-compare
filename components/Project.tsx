@@ -6,6 +6,7 @@ import { formatNumber } from "../lib/utils";
 import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
+import { TopHolders } from "./TopHolders";
 
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -68,6 +69,12 @@ const ProjectSkeleton: FunctionComponent = () => (
           <Skeleton />
         </div>
         <Skeleton height={90} width={"100%"} />
+      </div>
+      <div>
+        <div className="font-medium text-2xl w-[48.5%] mb-1">
+          <Skeleton />
+        </div>
+        <Skeleton height={290} width={"100%"} />
       </div>
       <div>
         <div className="font-medium text-2xl w-[48.5%] mb-1">
@@ -146,6 +153,10 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
           highConvictionHolders={data?.highConvictionHolders}
         />
         <HolderDistribution data={data?.holderDistribution} />
+        <TopHolders
+          data={data?.topHolders?.slice(0, 5)}
+          contract={data?.contract?.address}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import type { FunctionComponent } from "react";
 import { useState } from "react";
 import { Project } from "./Project";
-import { ComingledData } from "./ComingledData";
+import { CombinedData } from "./CombinedData";
 interface ProjectComparisonProps {
   projectAData: object;
   projectALoading: boolean;
@@ -15,9 +15,7 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   projectBData,
   projectBLoading,
 }) => {
-  const [view, setView] = useState<"side-by-side" | "comingled">(
-    "side-by-side"
-  );
+  const [view, setView] = useState<"side-by-side" | "combined">("side-by-side");
 
   const Tabs: FunctionComponent = () => (
     <div className="flex items-center justify-center px-4 mb-6 space-x-2 ">
@@ -30,20 +28,20 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
           Side by Side
         </button>
         <button
-          className={`tab ${view === "comingled" && " tab-active"}`}
-          onClick={() => setView("comingled")}
+          className={`tab ${view === "combined" && " tab-active"}`}
+          onClick={() => setView("combined")}
         >
-          Comingled
+          Combined
         </button>
       </div>
     </div>
   );
 
-  if (view === "comingled") {
+  if (view === "combined") {
     return (
       <>
         <Tabs />
-        <ComingledData
+        <CombinedData
           projectAData={projectAData}
           projectALoading={projectALoading}
           projectBData={projectBData}

@@ -1,6 +1,7 @@
 import type { FunctionComponent } from "react";
 import { useState } from "react";
 import { Project } from "./Project";
+import { ComingledData } from "./ComingledData";
 interface ProjectComparisonProps {
   projectAData: object;
   projectALoading: boolean;
@@ -42,9 +43,12 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
     return (
       <>
         <Tabs />
-        <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
-          <div className="flex-1">Comingled charts and data</div>
-        </div>
+        <ComingledData
+          projectAData={projectAData}
+          projectALoading={projectALoading}
+          projectBData={projectBData}
+          projectBLoading={projectBLoading}
+        />
       </>
     );
   }

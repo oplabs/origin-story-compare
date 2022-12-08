@@ -21,24 +21,6 @@ const ComingledDataSkeleton: FunctionComponent = () => (
             </div>
             <Skeleton height={290} width={"100%"} />
           </div>
-          <div>
-            <div className="font-medium text-2xl w-[48.5%] mb-1">
-              <Skeleton />
-            </div>
-            <Skeleton height={90} width={"100%"} />
-          </div>
-          <div>
-            <div className="font-medium text-2xl w-[48.5%] mb-1">
-              <Skeleton />
-            </div>
-            <Skeleton height={290} width={"100%"} />
-          </div>
-          <div>
-            <div className="font-medium text-2xl w-[48.5%] mb-1">
-              <Skeleton />
-            </div>
-            <Skeleton height={290} width={"100%"} />
-          </div>
         </div>
       </div>
     </div>

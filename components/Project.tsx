@@ -7,9 +7,9 @@ import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
 import { TopHolders } from "./TopHolders";
+import { PercentageBluechipHolders } from "./PercentageBluechipHolders";
 
 import "react-loading-skeleton/dist/skeleton.css";
-
 interface StatProps {
   value: number | string;
   label: string;
@@ -96,7 +96,7 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
     return <ProjectSkeleton />;
   }
 
-  //console.log(data);
+  console.log(data);
 
   const totalHolders = data?.holderDistribution?.reduce((m, o) => m + o[1], 0);
   const uniqueHoldersPercentage = (

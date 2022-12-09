@@ -7,6 +7,7 @@ import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
 import { TopHolders } from "./TopHolders";
+import { CreateImageWrapper } from "./CreateImageWrapper";
 
 import "react-loading-skeleton/dist/skeleton.css";
 interface StatProps {
@@ -101,6 +102,10 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
     100
   ).toFixed(0);
 
+  const imageFooter = `${
+    data?.contract?.collection?.name
+  } at ${new Date().toLocaleString()}`;
+
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">
       <div className="card-body space-y-6">
@@ -143,17 +148,25 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
             </div>
           </div>
         </div>
-        <AveragePrice allSalesByDay={data?.salesByDay} />
-        <HolderStats
-          totalHolders={totalHolders}
-          uniqueHolders={uniqueHoldersPercentage}
-          highConvictionHolders={data?.highConvictionHolders}
-        />
-        <HolderDistribution data={data?.holderDistribution} />
-        <TopHolders
-          data={data?.topHolders?.slice(0, 5)}
-          contract={data?.contract?.address}
-        />
+        <CreateImageWrapper footer={imageFooter}>
+          <AveragePrice allSalesByDay={data?.salesByDay} />
+        </CreateImageWrapper>
+        <CreateImageWrapper footer={imageFooter}>
+          <HolderStats
+            totalHolders={totalHolders}
+            uniqueHolders={uniqueHoldersPercentage}
+            highConvictionHolders={data?.highConvictionHolders}
+          />
+        </CreateImageWrapper>
+        <CreateImageWrapper footer={imageFooter}>
+          <HolderDistribution data={data?.holderDistribution} />
+        </CreateImageWrapper>
+        <CreateImageWrapper footer={imageFooter}>
+          <TopHolders
+            data={data?.topHolders?.slice(0, 5)}
+            contract={data?.contract?.address}
+          />
+        </CreateImageWrapper>
       </div>
     </div>
   );

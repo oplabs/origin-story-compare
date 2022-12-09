@@ -1807,6 +1807,11 @@ dom-helpers@^3.4.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
+downloadjs@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/downloadjs/-/downloadjs-1.4.7.tgz#f69f96f940e0d0553dac291139865a3cd0101e3c"
+  integrity sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==
+
 electron-to-chromium@^1.4.251:
   version "1.4.284"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"
@@ -2433,6 +2438,11 @@ hmac-drbg@^1.0.1:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+html-to-image@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.11.1.tgz#58d6e0ce609d78e40023e6ff48b3d512f93fff73"
+  integrity sha512-W6ZXctQQfhFA2tCcDbK1jCywwT9Oo1ucyXwlxku3zHacyhLPeMhs+h2OLBNeoYrPSgzgeOqhhSs+MbEmL2fDLw==
 
 ignore@^5.2.0:
   version "5.2.1"

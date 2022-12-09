@@ -2,6 +2,7 @@ import type { FunctionComponent } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { HolderDistribution } from "./CombinedData/HolderDistribution";
+import { CreateImageWrapper } from "./CreateImageWrapper";
 
 interface CombinedDataProps {
   projectAData: object;
@@ -35,6 +36,10 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
 }) => {
   if (projectALoading || projectBLoading) return <CombinedDataSkeleton />;
 
+  const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${
+    projectBData?.contract?.collection?.name
+  } at ${new Date().toLocaleString()}`;
+
   const holderDistributionData = projectAData?.holderDistribution.map((d) => ({
     label: d[0],
     dataPoints: [{ label: projectAData?.contract?.name, value: d[1] }],
@@ -59,7 +64,9 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
       <div className="flex-1">
         <div className="card border bg-base-100 w-full min-h-[200px]">
           <div className="card-body space-y-6">
-            <HolderDistribution data={holderDistributionData} />
+            <CreateImageWrapper footer={imageFooter}>
+              <HolderDistribution data={holderDistributionData} />
+            </CreateImageWrapper>
           </div>
         </div>
       </div>

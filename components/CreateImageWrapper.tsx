@@ -1,6 +1,8 @@
 import { ReactNode, FunctionComponent, useState, useRef } from "react";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
+import { Download } from "./Icons/Download";
+import { Twitter } from "./Icons/Twitter";
 
 interface CreateImageWrapperProps {
   children: ReactNode;
@@ -72,9 +74,17 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
       >
         <div ref={imageWrapper}>{children}</div>
         {isHovering && (
-          <div className="absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex items-center justify-center -m-3">
-            <button className="btn" onClick={handleCreateImage}>
-              Create image for Twitter
+          <div className="absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex items-center justify-center -m-3 space-x-4">
+            <button
+              className="btn space-x-1"
+              onClick={() => console.log("test")}
+            >
+              <Twitter />
+              <span>Share on Twitter</span>
+            </button>
+            <button className="btn space-x-1" onClick={handleCreateImage}>
+              <Download />
+              <span>Download image</span>
             </button>
           </div>
         )}

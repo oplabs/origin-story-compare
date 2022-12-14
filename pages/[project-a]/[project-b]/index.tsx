@@ -68,9 +68,11 @@ const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
   return (
     <Layout>
       <Seo
-        title={`Comparing ${projectA?.name} with ${projectB?.name} | Data by Origin Protocol`}
-        ogTitle={`Comparing ${projectA?.name} with ${projectB?.name}`}
+        title={`Compare ${projectA?.name} with ${projectB?.name} | Data by Origin Protocol`}
+        ogTitle={`Compare ${projectA?.name} with ${projectB?.name}`}
         description={`See how your ${projectA?.name} and ${projectB?.name} are doing and make informed buying decisions with side-by-side project data`}
+        contractA={projectA?.address}
+        contractB={projectB?.address}
       />
       <PageHeader>
         <PageTitle>

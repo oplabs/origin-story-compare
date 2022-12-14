@@ -5,14 +5,24 @@ interface SeoProps {
   title: string;
   ogTitle: string;
   description: string;
+  contractA?: string;
+  contractB?: string;
 }
 
-const Seo: FunctionComponent<SeoProps> = ({ title, ogTitle, description }) => {
+const Seo: FunctionComponent<SeoProps> = ({
+  title,
+  ogTitle,
+  description,
+  contractA,
+  contractB,
+}) => {
   const seoImage = `${
     process.env.NEXT_PUBLIC_VERCEL_URL
       ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
       : ""
-  }/api/og${ogTitle ? `?title=${ogTitle}` : ""}`;
+  }/api/og${ogTitle ? `?title=${ogTitle}` : ""}${
+    contractA ? `&contract-a=${contractA}` : ""
+  }${contractB ? `&contract-b=${contractB}` : ""}`;
 
   return (
     <Head>

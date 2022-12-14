@@ -24,7 +24,6 @@ const ComparativeBarChart = ({
   height = 800,
   data,
 }: ComparativeBarChartProps) => {
-  console.log(data);
 
   const xMax = width - horizontalMargin;
   const yMax = height - 80;

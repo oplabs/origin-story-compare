@@ -14,8 +14,10 @@ const Seo: FunctionComponent<SeoProps> = ({ title, ogTitle, description }) => (
     <meta
       property="og:image"
       content={`${
-        process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-      }/api/og?title=${ogTitle}`}
+        process.env.NEXT_PUBLIC_VERCEL_URL
+          ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
+          : ""
+      }/api/og${ogTitle ? `?title=${ogTitle}` : ""}`}
     />
     <link rel="icon" href="/favicon.ico" />
   </Head>

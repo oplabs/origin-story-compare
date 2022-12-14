@@ -93,7 +93,7 @@ export default async function handler(req: NextRequest) {
             height={500}
             width={500}
           />
-          <span tw="mr-3 text-sm text-gray-800">vs</span>
+          <span tw="mr-3 text-lg text-gray-800">vs</span>
           <img
             tw="rounded-full h-36 w-36 border"
             alt={contractB}
@@ -103,7 +103,7 @@ export default async function handler(req: NextRequest) {
           />
         </div>
         <div tw="text-6xl max-w-[680px] leading-snug mb-5">{title}</div>
-        <span tw="text-sm text-gray-800 mb-2">Data by</span>
+        <span tw="text-lg text-gray-800 mb-2">Data by</span>
 
         <img
           alt="Origin Protocol"

@@ -89,9 +89,10 @@ const ProjectSkeleton: FunctionComponent = () => (
 interface ProjectProps {
   data: object | undefined;
   loading: boolean | undefined;
+  name: string | undefined;
 }
 
-const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
+const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
   if (loading || (!loading && !data)) {
     return <ProjectSkeleton />;
   }
@@ -101,6 +102,8 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
     (totalHolders / data?.contractStats?.totalSupply) *
     100
   ).toFixed(0);
+
+  const tweetTextEnd = `of ${name} at ${new Date().toLocaleString()}`;
 
   const imageFooter = `${
     data?.contract?.collection?.name
@@ -148,20 +151,20 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading }) => {
             </div>
           </div>
         </div>
-        <CreateImageWrapper footer={imageFooter}>
+        <CreateImageWrapper tweetText={`Average price ${tweetTextEnd}`}footer={imageFooter}>
           <AveragePrice allSalesByDay={data?.salesByDay} />
         </CreateImageWrapper>
-        <CreateImageWrapper footer={imageFooter}>
+        <CreateImageWrapper tweetText={`Holder stats ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
           <HolderStats
             totalHolders={totalHolders}
             uniqueHolders={uniqueHoldersPercentage}
             highConvictionHolders={data?.highConvictionHolders}
           />
         </CreateImageWrapper>
-        <CreateImageWrapper footer={imageFooter}>
+        <CreateImageWrapper tweetText={`Holder distribution ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
           <HolderDistribution data={data?.holderDistribution} />
         </CreateImageWrapper>
-        <CreateImageWrapper footer={imageFooter}>
+        <CreateImageWrapper tweetText={`Top holders ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
           <TopHolders
             data={data?.topHolders?.slice(0, 5)}
             contract={data?.contract?.address}

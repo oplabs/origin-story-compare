@@ -91,6 +91,8 @@ const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
           projectALoading={projectALoading}
           projectBData={projectBData}
           projectBLoading={projectBLoading}
+          projectAName={projectA?.name}
+          projectBName={projectB?.name}
         />
       </div>
     </Layout>

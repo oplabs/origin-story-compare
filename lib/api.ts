@@ -17,6 +17,9 @@ const API_PROJECT_URLS = [
 
 const OPENSEA_API_CONTRACT_URL = `https://api.opensea.io/api/v1/asset_contract/`
 
+const INTERNAL_API_BASE_URL = `/api`;
+const INTERNAL_API_TWITTER_URL = `${INTERNAL_API_BASE_URL}/twitter`;
+
 export {
     API_BASE_URL,
     API_STATS_BASE_URL,
@@ -28,4 +31,6 @@ export {
     API_COLLECTIONS_URL,
     API_PROJECT_URLS,
     OPENSEA_API_CONTRACT_URL,
+    INTERNAL_API_BASE_URL,
+    INTERNAL_API_TWITTER_URL,
 }

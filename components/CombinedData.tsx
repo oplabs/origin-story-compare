@@ -9,6 +9,8 @@ interface CombinedDataProps {
   projectALoading: boolean;
   projectBData?: object;
   projectBLoading?: boolean;
+  projectAName: string;
+  projectBName?: string;
 }
 
 const CombinedDataSkeleton: FunctionComponent = () => (
@@ -33,8 +35,12 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
   projectALoading,
   projectBData,
   projectBLoading,
+  projectAName,
+  projectBName,
 }) => {
   if (projectALoading || projectBLoading) return <CombinedDataSkeleton />;
+
+  const tweetTextEnd = `of ${projectAName} vs. ${projectBName} at ${new Date().toLocaleString()}`;
 
   const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${
     projectBData?.contract?.collection?.name
@@ -64,7 +70,7 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
       <div className="flex-1">
         <div className="card border bg-base-100 w-full min-h-[200px]">
           <div className="card-body space-y-6">
-            <CreateImageWrapper footer={imageFooter}>
+            <CreateImageWrapper footer={imageFooter} tweetText={`Holder distribution ${tweetTextEnd}`}>
               <HolderDistribution data={holderDistributionData} />
             </CreateImageWrapper>
           </div>

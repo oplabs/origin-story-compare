@@ -3,17 +3,22 @@ import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
 import { Download } from "./Icons/Download";
 import { Twitter } from "./Icons/Twitter";
-
+import { Loading } from "./Icons/Loading";
+import { Check } from "./Icons/Check";
+import { INTERNAL_API_TWITTER_URL } from "../lib/api";
 interface CreateImageWrapperProps {
   children: ReactNode;
   footer?: string;
+  tweetText?: string;
 }
 
 const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   children,
   footer,
+  tweetText,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [twitterStatus, setTwitterStatus] = useState<'' | 'loading' | 'success'>('');
   const imageWrapper = useRef<HTMLDivElement>(null);
   const cloneWrapper = useRef<HTMLDivElement>(null);
 
@@ -48,7 +53,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
     clone.appendChild(watermark);
     cloneWrapper.current.appendChild(clone);
 
-    htmlToImage
+    return await htmlToImage
       .toPng(clone, {
         height: cloneWrapper.current.clientHeight + 40,
         width: cloneWrapper.current.clientWidth + 40,
@@ -60,9 +65,35 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
         cacheBust: true,
       })
       .then(async (dataUrl) => {
-        await download(dataUrl, "data-by-origin-protocol.png");
         cloneWrapper?.current?.removeChild(clone);
+        return dataUrl;
       });
+  };
+
+  const handleDownloadImage = async () => {
+    const dataUrl = await handleCreateImage();
+    await download(dataUrl, "data-by-origin-protocol.png");
+  };
+
+  const handleShareOnTwitter = async () => {
+    // Create image
+    const dataUrl = await handleCreateImage();
+    // Post image to @databyorigin bot
+    setTwitterStatus('loading')
+    const res = await fetch(`${INTERNAL_API_TWITTER_URL}`, {
+      method: "POST",
+      body: JSON.stringify({
+        image: dataUrl,
+        tweetText: tweetText || '',
+      }),
+    });
+    const json = await res.json();
+    if (json.success) {
+    setTwitterStatus('success')
+    } else {
+      setTwitterStatus('')
+    }
+    // @TODO: Open Twitter dialog using deep link with text and image URL
   };
 
   return (
@@ -77,12 +108,14 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
           <div className="absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex items-center justify-center -m-3 space-x-4">
             <button
               className="btn space-x-1"
-              onClick={() => console.log("test")}
+              onClick={handleShareOnTwitter}
             >
-              <Twitter />
+              { twitterStatus === '' && <Twitter />}
+              { twitterStatus === 'loading' && <Loading />}
+              { twitterStatus === 'success' && <Check />}
               <span>Share on Twitter</span>
             </button>
-            <button className="btn space-x-1" onClick={handleCreateImage}>
+            <button className="btn space-x-1" onClick={handleDownloadImage}>
               <Download />
               <span>Download image</span>
             </button>

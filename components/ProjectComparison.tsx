@@ -7,6 +7,8 @@ interface ProjectComparisonProps {
   projectALoading: boolean;
   projectBData?: object;
   projectBLoading?: boolean;
+  projectAName: string;
+  projectBName?: string;
 }
 
 const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
@@ -14,6 +16,8 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   projectALoading,
   projectBData,
   projectBLoading,
+  projectAName,
+  projectBName,
 }) => {
   const [view, setView] = useState<"side-by-side" | "combined">("side-by-side");
 
@@ -46,6 +50,8 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
           projectALoading={projectALoading}
           projectBData={projectBData}
           projectBLoading={projectBLoading}
+          projectAName={projectAName}
+          projectBName={projectBName}
         />
       </>
     );
@@ -56,10 +62,10 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
       <Tabs />
       <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
         <div className="flex-1">
-          <Project data={projectAData} loading={projectALoading} />
+          <Project data={projectAData} loading={projectALoading} name={projectAName} />
         </div>
         <div className="flex-1">
-          <Project data={projectBData} loading={projectBLoading} />
+          <Project data={projectBData} loading={projectBLoading} name={projectBName} />
         </div>
       </div>
     </>

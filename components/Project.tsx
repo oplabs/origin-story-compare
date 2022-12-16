@@ -160,7 +160,6 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
         <CreateImageWrapper
           tweetText={`Holder stats ${tweetTextEnd}`}
           footer={imageFooter}
-          footer={imageFooter}
         >
           <HolderStats
             totalHolders={totalHolders}
@@ -171,13 +170,11 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
         <CreateImageWrapper
           tweetText={`Holder distribution ${tweetTextEnd}`}
           footer={imageFooter}
-          footer={imageFooter}
         >
           <HolderDistribution data={data?.holderDistribution} />
         </CreateImageWrapper>
         <CreateImageWrapper
           tweetText={`Top holders ${tweetTextEnd}`}
-          footer={imageFooter}
           footer={imageFooter}
         >
           <TopHolders

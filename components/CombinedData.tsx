@@ -70,7 +70,10 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
       <div className="flex-1">
         <div className="card border bg-base-100 w-full min-h-[200px]">
           <div className="card-body space-y-6">
-            <CreateImageWrapper footer={imageFooter} tweetText={`Holder distribution ${tweetTextEnd}`}>
+            <CreateImageWrapper
+              footer={imageFooter}
+              tweetText={`Holder distribution ${tweetTextEnd}`}
+            >
               <HolderDistribution data={holderDistributionData} />
             </CreateImageWrapper>
           </div>

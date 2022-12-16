@@ -151,20 +151,35 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
             </div>
           </div>
         </div>
-        <CreateImageWrapper tweetText={`Average price ${tweetTextEnd}`}footer={imageFooter}>
+        <CreateImageWrapper
+          tweetText={`Average price ${tweetTextEnd}`}
+          footer={imageFooter}
+        >
           <AveragePrice allSalesByDay={data?.salesByDay} />
         </CreateImageWrapper>
-        <CreateImageWrapper tweetText={`Holder stats ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
+        <CreateImageWrapper
+          tweetText={`Holder stats ${tweetTextEnd}`}
+          footer={imageFooter}
+          footer={imageFooter}
+        >
           <HolderStats
             totalHolders={totalHolders}
             uniqueHolders={uniqueHoldersPercentage}
             highConvictionHolders={data?.highConvictionHolders}
           />
         </CreateImageWrapper>
-        <CreateImageWrapper tweetText={`Holder distribution ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
+        <CreateImageWrapper
+          tweetText={`Holder distribution ${tweetTextEnd}`}
+          footer={imageFooter}
+          footer={imageFooter}
+        >
           <HolderDistribution data={data?.holderDistribution} />
         </CreateImageWrapper>
-        <CreateImageWrapper tweetText={`Top holders ${tweetTextEnd}`}footer={imageFooter} footer={imageFooter}>
+        <CreateImageWrapper
+          tweetText={`Top holders ${tweetTextEnd}`}
+          footer={imageFooter}
+          footer={imageFooter}
+        >
           <TopHolders
             data={data?.topHolders?.slice(0, 5)}
             contract={data?.contract?.address}

@@ -18,7 +18,9 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   tweetText,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
-  const [twitterStatus, setTwitterStatus] = useState<'' | 'loading' | 'success'>('');
+  const [twitterStatus, setTwitterStatus] = useState<
+    "" | "loading" | "success"
+  >("");
   const imageWrapper = useRef<HTMLDivElement>(null);
   const cloneWrapper = useRef<HTMLDivElement>(null);
 
@@ -79,19 +81,19 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
     // Create image
     const dataUrl = await handleCreateImage();
     // Post image to @databyorigin bot
-    setTwitterStatus('loading')
+    setTwitterStatus("loading");
     const res = await fetch(`${INTERNAL_API_TWITTER_URL}`, {
       method: "POST",
       body: JSON.stringify({
         image: dataUrl,
-        tweetText: tweetText || '',
+        tweetText: tweetText || "",
       }),
     });
     const json = await res.json();
     if (json.success) {
-    setTwitterStatus('success')
+      setTwitterStatus("success");
     } else {
-      setTwitterStatus('')
+      setTwitterStatus("");
     }
     // @TODO: Open Twitter dialog using deep link with text and image URL
   };
@@ -106,13 +108,10 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
         <div ref={imageWrapper}>{children}</div>
         {isHovering && (
           <div className="absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex items-center justify-center -m-3 space-x-4">
-            <button
-              className="btn space-x-1"
-              onClick={handleShareOnTwitter}
-            >
-              { twitterStatus === '' && <Twitter />}
-              { twitterStatus === 'loading' && <Loading />}
-              { twitterStatus === 'success' && <Check />}
+            <button className="btn space-x-1" onClick={handleShareOnTwitter}>
+              {twitterStatus === "" && <Twitter />}
+              {twitterStatus === "loading" && <Loading />}
+              {twitterStatus === "success" && <Check />}
               <span>Share on Twitter</span>
             </button>
             <button className="btn space-x-1" onClick={handleDownloadImage}>

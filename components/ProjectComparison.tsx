@@ -62,10 +62,18 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
       <Tabs />
       <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
         <div className="flex-1">
-          <Project data={projectAData} loading={projectALoading} name={projectAName} />
+          <Project
+            data={projectAData}
+            loading={projectALoading}
+            name={projectAName}
+          />
         </div>
         <div className="flex-1">
-          <Project data={projectBData} loading={projectBLoading} name={projectBName} />
+          <Project
+            data={projectBData}
+            loading={projectBLoading}
+            name={projectBName}
+          />
         </div>
       </div>
     </>

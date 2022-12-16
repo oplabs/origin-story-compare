@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const Loading = ({
   color = undefined,
-  stroke = '16',
-  size = '16',
-  className = '',
+  stroke = "16",
+  size = "16",
+  className = "",
   ...props
 }) => {
   return (
@@ -37,7 +37,7 @@ const Loading = ({
         />
       </circle>
     </svg>
-  )
-}
+  );
+};
 
-export {Loading}
+export { Loading };

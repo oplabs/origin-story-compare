@@ -8,6 +8,7 @@ import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
 import { TopHolders } from "./TopHolders";
 import { CreateImageWrapper } from "./CreateImageWrapper";
+import { SalesByDay } from "./SalesByDay";
 
 import "react-loading-skeleton/dist/skeleton.css";
 interface StatProps {
@@ -153,6 +154,12 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
             </div>
           </div>
         </div>
+        <CreateImageWrapper
+          tweetText={`Sales by day ${tweetTextEnd}`}
+          footer={imageFooter}
+        >
+          <SalesByDay data={data?.salesByDay?.byDay} />
+        </CreateImageWrapper>
         <CreateImageWrapper
           tweetText={`Average price ${tweetTextEnd}`}
           footer={imageFooter}

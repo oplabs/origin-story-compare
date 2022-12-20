@@ -16,9 +16,23 @@ export type BarsProps = {
   height: number;
   events?: boolean;
   data?: { label: string; value: number }[];
+  axisLeftLabel?: string;
+  axisBottomLabel?: string;
+  appendCount?: boolean;
+  axisBottomIsDate?: boolean;
+  countFontSize?: number;
 };
 
-export const BarChart = ({ width = 600, height = 300, data }: BarsProps) => {
+export const BarChart = ({
+  width = 600,
+  height = 300,
+  data,
+  axisLeftLabel,
+  axisBottomLabel,
+  appendCount,
+  axisBottomIsDate,
+  countFontSize,
+}: BarsProps) => {
   const xMax = width - horizontalMargin;
   const yMax = height - 80;
 
@@ -62,18 +76,20 @@ export const BarChart = ({ width = 600, height = 300, data }: BarsProps) => {
                 height={barHeight}
                 className="fill-current"
               />
-              <Text
-                x={barX + barWidth / 2}
-                y={barY}
-                width={barWidth}
-                className="fill-current"
-                fontSize={16}
-                textAnchor="middle"
-                // dx={'-.2em'}
-                dy={"-0.5em"}
-              >
-                {getY(d)}
-              </Text>
+              {appendCount && (
+                <Text
+                  x={barX + barWidth / 2}
+                  y={barY}
+                  width={barWidth}
+                  className="fill-current"
+                  fontSize={countFontSize || 16}
+                  textAnchor="middle"
+                  // dx={'-.2em'}
+                  dy={"-0.5em"}
+                >
+                  {getY(d)}
+                </Text>
+              )}
             </Group>
           );
         })}
@@ -81,18 +97,29 @@ export const BarChart = ({ width = 600, height = 300, data }: BarsProps) => {
           top={yMax}
           scale={xScale}
           stroke="#eaeaea"
-          hideTicks
-          label="Tokens"
+          hideTicks={!axisBottomIsDate}
+          tickStroke="#cccccc"
+          label={axisBottomLabel}
           labelOffset={12}
-          tickLabelProps={() => ({ fontSize: 11, textAnchor: "middle" })}
+          tickLabelProps={() => ({
+            fontSize: axisBottomIsDate ? 9 : 11,
+            textAnchor: "middle",
+          })}
+          tickFormat={
+            axisBottomIsDate
+              ? (d) => {
+                  if (d === data[0].date) return "";
+                  return d.slice(5).replace("-", "/");
+                }
+              : (d) => d
+          }
         />
         <AxisLeft
           scale={yScale}
           numTicks={0}
           labelOffset={0}
           stroke="#eaeaea"
-          hideTicks
-          label="Holders"
+          label={axisLeftLabel}
         />
       </Group>
     </svg>

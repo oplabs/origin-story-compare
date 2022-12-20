@@ -17,12 +17,22 @@ export type ComparativeBarChartProps = {
   height: number;
   events?: boolean;
   data: { label: string; dataPoints: { label: string; value: number }[] }[];
+  axisLeftLabel?: string;
+  axisBottomLabel?: string;
+  appendCount?: boolean;
+  axisBottomIsDate?: boolean;
+  countFontSize?: number;
 };
 
 const ComparativeBarChart = ({
   width = 600,
   height = 800,
   data,
+  axisLeftLabel,
+  axisBottomLabel,
+  appendCount = true,
+  axisBottomIsDate = false,
+  countFontSize = 14,
 }: ComparativeBarChartProps) => {
   const xMax = width - horizontalMargin;
   const yMax = height - 80;
@@ -84,18 +94,20 @@ const ComparativeBarChart = ({
                     height={barHeight}
                     className={oddBar ? "fill-primary" : "fill-neutral"}
                   />
-                  <Text
-                    x={oddBar ? barX : barX + barWidth}
-                    y={barY}
-                    width={barWidth}
-                    className="fill-current"
-                    fontSize={14}
-                    textAnchor="middle"
-                    dy={"-0.5em"}
-                    dx={barWidth / 2}
-                  >
-                    {getY(dp)}
-                  </Text>
+                  {appendCount && (
+                    <Text
+                      x={oddBar ? barX : barX + barWidth}
+                      y={barY}
+                      width={barWidth}
+                      className="fill-current"
+                      fontSize={countFontSize}
+                      textAnchor="middle"
+                      dy={"-0.5em"}
+                      dx={barWidth / 2}
+                    >
+                      {getY(dp)}
+                    </Text>
+                  )}
                 </Group>
               );
             })
@@ -105,10 +117,22 @@ const ComparativeBarChart = ({
             top={yMax}
             scale={xScale}
             stroke="#eaeaea"
-            hideTicks
-            label="Tokens"
+            hideTicks={!axisBottomIsDate}
+            tickStroke="#cccccc"
+            label={axisBottomLabel}
             labelOffset={12}
-            tickLabelProps={() => ({ fontSize: 11, textAnchor: "middle" })}
+            tickLabelProps={() => ({
+              fontSize: axisBottomIsDate ? 9 : 11,
+              textAnchor: "middle",
+            })}
+            tickFormat={
+              axisBottomIsDate
+                ? (d) => {
+                    if (d === data[0].date) return "";
+                    return d.slice(5).replace("-", "/");
+                  }
+                : (d) => d
+            }
           />
           <AxisLeft
             scale={yScale}
@@ -116,7 +140,19 @@ const ComparativeBarChart = ({
             labelOffset={0}
             stroke="#eaeaea"
             hideTicks
-            label="Holders"
+            label={axisLeftLabel}
+            tickLabelProps={() => ({
+              fontSize: axisBottomIsDate ? 9 : 11,
+              textAnchor: "middle",
+            })}
+            tickFormat={
+              axisBottomIsDate
+                ? (d) => {
+                    if (d === data[0].date) return "";
+                    return d.slice(5).replace("-", "/");
+                  }
+                : (d) => d
+            }
           />
         </Group>
       </svg>

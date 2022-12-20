@@ -103,11 +103,13 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
     100
   ).toFixed(0);
 
-  const tweetTextEnd = `of ${name} at ${new Date().toLocaleString()}`;
+  const timestamp = new Date().toLocaleString("en-US", { timeZone: "UTC" });
+  const twitterUsername = data?.contract?.collection?.twitter_username;
+  const tweetTextEnd = `of ${name}${
+    twitterUsername ? ` (@${twitterUsername})` : ``
+  } at ${timestamp}`;
 
-  const imageFooter = `${
-    data?.contract?.collection?.name
-  } at ${new Date().toLocaleString()}`;
+  const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">

@@ -40,11 +40,19 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
 }) => {
   if (projectALoading || projectBLoading) return <CombinedDataSkeleton />;
 
-  const tweetTextEnd = `of ${projectAName} vs. ${projectBName} at ${new Date().toLocaleString()}`;
+  const projectATwitterUsername =
+    projectAData?.contract?.collection?.twitter_username;
+  const projectBTwitterUsername =
+    projectBData?.contract?.collection?.twitter_username;
 
-  const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${
-    projectBData?.contract?.collection?.name
-  } at ${new Date().toLocaleString()}`;
+  const timestamp = new Date().toLocaleString("en-US", { timeZone: "UTC" });
+  const tweetTextEnd = `of ${projectAName}${
+    projectATwitterUsername ? ` (@${projectATwitterUsername})` : ``
+  } vs. ${projectBName}${
+    projectBTwitterUsername ? ` (@${projectBTwitterUsername})` : ``
+  } at ${timestamp}`;
+
+  const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${projectBData?.contract?.collection?.name} at ${timestamp}`;
 
   const holderDistributionData = projectAData?.holderDistribution.map((d) => ({
     label: d[0],

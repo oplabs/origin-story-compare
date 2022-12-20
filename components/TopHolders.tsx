@@ -24,17 +24,17 @@ export const TopHolders = ({
   return (
     <div>
       <div className="text-xl font-medium mb-2">Top Holders</div>
-      <div className="card border rounded-xl border-gray-150 dark:border-dark-700 bg-white dark:bg-black">
+      <div className="card border rounded-xl border-gray-150 bg-white">
         <div className="m-6 grid grid-cols-7">
-          <div className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 dark:border-dark-700 col-span-1">
+          <div className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 col-span-1">
             Position
           </div>
-          <div className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 dark:border-dark-700 col-span-3">
+          <div className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 col-span-3">
             Holder
           </div>
           <div
             ref={ref}
-            className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 dark:border-dark-700 col-span-3"
+            className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 col-span-3"
           >
             Tokens
           </div>
@@ -76,18 +76,14 @@ const Row = ({
     <>
       <div
         className={`col-span-1 flex items-center pl-4 text-xl sm:text-2xl text-primary font-medium ${
-          last
-            ? ""
-            : "border-b border-gray-300 dark:border-dark-700 pb-3 mb-3 pr-3"
+          last ? "" : "border-b border-gray-300 pb-3 mb-3 pr-3"
         }`}
       >
         {position}
       </div>
       <div
         className={`col-span-3 flex items-center text-lg sm:text-xl ${
-          last
-            ? ""
-            : "border-b border-gray-300 dark:border-dark-700 pb-3 mb-3 pr-3"
+          last ? "" : "border-b border-gray-300 pb-3 mb-3 pr-3"
         }`}
       >
         <Image
@@ -106,7 +102,7 @@ const Row = ({
       </div>
       <div
         className={`col-span-3 flex items-center justify-between relative pr-4 sm:pr-10 ${
-          last ? "" : "border-b border-gray-300 dark:border-dark-700 pb-3 mb-3"
+          last ? "" : "border-b border-gray-300 pb-3 mb-3"
         }`}
       >
         {tokens.slice(0, showTokens).map((t) => (

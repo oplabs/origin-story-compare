@@ -45,7 +45,7 @@ export const AveragePrice = ({
           <Range {...{ range, setRange }} />
         )}
       </div>
-      <div className="px-5 py-4 rounded-xl card border border-gray-150 dark:border-dark-700 bg-white dark:bg-black">
+      <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
         <AreaChartHeader description="All time average price">
           <Image
             src="/eth-icon.svg"

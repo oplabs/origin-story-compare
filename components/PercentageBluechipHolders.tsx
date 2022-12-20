@@ -15,7 +15,7 @@ const PercentageBluechipHolders: FunctionComponent<
   return (
     <div>
       <div className="text-xl font-medium mb-2">Top Holders</div>
-      <div className="card border px-4 py-3 flex justify-between bg-white dark:bg-black dark:border-dark-700 rounded-lg">
+      <div className="card border px-4 py-3 flex justify-between bg-white rounded-lg">
         <div className="flex-1 flex flex-col">
           <div className="flex-1">
             <div className="text-3xl font-bold text-primary flex items-center leading-snug">

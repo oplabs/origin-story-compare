@@ -25,7 +25,7 @@ export const AreaChart = ({ data }: { data: Array<Item> }) => {
     colors: ["hsl(var(--p))"],
     tickLength: 0,
     gridColor: "rgba(0, 0, 0, 0.15)",
-    gridColorDark: "rgba(255, 255, 255, 0.15)",
+    gridColorDark: "rgba(0, 0, 0, 0.15)",
   });
 
   const height = 210;

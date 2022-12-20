@@ -31,6 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!mediaId) {
       return res.status(400).json({ error: "No media id" });
     }
+
     const tweet = await client.v1.tweet(tweetText || "", {
       media_ids: [mediaId],
     });

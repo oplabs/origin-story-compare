@@ -90,12 +90,20 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
       }),
     });
     const json = await res.json();
+
     if (json.success) {
+      const tweetId = json?.tweet?.id_str;
+      if (tweetId) {
+        // Open dialog for user to share on Twitter
+        window.open(
+          `https://twitter.com/intent/tweet?text=${tweetText} https://twitter.com/databyorigin/status/${tweetId}/photo/1`,
+          "_blank"
+        );
+      }
       setTwitterStatus("success");
     } else {
       setTwitterStatus("");
     }
-    // @TODO: Open Twitter dialog using deep link with text and image URL
   };
 
   return (

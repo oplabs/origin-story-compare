@@ -80,8 +80,6 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  console.log(projectAData?.salesByDay?.byDay);
-
   const projectASalesByDayData30 = projectAData?.salesByDay?.byDay.slice(
     Math.max(projectAData?.salesByDay?.byDay.length - 30, 0)
   );

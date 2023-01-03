@@ -20,7 +20,6 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   projectBName,
 }) => {
   const [view, setView] = useState<"side-by-side" | "combined">("side-by-side");
-  //console.log(projectAData, projectBData);
 
   const Tabs: FunctionComponent = () => (
     <div className="flex items-center justify-center px-4 mb-6 space-x-2 ">

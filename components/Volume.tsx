@@ -7,21 +7,22 @@ import { CreateImageWrapper } from "./CreateImageWrapper";
 interface AllSalesByDay {
   byDay: SalesByDay[];
   stats: object;
-  imageFooter?: string;
 }
 
 interface SalesByDay {
   date: string;
-  averagePrice: number;
+  ethVolume: number;
   value: number;
 }
 
-export const AveragePrice = ({
+export const Volume = ({
   allSalesByDay,
   imageFooter,
+  totalVolume,
 }: {
   allSalesByDay: AllSalesByDay;
   imageFooter?: string;
+  totalVolume: number;
 }) => {
   const [range, setRange] = useState("1M");
 
@@ -35,30 +36,28 @@ export const AveragePrice = ({
   } else {
     salesByDay = allSalesByDay?.byDay;
   }
-  salesByDay = salesByDay?.map(({ date, averagePrice }) => ({
+  salesByDay = salesByDay?.map(({ date, ethVolume }) => ({
     date,
-    averagePrice,
-    value: Math.round(averagePrice * 10000) / 10000,
+    ethVolume,
+    value: Math.round(ethVolume * 10000) / 10000,
   }));
 
   return (
     <div className="min-w-0">
       <div className="flex justify-between items-center mb-2">
-        <div className="text-xl font-medium">Average Price</div>
+        <div className="text-xl font-medium">Volume</div>
         <Range {...{ range, setRange }} />
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
-          <AreaChartHeader description="All time average price">
+          <AreaChartHeader description="All time total volume">
             <Image
               src="/eth-icon.svg"
-              alt="All time average price"
+              alt="All time total volume"
               width={12}
               height={12}
             />
-            <span className="ml-2 text-primary">
-              {`${Math.round(allSalesByDay.stats.avg * 10000) / 10000}`}
-            </span>
+            <span className="ml-2 text-primary">{totalVolume}</span>
           </AreaChartHeader>
           <AreaChart data={salesByDay} />
         </div>

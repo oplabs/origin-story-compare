@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ethers } from "ethers";
 import Skeleton from "react-loading-skeleton";
 import { formatNumber } from "../lib/utils";
+import { Sales } from "./Sales";
+import { Volume } from "./Volume";
 import { AveragePrice } from "./AveragePrice";
 import { HolderStats } from "./HolderStats";
 import { HolderDistribution } from "./HolderDistribution";
@@ -114,8 +116,6 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
 
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
-  console.log(data?.salesByDay?.byDay);
-
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">
       <div className="card-body space-y-6">
@@ -176,12 +176,16 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
         >
           <AveragePriceByDay data={data?.salesByDay?.byDay} />
         </CreateImageWrapper>
-        <CreateImageWrapper
-          tweetText={`Average price ${tweetTextEnd}`}
-          footer={imageFooter}
-        >
-          <AveragePrice allSalesByDay={data?.salesByDay} />
-        </CreateImageWrapper>
+        <Sales allSalesByDay={data?.salesByDay} imageFooter={imageFooter} />
+        <Volume
+          allSalesByDay={data?.salesByDay}
+          totalVolume={formatNumber(data?.contractStats?.totalVolume)}
+          imageFooter={imageFooter}
+        />
+        <AveragePrice
+          allSalesByDay={data?.salesByDay}
+          imageFooter={imageFooter}
+        />
         <CreateImageWrapper
           tweetText={`Holder stats ${tweetTextEnd}`}
           footer={imageFooter}

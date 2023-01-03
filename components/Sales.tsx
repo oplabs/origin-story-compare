@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 import { CreateImageWrapper } from "./CreateImageWrapper";
+import { formatNumber } from "../lib/utils";
 
 interface AllSalesByDay {
   byDay: SalesByDay[];
@@ -12,11 +13,11 @@ interface AllSalesByDay {
 
 interface SalesByDay {
   date: string;
-  averagePrice: number;
+  sales: number;
   value: number;
 }
 
-export const AveragePrice = ({
+export const Sales = ({
   allSalesByDay,
   imageFooter,
 }: {
@@ -35,29 +36,31 @@ export const AveragePrice = ({
   } else {
     salesByDay = allSalesByDay?.byDay;
   }
-  salesByDay = salesByDay?.map(({ date, averagePrice }) => ({
+  salesByDay = salesByDay?.map(({ date, sales }) => ({
     date,
-    averagePrice,
-    value: Math.round(averagePrice * 10000) / 10000,
+    sales,
+    value: Math.round(sales * 10000) / 10000,
   }));
 
   return (
     <div className="min-w-0">
       <div className="flex justify-between items-center mb-2">
-        <div className="text-xl font-medium">Average Price</div>
+        <div className="text-xl font-medium">Sales</div>
         <Range {...{ range, setRange }} />
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
-          <AreaChartHeader description="All time average price">
+          <AreaChartHeader description="All time total sales">
             <Image
               src="/eth-icon.svg"
-              alt="All time average price"
+              alt="All time total sales"
               width={12}
               height={12}
             />
             <span className="ml-2 text-primary">
-              {`${Math.round(allSalesByDay.stats.avg * 10000) / 10000}`}
+              {`${formatNumber(
+                Math.round(allSalesByDay.stats.count * 10000) / 10000
+              )}`}
             </span>
           </AreaChartHeader>
           <AreaChart data={salesByDay} />

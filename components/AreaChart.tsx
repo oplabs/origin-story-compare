@@ -5,7 +5,6 @@ import {
   Grid,
   AreaSeries,
   XYChart,
-  Tooltip,
   buildChartTheme,
 } from "@visx/xychart";
 
@@ -19,7 +18,13 @@ const accessors = {
   yAccessor: (d: Item) => d.value,
 };
 
-export const AreaChart = ({ data }: { data: Array<Item> }) => {
+export const AreaChart = ({
+  data,
+  showLeftAxis,
+}: {
+  data: Array<Item>;
+  showLeftAxis?: boolean;
+}) => {
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
     colors: ["hsl(var(--p))"],
@@ -28,7 +33,7 @@ export const AreaChart = ({ data }: { data: Array<Item> }) => {
     gridColorDark: "rgba(0, 0, 0, 0.15)",
   });
 
-  const height = 210;
+  const height = 220;
 
   return (
     <XYChart
@@ -56,6 +61,17 @@ export const AreaChart = ({ data }: { data: Array<Item> }) => {
           return d.slice(5).replace("-", "/");
         }}
       />
+      {showLeftAxis && (
+        <Axis
+          orientation="left"
+          //scale={yScale}
+          //numTicks={appendCount ? 0 : undefined}
+          tickStroke="#cccccc"
+          //labelOffset={appendCount ? 0 : undefined}
+          stroke="#eaeaea"
+          label="test"
+        />
+      )}
       <Grid columns={false} numTicks={4} />
       <AreaSeries
         dataKey="Sales"

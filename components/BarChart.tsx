@@ -4,9 +4,9 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Text } from "@visx/text";
 import { AxisBottom, AxisLeft } from "@visx/axis";
+import { GridRows } from "@visx/grid";
 
 const verticalMargin = 60;
-const horizontalMargin = 20;
 
 const getX = (d: any) => d.label;
 const getY = (d: any) => d.value;
@@ -21,6 +21,7 @@ export type BarsProps = {
   appendCount?: boolean;
   axisBottomIsDate?: boolean;
   countFontSize?: number;
+  showGrid?: boolean;
 };
 
 export const BarChart = ({
@@ -32,8 +33,11 @@ export const BarChart = ({
   appendCount,
   axisBottomIsDate,
   countFontSize,
+  showGrid = false,
 }: BarsProps) => {
-  const xMax = width - horizontalMargin;
+  const horizontalMargin = appendCount ? 20 : 60;
+
+  const xMax = width - (appendCount ? 0 : 60);
   const yMax = height - 80;
 
   const xScale = useMemo(
@@ -58,6 +62,17 @@ export const BarChart = ({
     <svg width="100%" height={height} className="text-primary">
       {/* <GridRows scale={xScale} tickValues={data?.map((d) => getX(d))} width={innerWidth} /> */}
       <Group top={verticalMargin - 30} left={horizontalMargin}>
+        {showGrid && (
+          <GridRows
+            left={0}
+            top={0}
+            scale={yScale}
+            width={innerWidth}
+            strokeOpacity={1}
+            strokeWidth={1}
+            pointerEvents="none"
+          />
+        )}
         {data.map((d) => {
           const letter = getX(d);
           const barWidth = xScale.bandwidth();
@@ -87,7 +102,7 @@ export const BarChart = ({
                   // dx={'-.2em'}
                   dy={"-0.5em"}
                 >
-                  {getY(d)}
+                  {getY(d).toFixed(0)}
                 </Text>
               )}
             </Group>
@@ -116,8 +131,9 @@ export const BarChart = ({
         />
         <AxisLeft
           scale={yScale}
-          numTicks={0}
-          labelOffset={0}
+          numTicks={appendCount ? 0 : undefined}
+          tickStroke="#cccccc"
+          labelOffset={appendCount ? 0 : undefined}
           stroke="#eaeaea"
           label={axisLeftLabel}
         />

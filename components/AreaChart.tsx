@@ -65,26 +65,6 @@ export const AreaChart = ({ data }: { data: Array<Item> }) => {
         lineProps={{ strokeWidth: 3, stroke: "hsl(var(--p))" }}
         {...accessors}
       />
-      <Tooltip
-        showVerticalCrosshair
-        showSeriesGlyphs
-        glyphStyle={{ stroke: "var(--inverse)", strokeWidth: 3, r: 6 }}
-        renderTooltip={({ tooltipData, colorScale }) => {
-          if (!tooltipData?.nearestDatum?.key || !colorScale) return null;
-          return (
-            <>
-              <div>
-                <>
-                  <div>{tooltipData.nearestDatum.key}</div>
-                  {accessors.xAccessor(tooltipData.nearestDatum.datum as Item)}
-                  {": "}
-                  {accessors.yAccessor(tooltipData.nearestDatum.datum as Item)}
-                </>
-              </div>
-            </>
-          );
-        }}
-      />
     </XYChart>
   );
 };

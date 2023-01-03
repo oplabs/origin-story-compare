@@ -9,6 +9,8 @@ import { HolderDistribution } from "./HolderDistribution";
 import { TopHolders } from "./TopHolders";
 import { CreateImageWrapper } from "./CreateImageWrapper";
 import { SalesByDay } from "./SalesByDay";
+import { VolumeByDay } from "./VolumeByDay";
+import { AveragePriceByDay } from "./AveragePriceByDay";
 
 import "react-loading-skeleton/dist/skeleton.css";
 interface StatProps {
@@ -112,6 +114,8 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
 
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
+  console.log(data?.salesByDay?.byDay);
+
   return (
     <div className="card border bg-base-100 w-full min-h-[200px]">
       <div className="card-body space-y-6">
@@ -159,6 +163,18 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
           footer={imageFooter}
         >
           <SalesByDay data={data?.salesByDay?.byDay} />
+        </CreateImageWrapper>
+        <CreateImageWrapper
+          tweetText={`Volume by day ${tweetTextEnd}`}
+          footer={imageFooter}
+        >
+          <VolumeByDay data={data?.salesByDay?.byDay} />
+        </CreateImageWrapper>
+        <CreateImageWrapper
+          tweetText={`Average price by day ${tweetTextEnd}`}
+          footer={imageFooter}
+        >
+          <AveragePriceByDay data={data?.salesByDay?.byDay} />
         </CreateImageWrapper>
         <CreateImageWrapper
           tweetText={`Average price ${tweetTextEnd}`}

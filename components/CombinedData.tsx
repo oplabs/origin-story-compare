@@ -4,7 +4,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { HolderDistribution } from "./CombinedData/HolderDistribution";
 import { CreateImageWrapper } from "./CreateImageWrapper";
 import { SalesByDay } from "./CombinedData/SalesByDay";
-
+import { VolumeByDay } from "./CombinedData/VolumeByDay";
+import { AveragePriceByDay } from "./CombinedData/AveragePriceByDay";
 interface CombinedDataProps {
   projectAData: object;
   projectALoading: boolean;
@@ -136,6 +137,52 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
+  const volumeByDayData = projectASalesByDayData30.map((d) => ({
+    label: d.date,
+    dataPoints: [{ label: projectAData?.contract?.name, value: d.ethVolume }],
+  }));
+  projectBSalesByDayData30.forEach((d) => {
+    const found = volumeByDayData.find((e) => e.label === d.date);
+    if (found) {
+      found.dataPoints.push({
+        label: projectBData?.contract?.name,
+        value: d.ethVolume,
+      });
+    } else {
+      volumeByDayData.push({
+        label: d.date,
+        dataPoints: [
+          { label: projectBData?.contract?.name, value: d.ethVolume },
+        ],
+      });
+    }
+  });
+
+  console.log(projectBSalesByDayData30);
+
+  const averagePriceByDayData = projectASalesByDayData30.map((d) => ({
+    label: d.date,
+    dataPoints: [
+      { label: projectAData?.contract?.name, value: d.averagePrice },
+    ],
+  }));
+  projectBSalesByDayData30.forEach((d) => {
+    const found = averagePriceByDayData.find((e) => e.label === d.date);
+    if (found) {
+      found.dataPoints.push({
+        label: projectBData?.contract?.name,
+        value: d.averagePrice,
+      });
+    } else {
+      volumeByDayData.push({
+        label: d.date,
+        dataPoints: [
+          { label: projectBData?.contract?.name, value: d.averagePrice },
+        ],
+      });
+    }
+  });
+
   return (
     <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
       <div className="flex-1">
@@ -146,6 +193,18 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
               tweetText={`Sales by day ${tweetTextEnd}`}
             >
               <SalesByDay data={salesByDayData} />
+            </CreateImageWrapper>
+            <CreateImageWrapper
+              footer={imageFooter}
+              tweetText={`Volume by day ${tweetTextEnd}`}
+            >
+              <VolumeByDay data={volumeByDayData} />
+            </CreateImageWrapper>
+            <CreateImageWrapper
+              footer={imageFooter}
+              tweetText={`Average price by day ${tweetTextEnd}`}
+            >
+              <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
             <CreateImageWrapper
               footer={imageFooter}

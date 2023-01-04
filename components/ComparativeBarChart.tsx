@@ -5,9 +5,9 @@ import { scaleBand, scaleLinear, scaleOrdinal } from "@visx/scale";
 import { Text } from "@visx/text";
 import { AxisBottom, AxisLeft } from "@visx/axis";
 import { LegendOrdinal } from "@visx/legend";
+import { GridRows } from "@visx/grid";
 
 const verticalMargin = 60;
-const horizontalMargin = 20;
 
 const getX = (d: { label: string; value: number }) => d.label;
 const getY = (d: { label: string; value: number }) => d.value;
@@ -22,6 +22,7 @@ export type ComparativeBarChartProps = {
   appendCount?: boolean;
   axisBottomIsDate?: boolean;
   countFontSize?: number;
+  showGrid?: boolean;
 };
 
 const ComparativeBarChart = ({
@@ -33,8 +34,11 @@ const ComparativeBarChart = ({
   appendCount = true,
   axisBottomIsDate = false,
   countFontSize = 14,
+  showGrid = false,
 }: ComparativeBarChartProps) => {
-  const xMax = width - horizontalMargin;
+  const horizontalMargin = appendCount ? 20 : 60;
+
+  const xMax = width - (appendCount ? 20 : 60);
   const yMax = height - 80;
 
   const xScale = useMemo(
@@ -74,6 +78,17 @@ const ComparativeBarChart = ({
     <div className="relative">
       <svg width="100%" height={height}>
         <Group top={verticalMargin - 30} left={horizontalMargin}>
+          {showGrid && (
+            <GridRows
+              left={0}
+              top={0}
+              scale={yScale}
+              width={innerWidth}
+              strokeOpacity={1}
+              strokeWidth={1}
+              pointerEvents="none"
+            />
+          )}
           {data.map((d) =>
             d.dataPoints.map((dp) => {
               const letter = getX(dp);
@@ -136,23 +151,11 @@ const ComparativeBarChart = ({
           />
           <AxisLeft
             scale={yScale}
-            numTicks={0}
-            labelOffset={0}
+            numTicks={appendCount ? 0 : undefined}
+            tickStroke="#cccccc"
+            labelOffset={appendCount ? 0 : undefined}
             stroke="#eaeaea"
-            hideTicks
             label={axisLeftLabel}
-            tickLabelProps={() => ({
-              fontSize: axisBottomIsDate ? 9 : 11,
-              textAnchor: "middle",
-            })}
-            tickFormat={
-              axisBottomIsDate
-                ? (d) => {
-                    if (d === data[0].date) return "";
-                    return d.slice(5).replace("-", "/");
-                  }
-                : (d) => d
-            }
           />
         </Group>
       </svg>

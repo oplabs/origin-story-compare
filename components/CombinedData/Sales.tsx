@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ComparativeAreaChart } from "./ComparativeAreaChart";
+import { ComparativeAreaChart } from "../ComparativeAreaChart";
 import { Range } from "../Range";
 import { CreateImageWrapper } from "../CreateImageWrapper";
-import { formatNumber } from "../../lib/utils";
 import { ParentSize } from "@visx/responsive";
 
 interface AllSalesByDay {

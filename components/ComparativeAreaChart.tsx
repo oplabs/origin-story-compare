@@ -18,15 +18,16 @@ const accessors = {
   yAccessor: (d: Item) => d.value,
 };
 
-export const AreaChart = ({
+export const ComparativeAreaChart = ({
   data,
   showLeftAxis,
   parentWidth,
 }: {
-  data: Array<Item>;
   showLeftAxis?: boolean;
   parentWidth?: number;
+  data: { label: string; dataPoints: { label: string; value: number }[] }[];
 }) => {
+  console.log(data);
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
     colors: ["hsl(var(--p))"],

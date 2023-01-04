@@ -10,12 +10,14 @@ interface CreateImageWrapperProps {
   children: ReactNode;
   footer?: string;
   tweetText?: string;
+  isCombined?: boolean;
 }
 
 const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   children,
   footer,
   tweetText,
+  isCombined,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [twitterStatus, setTwitterStatus] = useState<
@@ -130,7 +132,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
         )}
       </div>
       <div
-        className="w-[600px]"
+        className={`${isCombined ? "w-[1280px]" : "w-[600px]"}`}
         ref={cloneWrapper}
         style={{ position: "absolute", left: "-100vw", top: "-100vh" }}
       />

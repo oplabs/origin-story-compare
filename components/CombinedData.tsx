@@ -6,6 +6,7 @@ import { CreateImageWrapper } from "./CreateImageWrapper";
 import { SalesByDay } from "./CombinedData/SalesByDay";
 import { VolumeByDay } from "./CombinedData/VolumeByDay";
 import { AveragePriceByDay } from "./CombinedData/AveragePriceByDay";
+import { Sales } from "./CombinedData/Sales";
 interface CombinedDataProps {
   projectAData: object;
   projectALoading: boolean;
@@ -189,21 +190,31 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Sales by day ${tweetTextEnd}`}
+              isCombined
             >
               <SalesByDay data={salesByDayData} />
             </CreateImageWrapper>
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Volume by day ${tweetTextEnd}`}
+              isCombined
             >
               <VolumeByDay data={volumeByDayData} />
             </CreateImageWrapper>
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Average price by day ${tweetTextEnd}`}
+              isCombined
             >
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
+            {/*<CreateImageWrapper
+              footer={imageFooter}
+              tweetText={`Sales ${tweetTextEnd}`}
+              isCombined
+            >
+              <Sales data={salesData} />
+            </CreateImageWrapper>*/}
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Holder distribution ${tweetTextEnd}`}

@@ -57,7 +57,7 @@ export const AveragePrice = ({
               height={12}
             />
             <span className="ml-2 text-primary">
-              {`${Math.round(allSalesByDay.stats.avg * 10000) / 10000}`}
+              {`${Math.round(allSalesByDay?.stats?.avg * 10000) / 10000}`}
             </span>
           </AreaChartHeader>
           <AreaChart data={salesByDay} />

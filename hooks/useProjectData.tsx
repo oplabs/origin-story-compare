@@ -9,25 +9,32 @@ const useProjectData = (address:string) => {
         setLoading(true)
         const fetchProject = async () => {
             let projectData = {}
-            await Promise.all(API_PROJECT_URLS.map(async (project) => {
-                const res = await fetch(`${project.url}?contract=${address}`)
-                const json = await res.json()
+            try {
+                await Promise.all(API_PROJECT_URLS.map(async (project) => {
+                    const res = await fetch(`${project.url}?contract=${address}`)
+                    const json = await res.json()
+                    projectData = {
+                        ...projectData,
+                        [project.key]: json.result,
+                    }
+                }))
+                const contractData = await fetch(`${OPENSEA_API_CONTRACT_URL}${address}`)
+                const contractDataJson = await contractData.json()
                 projectData = {
                     ...projectData,
-                    [project.key]: json.result,
+                    contract: contractDataJson,
                 }
-            }))
-            const contractData = await fetch(`${OPENSEA_API_CONTRACT_URL}${address}`)
-            const contractDataJson = await contractData.json()
-            projectData = {
-                ...projectData,
-                contract: contractDataJson,
-            }
-            const contractStats = await fetch(`${API_COLLECTIONS_URL}${address}?compat=true`)
-            const contractStatsJson = await contractStats.json()
-            projectData = {
-                ...projectData,
-                contractStats: contractStatsJson?.stats,
+                const contractStats = await fetch(`${API_COLLECTIONS_URL}${address}?compat=true`)
+                const contractStatsJson = await contractStats.json()
+                projectData = {
+                    ...projectData,
+                    contractStats: contractStatsJson?.stats,
+                }
+            } catch (e) {
+                projectData = {
+                    success: false,
+                    error: e,
+                }
             }
             setProjectData(projectData)
             setLoading(false)

@@ -44,7 +44,7 @@ export const BarChart = ({
     () =>
       scaleBand<string>({
         range: [0, xMax],
-        domain: data.map(getX),
+        domain: data?.map(getX),
         padding: 0.25,
       }),
     [xMax, data]
@@ -53,7 +53,7 @@ export const BarChart = ({
     () =>
       scaleLinear<number>({
         range: [yMax, 0],
-        domain: [0, Math.max(...data.map(getY))],
+        domain: [0, Math.max(...(data?.map(getY) || [0]))],
       }),
     [yMax, data]
   );
@@ -73,7 +73,7 @@ export const BarChart = ({
             pointerEvents="none"
           />
         )}
-        {data.map((d) => {
+        {data?.map((d) => {
           const letter = getX(d);
           const barWidth = xScale.bandwidth();
           const barHeight = yMax - (yScale(getY(d)) ?? 0);
@@ -123,7 +123,7 @@ export const BarChart = ({
           tickFormat={
             axisBottomIsDate
               ? (d) => {
-                  if (d === data[0].date) return "";
+                  if (d === data[0]?.date) return "";
                   return d.slice(5).replace("-", "/");
                 }
               : (d) => d

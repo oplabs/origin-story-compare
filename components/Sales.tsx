@@ -59,11 +59,11 @@ export const Sales = ({
             />
             <span className="ml-2 text-primary">
               {`${formatNumber(
-                Math.round(allSalesByDay.stats.count * 10000) / 10000
+                Math.round(allSalesByDay?.stats?.count * 10000) / 10000
               )}`}
             </span>
           </AreaChartHeader>
-          <AreaChart data={salesByDay} />
+          <AreaChart data={salesByDay} showLeftAxis />
         </div>
       </CreateImageWrapper>
     </div>

@@ -38,13 +38,13 @@ export const TopHolders = ({
           >
             Tokens
           </div>
-          {data.map((d, idx) => (
+          {data?.map((d, idx) => (
             <Row
               key={d.owner}
               position={idx + 1}
               width={width}
               {...d}
-              last={idx === data.length - 1}
+              last={idx === data?.length - 1}
               assetTemplate={assetTemplate}
             />
           ))}

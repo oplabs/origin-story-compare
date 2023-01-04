@@ -1,6 +1,6 @@
 import type { FunctionComponent, PropsWithChildren } from "react";
 import Image from "next/image";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import Skeleton from "react-loading-skeleton";
 import { formatNumber } from "../lib/utils";
 import { Sales } from "./Sales";
@@ -164,7 +164,7 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
               />
               <Stat
                 value={ethers.utils.formatUnits(
-                  data?.contractStats?.floorPrice,
+                  data?.contractStats?.floorPrice || BigNumber.from(0),
                   18
                 )}
                 label="Floor Price"

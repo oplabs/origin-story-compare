@@ -51,12 +51,13 @@ const Index: NextPage<IndexProps> = ({ projectA = {} }) => {
         <PageTitle>Comparing {projectA?.name} with...</PageTitle>
       </PageHeader>
       <div className="mt-8">
-        <ProjectSelector projectAPlaceholder={projectA?.name} />
+        <ProjectSelector projectAValue={projectA?.name} />
       </div>
       <div className="mt-8">
         <ProjectComparison
           projectAData={projectAData}
           projectALoading={projectALoading}
+          projectAName={projectA?.name}
         />
       </div>
     </Layout>

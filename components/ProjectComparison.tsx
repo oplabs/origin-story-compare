@@ -21,6 +21,8 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
 }) => {
   const [view, setView] = useState<"side-by-side" | "combined">("side-by-side");
 
+  const hasProjectB = projectBData && projectBName;
+
   const Tabs: FunctionComponent = () => (
     <div className="flex items-center justify-center px-4 mb-6 space-x-2 ">
       <div className="text-sm text-neutral">Toggle View</div>
@@ -34,6 +36,7 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
         <button
           className={`tab ${view === "combined" && " tab-active"}`}
           onClick={() => setView("combined")}
+          disabled={!hasProjectB}
         >
           Combined
         </button>
@@ -41,7 +44,7 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
     </div>
   );
 
-  if (view === "combined") {
+  if (hasProjectB && view === "combined") {
     return (
       <>
         <Tabs />
@@ -70,9 +73,9 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
         </div>
         <div className="flex-1">
           <Project
-            data={projectBData}
-            loading={projectBLoading}
-            name={projectBName}
+            data={hasProjectB ? projectBData : {}}
+            loading={hasProjectB ? projectBLoading : true}
+            name={hasProjectB ? projectBName : ""}
           />
         </div>
       </div>

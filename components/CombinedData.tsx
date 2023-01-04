@@ -158,8 +158,6 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  console.log(projectBSalesByDayData30);
-
   const averagePriceByDayData = projectASalesByDayData30.map((d) => ({
     label: d.date,
     dataPoints: [

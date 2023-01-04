@@ -1,5 +1,6 @@
 export function formatNumber(num, dec = 2, trailingZeros = false) {
-    const dsep = '.',
+  if(!num) return 0;  
+  const dsep = '.',
       tsep = ','
     num = num.toFixed(~~dec)
     const parts = num.split('.'),

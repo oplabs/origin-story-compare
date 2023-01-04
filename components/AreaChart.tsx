@@ -21,9 +21,11 @@ const accessors = {
 export const AreaChart = ({
   data,
   showLeftAxis,
+  parentWidth,
 }: {
   data: Array<Item>;
   showLeftAxis?: boolean;
+  parentWidth?: number;
 }) => {
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
@@ -38,17 +40,18 @@ export const AreaChart = ({
   return (
     <XYChart
       height={height}
-      margin={{ top: 20, right: 0, bottom: 25, left: 0 }}
+      margin={{ top: 20, right: 0, bottom: 25, left: showLeftAxis ? 40 : 0 }}
       xScale={{ type: "band" }}
       yScale={{ type: "linear" }}
       theme={customTheme}
+      width={showLeftAxis && parentWidth ? parentWidth - 20 : undefined}
     >
       <Axis
         orientation="bottom"
         numTicks={6}
         hideAxisLine
         hideTicks
-        top={height - 15}
+        top={height - 20}
         tickLabelProps={() => ({
           fontSize: 10,
           fontWeight: 400,
@@ -64,12 +67,17 @@ export const AreaChart = ({
       {showLeftAxis && (
         <Axis
           orientation="left"
-          //scale={yScale}
-          //numTicks={appendCount ? 0 : undefined}
-          tickStroke="#cccccc"
-          //labelOffset={appendCount ? 0 : undefined}
-          stroke="#eaeaea"
-          label="test"
+          numTicks={6}
+          hideAxisLine
+          hideTicks
+          left={35}
+          tickLabelProps={() => ({
+            fontSize: 10,
+            fontWeight: 400,
+            fill: "#000",
+            textAnchor: "end",
+            verticalAnchor: "end",
+          })}
         />
       )}
       <Grid columns={false} numTicks={4} />
@@ -80,6 +88,7 @@ export const AreaChart = ({
         fillOpacity={0.1}
         lineProps={{ strokeWidth: 3, stroke: "hsl(var(--p))" }}
         {...accessors}
+        width={showLeftAxis && parentWidth ? parentWidth - 30 : undefined}
       />
     </XYChart>
   );

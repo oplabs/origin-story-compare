@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 import { CreateImageWrapper } from "./CreateImageWrapper";
+import { ParentSize } from "@visx/responsive";
 
 interface AllSalesByDay {
   byDay: SalesByDay[];
@@ -59,7 +60,11 @@ export const Volume = ({
             />
             <span className="ml-2 text-primary">{totalVolume}</span>
           </AreaChartHeader>
-          <AreaChart data={salesByDay} />
+          <ParentSize>
+            {(parent) => (
+              <AreaChart data={salesByDay} parentWidth={parent.width} />
+            )}
+          </ParentSize>
         </div>
       </CreateImageWrapper>
     </div>

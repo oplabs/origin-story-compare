@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 import { CreateImageWrapper } from "./CreateImageWrapper";
+import { ParentSize } from "@visx/responsive";
 
 interface AllSalesByDay {
   byDay: SalesByDay[];
@@ -60,7 +61,11 @@ export const AveragePrice = ({
               {`${Math.round(allSalesByDay?.stats?.avg * 10000) / 10000}`}
             </span>
           </AreaChartHeader>
-          <AreaChart data={salesByDay} />
+          <ParentSize>
+            {(parent) => (
+              <AreaChart data={salesByDay} parentWidth={parent.width} />
+            )}
+          </ParentSize>
         </div>
       </CreateImageWrapper>
     </div>

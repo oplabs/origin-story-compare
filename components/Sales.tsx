@@ -4,7 +4,7 @@ import { AreaChart, AreaChartHeader } from "./AreaChart";
 import { Range } from "./Range";
 import { CreateImageWrapper } from "./CreateImageWrapper";
 import { formatNumber } from "../lib/utils";
-
+import { ParentSize } from "@visx/responsive";
 interface AllSalesByDay {
   byDay: SalesByDay[];
   stats: object;
@@ -63,7 +63,11 @@ export const Sales = ({
               )}`}
             </span>
           </AreaChartHeader>
-          <AreaChart data={salesByDay} showLeftAxis />
+          <ParentSize>
+            {(parent) => (
+              <AreaChart data={salesByDay} parentWidth={parent.width} />
+            )}
+          </ParentSize>
         </div>
       </CreateImageWrapper>
     </div>

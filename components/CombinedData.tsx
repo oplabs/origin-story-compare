@@ -49,10 +49,23 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
 }) => {
   if (projectALoading || projectBLoading) return <CombinedDataSkeleton />;
 
+  const dataAEmpty =
+    projectAData &&
+    Object.keys(projectAData).length > 0 &&
+    Object.entries(projectAData).find((d) => d[1] === undefined);
+
+  const dataBEmpty =
+    projectBData &&
+    Object.keys(projectBData).length > 0 &&
+    Object.entries(projectBData).find((d) => d[1] === undefined);
+
   if (
-    !projectALoading &&
-    !projectBLoading &&
-    (projectAData?.error !== undefined || projectBData?.error !== undefined)
+    (!projectALoading &&
+      !projectBLoading &&
+      (projectAData?.error !== undefined ||
+        projectBData?.error !== undefined)) ||
+    dataAEmpty ||
+    dataBEmpty
   ) {
     return (
       <div className="space-y-4">

@@ -1,4 +1,4 @@
-const API_BASE_URL = `https://nip.ogn-review.net/v1/`
+const API_BASE_URL = `/api/nip/`
 const API_STATS_BASE_URL = API_BASE_URL + `stats/`
 const API_TOP_HOLDERS_URL = API_STATS_BASE_URL + `top-holders`
 const API_HIGH_CONVICTION_HOLDERS_URL = API_STATS_BASE_URL + `high-conviction-holders`

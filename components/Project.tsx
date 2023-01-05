@@ -101,7 +101,12 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
     return <ProjectSkeleton />;
   }
 
-  if (!loading && data?.error !== undefined) {
+  const dataEmpty =
+    data &&
+    Object.keys(data).length > 0 &&
+    Object.entries(data).find((d) => d[1] === undefined);
+
+  if ((!loading && data?.error !== undefined) || dataEmpty) {
     return (
       <div className="space-y-4">
         <div className="alert alert-error text-white">
@@ -126,6 +131,8 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
       </div>
     );
   }
+
+  console.log(data);
 
   const totalHolders = data?.holderDistribution?.reduce((m, o) => m + o[1], 0);
   const uniqueHoldersPercentage = (

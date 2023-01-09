@@ -1,45 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, FunctionComponent } from "react";
 import { ComparativeAreaChart } from "../ComparativeAreaChart";
 import { Range } from "../Range";
 import { CreateImageWrapper } from "../CreateImageWrapper";
 import { ParentSize } from "@visx/responsive";
 
-interface AllSalesByDay {
-  byDay: SalesByDay[];
-  stats: object;
-  imageFooter?: string;
-}
-
-interface SalesByDay {
-  date: string;
-  sales: number;
+interface DataItem {
+  label: string;
   value: number;
 }
-
-export const Sales = ({
-  allSalesByDay,
-  imageFooter,
-}: {
-  allSalesByDay: AllSalesByDay;
+interface Sales {
+  dataA: DataItem[];
+  dataB: DataItem[];
   imageFooter?: string;
+  tweetText?: string;
+  dataAKey: string;
+  dataBKey: string;
+}
+
+export const Sales: FunctionComponent<Sales> = ({
+  dataA,
+  dataB,
+  imageFooter,
+  tweetText,
+  dataAKey,
+  dataBKey,
 }) => {
   const [range, setRange] = useState("1M");
 
-  let salesByDay: SalesByDay[];
+  let dataASlice: DataItem[];
   if (range === "3M") {
-    salesByDay = allSalesByDay?.byDay.slice(-90);
+    dataASlice = dataA?.slice(-90);
   } else if (range === "1M") {
-    salesByDay = allSalesByDay?.byDay.slice(-30);
+    dataASlice = dataA?.slice(-30);
   } else if (range === "1Y") {
-    salesByDay = allSalesByDay?.byDay.slice(-365);
+    dataASlice = dataA?.slice(-365);
   } else {
-    salesByDay = allSalesByDay?.byDay;
+    dataASlice = dataA;
   }
-  salesByDay = salesByDay?.map(({ date, sales }) => ({
-    date,
-    sales,
-    value: Math.round(sales * 10000) / 10000,
-  }));
+
+  let dataBSlice: DataItem[];
+  if (range === "3M") {
+    dataBSlice = dataB?.slice(-90);
+  } else if (range === "1M") {
+    dataBSlice = dataB?.slice(-30);
+  } else if (range === "1Y") {
+    dataBSlice = dataB?.slice(-365);
+  } else {
+    dataBSlice = dataB;
+  }
 
   return (
     <div className="min-w-0">
@@ -47,12 +55,15 @@ export const Sales = ({
         <div className="text-xl font-medium">Sales</div>
         <Range {...{ range, setRange }} />
       </div>
-      <CreateImageWrapper footer={imageFooter}>
+      <CreateImageWrapper footer={imageFooter} tweetText={tweetText} isCombined>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
           <ParentSize>
             {(parent) => (
               <ComparativeAreaChart
-                data={salesByDay}
+                dataA={dataASlice}
+                dataB={dataBSlice}
+                dataAKey={dataAKey}
+                dataBKey={dataBKey}
                 parentWidth={parent.width}
               />
             )}

@@ -192,7 +192,34 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  const salesData = salesByDayData;
+  const salesData = projectAData?.salesByDay?.byDay.map((d) => ({
+    label: d.date,
+    dataPoints: [{ label: projectAData?.contract?.name, value: d.sales }],
+  }));
+  projectBData?.salesByDay?.byDay.forEach((d) => {
+    const found = salesData.find((e) => e.label === d.date);
+    if (found) {
+      found.dataPoints.push({
+        label: projectBData?.contract?.name,
+        value: d.sales,
+      });
+    } else {
+      salesData.push({
+        label: d.date,
+        dataPoints: [{ label: projectBData?.contract?.name, value: d.sales }],
+      });
+    }
+  });
+
+  const salesDataA = projectAData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.sales,
+  }));
+
+  const salesDataB = projectBData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.sales,
+  }));
 
   return (
     <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
@@ -220,13 +247,15 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
             >
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
-            <CreateImageWrapper
-              footer={imageFooter}
+            <Sales
+              data={salesData}
+              dataA={salesDataA}
+              dataB={salesDataB}
+              dataAKey={projectAName}
+              dataBKey={projectBName}
+              imageFooter={imageFooter}
               tweetText={`Sales ${tweetTextEnd}`}
-              isCombined
-            >
-              <Sales data={salesData} />
-            </CreateImageWrapper>
+            />
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Holder distribution ${tweetTextEnd}`}

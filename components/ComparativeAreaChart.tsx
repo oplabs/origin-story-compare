@@ -7,30 +7,37 @@ import {
   XYChart,
   buildChartTheme,
 } from "@visx/xychart";
+import { LegendOrdinal } from "@visx/legend";
+import { scaleOrdinal } from "@visx/scale";
 
-interface Item {
+interface DataItem {
   date: Date;
   value: number;
 }
 
 const accessors = {
-  xAccessor: (d: Item) => d.date,
-  yAccessor: (d: Item) => d.value,
+  xAccessor: (d: DataItem) => d.date,
+  yAccessor: (d: DataItem) => d.value,
 };
 
 export const ComparativeAreaChart = ({
-  data,
+  dataA,
+  dataB,
   showLeftAxis,
   parentWidth,
+  dataAKey,
+  dataBKey,
 }: {
   showLeftAxis?: boolean;
   parentWidth?: number;
-  data: { label: string; dataPoints: { label: string; value: number }[] }[];
+  dataA: DataItem[];
+  dataB: DataItem[];
+  dataAKey: string;
+  dataBKey: string;
 }) => {
-  console.log(data);
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
-    colors: ["hsl(var(--p))"],
+    colors: ["hsl(var(--p))", "hsl(var(--b))"],
     tickLength: 0,
     gridColor: "rgba(0, 0, 0, 0.15)",
     gridColorDark: "rgba(0, 0, 0, 0.15)",
@@ -38,60 +45,83 @@ export const ComparativeAreaChart = ({
 
   const height = 220;
 
+  const colorScale = scaleOrdinal<string, string>({
+    domain: [dataAKey, dataBKey],
+    range: ["hsl(var(--p))", "hsl(var(--n))"],
+  });
+
   return (
-    <XYChart
-      height={height}
-      margin={{ top: 20, right: 0, bottom: 25, left: showLeftAxis ? 40 : 0 }}
-      xScale={{ type: "band" }}
-      yScale={{ type: "linear" }}
-      theme={customTheme}
-      width={showLeftAxis && parentWidth ? parentWidth - 20 : undefined}
-    >
-      <Axis
-        orientation="bottom"
-        numTicks={6}
-        hideAxisLine
-        hideTicks
-        top={height - 20}
-        tickLabelProps={() => ({
-          fontSize: 10,
-          fontWeight: 400,
-          fill: "#000",
-          textAnchor: "middle",
-          verticalAnchor: "middle",
-        })}
-        tickFormat={(d) => {
-          if (d === data[0].date) return "";
-          return d.slice(5).replace("-", "/");
-        }}
-      />
-      {showLeftAxis && (
+    <div className="pt-8">
+      <XYChart
+        height={height}
+        margin={{ top: 20, right: 0, bottom: 25, left: showLeftAxis ? 40 : 0 }}
+        xScale={{ type: "band" }}
+        yScale={{ type: "linear" }}
+        theme={customTheme}
+        width={showLeftAxis && parentWidth ? parentWidth - 20 : undefined}
+      >
         <Axis
-          orientation="left"
+          orientation="bottom"
           numTicks={6}
           hideAxisLine
           hideTicks
-          left={35}
+          top={height - 20}
           tickLabelProps={() => ({
             fontSize: 10,
             fontWeight: 400,
             fill: "#000",
-            textAnchor: "end",
-            verticalAnchor: "end",
+            textAnchor: "middle",
+            verticalAnchor: "middle",
           })}
+          tickFormat={(d) => {
+            if (d === dataA[0].date) return "";
+            return d.slice(5).replace("-", "/");
+          }}
         />
-      )}
-      <Grid columns={false} numTicks={4} />
-      <AreaSeries
-        dataKey="Sales"
-        data={data}
-        curve={curveCardinal}
-        fillOpacity={0.1}
-        lineProps={{ strokeWidth: 3, stroke: "hsl(var(--p))" }}
-        {...accessors}
-        width={showLeftAxis && parentWidth ? parentWidth - 30 : undefined}
-      />
-    </XYChart>
+        {showLeftAxis && (
+          <Axis
+            orientation="left"
+            numTicks={6}
+            hideAxisLine
+            hideTicks
+            left={35}
+            tickLabelProps={() => ({
+              fontSize: 10,
+              fontWeight: 400,
+              fill: "#000",
+              textAnchor: "end",
+              verticalAnchor: "end",
+            })}
+          />
+        )}
+        <Grid columns={false} numTicks={4} />
+        <AreaSeries
+          dataKey={dataAKey}
+          data={dataA}
+          curve={curveCardinal}
+          fillOpacity={0.1}
+          lineProps={{ strokeWidth: 3, stroke: "hsl(var(--p))" }}
+          {...accessors}
+          width={showLeftAxis && parentWidth ? parentWidth - 30 : undefined}
+        />
+        <AreaSeries
+          dataKey={dataBKey}
+          data={dataB}
+          curve={curveCardinal}
+          fillOpacity={0.1}
+          lineProps={{ strokeWidth: 3, stroke: "hsl(var(--n))" }}
+          {...accessors}
+          width={showLeftAxis && parentWidth ? parentWidth - 30 : undefined}
+        />
+      </XYChart>
+      <div className="absolute top-4 right-2 text-sm text-neutral">
+        <LegendOrdinal
+          scale={colorScale}
+          direction="row"
+          labelMargin="0 15px 0 0"
+        />
+      </div>
+    </div>
   );
 };
 

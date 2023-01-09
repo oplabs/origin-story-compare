@@ -7,6 +7,8 @@ import { SalesByDay } from "./CombinedData/SalesByDay";
 import { VolumeByDay } from "./CombinedData/VolumeByDay";
 import { AveragePriceByDay } from "./CombinedData/AveragePriceByDay";
 import { Sales } from "./CombinedData/Sales";
+import { Volume } from "./CombinedData/Volume";
+import { AveragePrice } from "./CombinedData/AveragePrice";
 interface CombinedDataProps {
   projectAData: object;
   projectALoading: boolean;
@@ -221,6 +223,26 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     value: d.sales,
   }));
 
+  const volumeDataA = projectAData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.ethVolume,
+  }));
+
+  const volumeDataB = projectBData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.ethVolume,
+  }));
+
+  const averagePriceDataA = projectAData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.averagePrice,
+  }));
+
+  const averagePriceDataB = projectBData?.salesByDay?.byDay.map((d) => ({
+    date: d.date,
+    value: d.averagePrice,
+  }));
+
   return (
     <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
       <div className="flex-1">
@@ -248,13 +270,28 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
             <Sales
-              data={salesData}
               dataA={salesDataA}
               dataB={salesDataB}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}
               tweetText={`Sales ${tweetTextEnd}`}
+            />
+            <Volume
+              dataA={volumeDataA}
+              dataB={volumeDataB}
+              dataAKey={projectAName}
+              dataBKey={projectBName}
+              imageFooter={imageFooter}
+              tweetText={`Volume ${tweetTextEnd}`}
+            />
+            <AveragePrice
+              dataA={averagePriceDataA}
+              dataB={averagePriceDataB}
+              dataAKey={projectAName}
+              dataBKey={projectBName}
+              imageFooter={imageFooter}
+              tweetText={`Volume ${tweetTextEnd}`}
             />
             <CreateImageWrapper
               footer={imageFooter}

@@ -60,12 +60,9 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     Object.entries(projectBData).find((d) => d[1] === undefined);
 
   if (
-    (!projectALoading &&
-      !projectBLoading &&
-      (projectAData?.error !== undefined ||
-        projectBData?.error !== undefined)) ||
-    dataAEmpty ||
-    dataBEmpty
+    !projectALoading &&
+    !projectBLoading &&
+    (dataAEmpty !== undefined || dataBEmpty !== undefined)
   ) {
     return (
       <div className="space-y-4">
@@ -195,6 +192,8 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
+  const salesData = salesByDayData;
+
   return (
     <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
       <div className="flex-1">
@@ -221,13 +220,13 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
             >
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
-            {/*<CreateImageWrapper
+            <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Sales ${tweetTextEnd}`}
               isCombined
             >
               <Sales data={salesData} />
-            </CreateImageWrapper>*/}
+            </CreateImageWrapper>
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Holder distribution ${tweetTextEnd}`}

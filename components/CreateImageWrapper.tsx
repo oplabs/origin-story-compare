@@ -5,6 +5,7 @@ import { Download } from "./Icons/Download";
 import { Twitter } from "./Icons/Twitter";
 import { Loading } from "./Icons/Loading";
 import { Check } from "./Icons/Check";
+import { Error } from "./Icons/Error";
 import { INTERNAL_API_TWITTER_URL, TWITTER_BOT_USERNAME } from "../lib/api";
 interface CreateImageWrapperProps {
   children: ReactNode;
@@ -21,7 +22,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [twitterStatus, setTwitterStatus] = useState<
-    "" | "loading" | "success"
+    "" | "loading" | "success" | "error"
   >("");
   const imageWrapper = useRef<HTMLDivElement>(null);
   const cloneWrapper = useRef<HTMLDivElement>(null);
@@ -80,31 +81,35 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   };
 
   const handleShareOnTwitter = async () => {
-    // Create image
-    const dataUrl = await handleCreateImage();
-    // Post image to bot
-    setTwitterStatus("loading");
-    const res = await fetch(`${INTERNAL_API_TWITTER_URL}`, {
-      method: "POST",
-      body: JSON.stringify({
-        image: dataUrl,
-        tweetText: tweetText || "",
-      }),
-    });
-    const json = await res.json();
+    try {
+      // Create image
+      const dataUrl = await handleCreateImage();
+      // Post image to bot
+      setTwitterStatus("loading");
+      const res = await fetch(`${INTERNAL_API_TWITTER_URL}`, {
+        method: "POST",
+        body: JSON.stringify({
+          image: dataUrl,
+          tweetText: tweetText || "",
+        }),
+      });
+      const json = await res.json();
 
-    if (json.success) {
-      const tweetId = json?.tweet?.id_str;
-      if (tweetId) {
-        // Open dialog for user to share on Twitter
-        window.open(
-          `https://twitter.com/intent/tweet?text=${tweetText} https://twitter.com/${TWITTER_BOT_USERNAME}/status/${tweetId}/photo/1`,
-          "_blank"
-        );
+      if (json.success) {
+        const tweetId = json?.tweet?.id_str;
+        if (tweetId) {
+          // Open dialog for user to share on Twitter
+          window.open(
+            `https://twitter.com/intent/tweet?text=${tweetText} https://twitter.com/${TWITTER_BOT_USERNAME}/status/${tweetId}/photo/1`,
+            "_blank"
+          );
+        }
+        setTwitterStatus("success");
+      } else {
+        setTwitterStatus("error");
       }
-      setTwitterStatus("success");
-    } else {
-      setTwitterStatus("");
+    } catch (e) {
+      setTwitterStatus("error");
     }
   };
 
@@ -122,6 +127,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
               {twitterStatus === "" && <Twitter />}
               {twitterStatus === "loading" && <Loading />}
               {twitterStatus === "success" && <Check />}
+              {twitterStatus === "error" && <Error />}
               <span>Share on Twitter</span>
             </button>
             <button className="btn space-x-1" onClick={handleDownloadImage}>

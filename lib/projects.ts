@@ -75,6 +75,38 @@ const projects = [
         name: 'Meebits',
         address: '0x7Bd29408f11D2bFC23c34f18275bBf23bB716Bc7',
     },
+    {
+        name: '0N1 Force',
+        address: '0x3bf2922f4520a8BA0c2eFC3D2a1539678DaD5e9D',
+    },
+    {
+        name: '10KTF',
+        address: '0x0Cfb5d82BE2b949e8fa73A656dF91821E2aD99FD',
+    },
+    {
+        name: 'Azuki',
+        address: '0xed5af388653567af2f388e6224dc7c4b3241c544',
+    },
+    /*{
+        name: 'BEANZ Official',
+        address: '0x306b1ea3ecdf94ab739f1910bbda052ed4a9f949',
+    },
+    {
+        name: 'CloneX',
+        address: '0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b',
+    },
+    {
+        name: 'Doodles',
+        address: '0x8a90cab2b38dba80c64b7734e58ee1db38b8992e',
+    },
+    {
+        name: 'Dooplicator',
+        address: '0x466cfcd0525189b573e794f554b8a751279213ac',
+    },
+    {
+        name: 'Moonbirds',
+        address: '0x23581767a106ae21c074b2276d25e5c3e136a68b',
+    },*/
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

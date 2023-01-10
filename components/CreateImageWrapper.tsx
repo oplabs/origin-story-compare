@@ -5,7 +5,7 @@ import { Download } from "./Icons/Download";
 import { Twitter } from "./Icons/Twitter";
 import { Loading } from "./Icons/Loading";
 import { Check } from "./Icons/Check";
-import { INTERNAL_API_TWITTER_URL } from "../lib/api";
+import { INTERNAL_API_TWITTER_URL, TWITTER_BOT_USERNAME } from "../lib/api";
 interface CreateImageWrapperProps {
   children: ReactNode;
   footer?: string;
@@ -82,7 +82,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   const handleShareOnTwitter = async () => {
     // Create image
     const dataUrl = await handleCreateImage();
-    // Post image to @databyorigin bot
+    // Post image to bot
     setTwitterStatus("loading");
     const res = await fetch(`${INTERNAL_API_TWITTER_URL}`, {
       method: "POST",
@@ -98,7 +98,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
       if (tweetId) {
         // Open dialog for user to share on Twitter
         window.open(
-          `https://twitter.com/intent/tweet?text=${tweetText} https://twitter.com/databyorigin/status/${tweetId}/photo/1`,
+          `https://twitter.com/intent/tweet?text=${tweetText} https://twitter.com/${TWITTER_BOT_USERNAME}/status/${tweetId}/photo/1`,
           "_blank"
         );
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import useElWidth from "../hooks/useElWidth";
 
@@ -72,6 +72,8 @@ const Row = ({
   tokens: TokenRow[];
 }) => {
   const showTokens = Math.floor(width / 30);
+  const [hiddenIds, setHiddenIds] = useState<string[]>([]);
+
   return (
     <>
       <div
@@ -105,17 +107,20 @@ const Row = ({
           last ? "" : "border-b border-gray-300 pb-3 mb-3"
         }`}
       >
-        {tokens.slice(0, showTokens).map((t) => (
-          <div className="flex-1 relative h-8 sm:h-11" key={t.tokenId}>
-            <Image
-              className={`absolute w-8 sm:w-11 h-8 sm:h-11 rounded-full max-w-none`}
-              src={assetTemplate.replace("TOKEN_ID", t.tokenId)}
-              alt={t.tokenId}
-              height={44}
-              width={44}
-            />
-          </div>
-        ))}
+        {tokens
+          .filter((t) => !hiddenIds.includes(t.tokenId))
+          .slice(0, showTokens)
+          .map((t) => (
+            <div className="flex-1 relative h-8 sm:h-11" key={t.tokenId}>
+              <Image
+                className={`absolute w-8 sm:w-11 h-8 sm:h-11 rounded-full max-w-none`}
+                src={assetTemplate.replace("TOKEN_ID", t.tokenId)}
+                alt={t.tokenId}
+                height={44}
+                width={44}
+              />
+            </div>
+          ))}
         <div className="relative flex-1 h-8 sm:h-11">
           <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-neutral text-neutral-content absolute flex items-center justify-center text-xs">
             {`+${total - showTokens}`}

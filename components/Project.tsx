@@ -132,8 +132,6 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
     );
   }
 
-  console.log(data);
-
   const totalHolders = data?.holderDistribution?.reduce((m, o) => m + o[1], 0);
   const uniqueHoldersPercentage = (
     (totalHolders / data?.contractStats?.totalSupply) *

@@ -15,8 +15,8 @@ const Index: NextPage = () => (
     <PageHeader>
       <PageTitle>Compare Top NFT Projects</PageTitle>
       <PageDescription>
-        See how your favourite collection is doing and make informed buying
-        decisions with side-by-side project data
+        See how your favourite NFT collection is doing with side-by-side and
+        combined data
       </PageDescription>
     </PageHeader>
     <div className="mt-8">

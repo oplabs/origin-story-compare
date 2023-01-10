@@ -101,7 +101,7 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     projectATwitterUsername ? ` (@${projectATwitterUsername})` : ``
   } vs. ${projectBName}${
     projectBTwitterUsername ? ` (@${projectBTwitterUsername})` : ``
-  } at ${timestamp}`;
+  } at ${timestamp}. Data by @OriginProtocol`;
 
   const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${projectBData?.contract?.collection?.name} at ${timestamp}`;
 

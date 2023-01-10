@@ -142,7 +142,7 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
   const twitterUsername = data?.contract?.collection?.twitter_username;
   const tweetTextEnd = `of ${name}${
     twitterUsername ? ` (@${twitterUsername})` : ``
-  } at ${timestamp}`;
+  } at ${timestamp}. Data by @OriginProtocol`;
 
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 

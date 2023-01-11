@@ -9,6 +9,7 @@ import { AveragePriceByDay } from "./CombinedData/AveragePriceByDay";
 import { Sales } from "./CombinedData/Sales";
 import { Volume } from "./CombinedData/Volume";
 import { AveragePrice } from "./CombinedData/AveragePrice";
+import { HolderOverlap } from "./CombinedData/HolderOverlap";
 interface CombinedDataProps {
   projectAData: object;
   projectALoading: boolean;
@@ -243,11 +244,43 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     value: d.averagePrice,
   }));
 
+  const projectAOwnerAddressess = projectAData?.ownerAddresses;
+  const projectBOwnerAddressess = projectBData?.ownerAddresses;
+  const ownersOfBothProjects = projectAOwnerAddressess.filter((a: string) =>
+    projectBOwnerAddressess.includes(a)
+  );
+  const numberOfOwnersOfBothProjects = ownersOfBothProjects.length;
+  const percentageOfProjectAOwnersWhoOwnProjectB = (
+    (ownersOfBothProjects.length / projectAOwnerAddressess.length) *
+    100
+  ).toFixed(2);
+  const percentageOfProjectBOwnersWhoOwnProjectA = (
+    (ownersOfBothProjects.length / projectBOwnerAddressess.length) *
+    100
+  ).toFixed(2);
+
   return (
     <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
       <div className="flex-1">
         <div className="card border bg-base-100 w-full min-h-[200px]">
           <div className="card-body space-y-6">
+            <CreateImageWrapper
+              footer={imageFooter}
+              tweetText={`Holder overlap ${tweetTextEnd}`}
+              isCombined
+            >
+              <HolderOverlap
+                numberOfOwnersOfBothProjects={numberOfOwnersOfBothProjects}
+                percentageOfProjectAOwnersWhoOwnProjectB={
+                  percentageOfProjectAOwnersWhoOwnProjectB
+                }
+                percentageOfProjectBOwnersWhoOwnProjectA={
+                  percentageOfProjectBOwnersWhoOwnProjectA
+                }
+                projectAName={projectAName}
+                projectBName={projectBName}
+              />
+            </CreateImageWrapper>
             <CreateImageWrapper
               footer={imageFooter}
               tweetText={`Sales by day ${tweetTextEnd}`}

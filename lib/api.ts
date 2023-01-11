@@ -15,10 +15,11 @@ const API_PROJECT_URLS = [
     {key: 'salesByDay', url: API_SALES_BY_DAY_URL},
 ]
 
-const OPENSEA_API_CONTRACT_URL = `https://api.opensea.io/api/v1/asset_contract/`
+const OPENSEA_API_CONTRACT_URL = `https://api.opensea.io/api/v1/asset_contract/`;
 
 const INTERNAL_API_BASE_URL = `/api`;
 const INTERNAL_API_TWITTER_URL = `${INTERNAL_API_BASE_URL}/twitter`;
+const INTERNAL_API_ALCHEMY_URL = `${INTERNAL_API_BASE_URL}/alchemy`;
 
 const TWITTER_BOT_USERNAME = process.env.TWITTER_BOT_USERNAME || '';
 
@@ -36,4 +37,5 @@ export {
     INTERNAL_API_BASE_URL,
     INTERNAL_API_TWITTER_URL,
     TWITTER_BOT_USERNAME,
+    INTERNAL_API_ALCHEMY_URL,
 }

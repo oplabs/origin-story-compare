@@ -28,6 +28,10 @@ const nextConfig = {
         source: '/api/nip/:path*',
         destination: 'https://nip.ogn-review.net/v1/:path*',
       },
+      {
+        source: '/api/alchemy/:path*',
+        destination: `${process.env.ALCHEMY_NFT_URL}/:path*`,
+      },
     ]
   }
 }

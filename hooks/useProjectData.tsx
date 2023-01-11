@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { API_PROJECT_URLS, OPENSEA_API_CONTRACT_URL, API_COLLECTIONS_URL } from '../lib/api';
+import { API_PROJECT_URLS, OPENSEA_API_CONTRACT_URL, API_COLLECTIONS_URL, INTERNAL_API_ALCHEMY_URL } from '../lib/api';
 
 const useProjectData = (address:string) => {
     const [loading, setLoading] = useState(true)
@@ -29,6 +29,12 @@ const useProjectData = (address:string) => {
                 projectData = {
                     ...projectData,
                     contractStats: contractStatsJson?.stats,
+                }
+                const ownersAddresses = await fetch(`${INTERNAL_API_ALCHEMY_URL}/getOwnersForCollection?contractAddress=${address}`)
+                const ownersAddressesJson = await ownersAddresses.json()
+                projectData = {
+                    ...projectData,
+                    ...ownersAddressesJson,
                 }
             } catch (e) {
                 projectData = {

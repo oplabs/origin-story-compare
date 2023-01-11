@@ -87,7 +87,7 @@ const projects = [
         name: 'Azuki',
         address: '0xed5af388653567af2f388e6224dc7c4b3241c544',
     },
-    /*{
+    {
         name: 'BEANZ Official',
         address: '0x306b1ea3ecdf94ab739f1910bbda052ed4a9f949',
     },
@@ -106,7 +106,7 @@ const projects = [
     {
         name: 'Moonbirds',
         address: '0x23581767a106ae21c074b2276d25e5c3e136a68b',
-    },*/
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

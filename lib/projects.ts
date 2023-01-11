@@ -107,6 +107,66 @@ const projects = [
         name: 'Moonbirds',
         address: '0x23581767a106ae21c074b2276d25e5c3e136a68b',
     },
+    {
+        name: 'Wolf Game',
+        address: '0x7f36182dee28c45de6072a34d29855bae76dbe2f',
+    },
+    {
+        name: 'Wolf Game - Wool Pouch',
+        address: '0xb76fbbb30e31f2c3bdaa2466cfb1cfe39b220d06',
+    },
+    {
+        name: 'Wolf Game - Land',
+        address: '0x2c88aa0956bc9813505d73575f653f69ada60923',
+    },
+    {
+        name: 'Wolf Game - Farmer',
+        address: '0xbda2481db91fc0f942ed3f53de378ba45ba9d17e',
+    },
+    {
+        name: 'Wonky Stonks',
+        address: '0x518ba36f1ca6dfe3bb1b098b8dd0444030e79d9f',
+    },
+    {
+        name: 'Valhalla',
+        address: '0x231d3559aa848bf10366fb9868590f01d34bf240',
+    },
+    {
+        name: 'Renga',
+        address: '0x394e3d3044fc89fcdd966d3cb35ac0b32b0cda91',
+    },
+    {
+        name: 'The Potatoz',
+        address: '0x39ee2c7b3cb80254225884ca001f57118c8f21b6',
+    },
+    {
+        name: 'Rektguy',
+        address: '0xb852c6b5892256c264cc2c888ea462189154d8d7',
+    },
+    {
+        name: 'Kanpai Pandas',
+        address: '0xacf63e56fd08970b43401492a02f6f38b6635c91',
+    },
+    {
+        name: 'The Plague',
+        address: '0x8c3fb10693b228e8b976ff33ce88f97ce2ea9563',
+    },
+    {
+        name: 'mfers',
+        address: '0x79fcdef22feed20eddacbb2587640e45491b757f',
+    },
+    {
+        name: 'goblintown',
+        address: '0xbce3781ae7ca1a5e050bd9c4c77369867ebc307e',
+    },
+    {
+        name: 'The Alien Boy',
+        address: '0x4581649af66bccaee81eebae3ddc0511fe4c5312',
+    },
+    {
+        name: 'Kiwami GENESIS',
+        address: '0x701a038af4bd0fc9b69a829ddcb2f61185a49568',
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

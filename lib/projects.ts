@@ -36,7 +36,7 @@ const projects = [
         address: '0x760C355b8E3DBdA999CC7f41B9278104B782d235',
     },
     {
-        name: 'RooTroop',
+        name: 'Roo Troop',
         address: '0x928f072C009727FbAd81bBF3aAa885f9fEa65fcf',
     },
     {

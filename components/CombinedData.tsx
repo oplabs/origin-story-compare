@@ -108,19 +108,19 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
 
   const holderDistributionData = projectAData?.holderDistribution.map((d) => ({
     label: d[0],
-    dataPoints: [{ label: projectAData?.contract?.name, value: d[1] }],
+    dataPoints: [{ label: projectAName, value: d[1] }],
   }));
   projectBData?.holderDistribution.forEach((d) => {
     const found = holderDistributionData.find((e) => e.label === d[0]);
     if (found) {
       found.dataPoints.push({
-        label: projectBData?.contract?.name,
+        label: projectBName,
         value: d[1],
       });
     } else {
       holderDistributionData.push({
         label: d[0],
-        dataPoints: [{ label: projectBData?.contract?.name, value: d[1] }],
+        dataPoints: [{ label: projectBName, value: d[1] }],
       });
     }
   });
@@ -134,82 +134,76 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
 
   const salesByDayData = projectASalesByDayData30.map((d) => ({
     label: d.date,
-    dataPoints: [{ label: projectAData?.contract?.name, value: d.sales }],
+    dataPoints: [{ label: projectAName, value: d.sales }],
   }));
   projectBSalesByDayData30.forEach((d) => {
     const found = salesByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
-        label: projectBData?.contract?.name,
+        label: projectBName,
         value: d.sales,
       });
     } else {
       salesByDayData.push({
         label: d.date,
-        dataPoints: [{ label: projectBData?.contract?.name, value: d.sales }],
+        dataPoints: [{ label: projectBName, value: d.sales }],
       });
     }
   });
 
   const volumeByDayData = projectASalesByDayData30.map((d) => ({
     label: d.date,
-    dataPoints: [{ label: projectAData?.contract?.name, value: d.ethVolume }],
+    dataPoints: [{ label: projectAName, value: d.ethVolume }],
   }));
   projectBSalesByDayData30.forEach((d) => {
     const found = volumeByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
-        label: projectBData?.contract?.name,
+        label: projectBName,
         value: d.ethVolume,
       });
     } else {
       volumeByDayData.push({
         label: d.date,
-        dataPoints: [
-          { label: projectBData?.contract?.name, value: d.ethVolume },
-        ],
+        dataPoints: [{ label: projectBName, value: d.ethVolume }],
       });
     }
   });
 
   const averagePriceByDayData = projectASalesByDayData30.map((d) => ({
     label: d.date,
-    dataPoints: [
-      { label: projectAData?.contract?.name, value: d.averagePrice },
-    ],
+    dataPoints: [{ label: projectAName, value: d.averagePrice }],
   }));
   projectBSalesByDayData30.forEach((d) => {
     const found = averagePriceByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
-        label: projectBData?.contract?.name,
+        label: projectBName,
         value: d.averagePrice,
       });
     } else {
       volumeByDayData.push({
         label: d.date,
-        dataPoints: [
-          { label: projectBData?.contract?.name, value: d.averagePrice },
-        ],
+        dataPoints: [{ label: projectBName, value: d.averagePrice }],
       });
     }
   });
 
   const salesData = projectAData?.salesByDay?.byDay.map((d) => ({
     label: d.date,
-    dataPoints: [{ label: projectAData?.contract?.name, value: d.sales }],
+    dataPoints: [{ label: projectAName, value: d.sales }],
   }));
   projectBData?.salesByDay?.byDay.forEach((d) => {
     const found = salesData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
-        label: projectBData?.contract?.name,
+        label: projectBName,
         value: d.sales,
       });
     } else {
       salesData.push({
         label: d.date,
-        dataPoints: [{ label: projectBData?.contract?.name, value: d.sales }],
+        dataPoints: [{ label: projectBName, value: d.sales }],
       });
     }
   });

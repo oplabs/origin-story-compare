@@ -51,7 +51,7 @@ export const Volume = ({
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
-          <AreaChartHeader description="All time total volume">
+          {/*<AreaChartHeader description="All time total volume">
             <Image
               src="/eth-icon.svg"
               alt="All time total volume"
@@ -59,7 +59,7 @@ export const Volume = ({
               height={12}
             />
             <span className="ml-2 text-primary">{totalVolume}</span>
-          </AreaChartHeader>
+  </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
               <AreaChart data={salesByDay} parentWidth={parent.width} />

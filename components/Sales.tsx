@@ -42,6 +42,8 @@ export const Sales = ({
     value: Math.round(sales * 10000) / 10000,
   }));
 
+  console.log(allSalesByDay);
+
   return (
     <div className="min-w-0">
       <div className="flex justify-between items-center mb-2">
@@ -50,7 +52,7 @@ export const Sales = ({
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
-          <AreaChartHeader description="All time total sales">
+          {/*<AreaChartHeader description="All time total sales">
             <Image
               src="/eth-icon.svg"
               alt="All time total sales"
@@ -59,10 +61,10 @@ export const Sales = ({
             />
             <span className="ml-2 text-primary">
               {`${formatNumber(
-                Math.round(allSalesByDay?.stats?.count * 10000) / 10000
+                Math.round(allSalesByDay?.stats?.sum * 10000) / 10000
               )}`}
             </span>
-          </AreaChartHeader>
+              </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
               <AreaChart data={salesByDay} parentWidth={parent.width} />

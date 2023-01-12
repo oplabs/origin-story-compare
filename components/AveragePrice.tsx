@@ -50,7 +50,7 @@ export const AveragePrice = ({
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
-          <AreaChartHeader description="All time average price">
+          {/*<AreaChartHeader description="All time average price">
             <Image
               src="/eth-icon.svg"
               alt="All time average price"
@@ -60,7 +60,7 @@ export const AveragePrice = ({
             <span className="ml-2 text-primary">
               {`${Math.round(allSalesByDay?.stats?.avg * 10000) / 10000}`}
             </span>
-          </AreaChartHeader>
+  </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
               <AreaChart data={salesByDay} parentWidth={parent.width} />

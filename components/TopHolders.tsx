@@ -73,6 +73,7 @@ const Row = ({
 }) => {
   const showTokens = Math.floor(width / 30);
   const [hiddenIds, setHiddenIds] = useState<string[]>([]);
+  const profileToken = tokens.find((t) => !hiddenIds.includes(t.tokenId));
 
   return (
     <>
@@ -88,13 +89,19 @@ const Row = ({
           last ? "" : "border-b border-gray-300 pb-3 mb-3 pr-3"
         }`}
       >
-        <Image
-          className="rounded-full mr-3 w-14 h-14 sm:w-16 sm:h-16 "
-          src={assetTemplate.replace("TOKEN_ID", tokens[0].tokenId)}
-          alt={owner}
-          height={64}
-          width={64}
-        />
+        {profileToken && (
+          <Image
+            className="rounded-full mr-3 w-14 h-14 sm:w-16 sm:h-16 "
+            src={assetTemplate.replace("TOKEN_ID", profileToken.tokenId)}
+            alt={owner}
+            height={64}
+            width={64}
+            onError={() => {
+              setHiddenIds([...hiddenIds, profileToken.tokenId]);
+            }}
+          />
+        )}
+
         <div className="min-w-0 truncate hover:opacity-90 text-sm">
           <a href={`https://etherscan.io/address/${owner}`}>{`${owner.slice(
             0,
@@ -118,6 +125,9 @@ const Row = ({
                 alt={t.tokenId}
                 height={44}
                 width={44}
+                onError={() => {
+                  setHiddenIds([...hiddenIds, t.tokenId]);
+                }}
               />
             </div>
           ))}

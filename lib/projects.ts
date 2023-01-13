@@ -12,7 +12,7 @@ const projects = [
         address: '0x1485297e942ce64E0870EcE60179dFda34b4C625',
     },
     {
-        name: 'Otherdeed',
+        name: 'Otherdeed for Otherside',
         address: '0x34d85c9CDeB23FA97cb08333b511ac86E1C4E258',
     },
     {
@@ -166,6 +166,14 @@ const projects = [
     {
         name: 'Kiwami GENESIS',
         address: '0x701a038af4bd0fc9b69a829ddcb2f61185a49568',
+    },
+    {
+        name: 'Mutant Hounds',
+        address: '0x354634c4621cDfb7a25E6486cCA1E019777D841B',
+    },
+    {
+        name: 'Mutant Hound Collars',
+        address: '0xaE99a698156eE8F8d07Cbe7F271c31EeaaC07087',
     },
 ];
 

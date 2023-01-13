@@ -10,8 +10,8 @@ export const AveragePriceByDay = ({
   const data30 = data?.slice(Math.max(data.length - 30, 0));
   return (
     <div>
-      <div className="text-xl font-medium mb-2">Average Price By Day</div>
-      <div className="p-4 card border rounded-xl border-gray-150 bg-white">
+      <div className="text-xl font-medium md:mb-2">Average Price By Day</div>
+      <div className="md:p-4 card md:border rounded-xl border-gray-150 bg-white">
         <ParentSize>
           {(parent) => (
             <BarChart

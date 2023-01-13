@@ -20,7 +20,7 @@ interface CombinedDataProps {
 }
 
 const CombinedDataSkeleton: FunctionComponent = () => (
-  <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
+  <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1000px] mx-auto">
     <div className="flex-1">
       <div className="card border bg-base-100 w-full min-h-[200px]">
         <div className="card-body space-y-6">
@@ -254,7 +254,7 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
   ).toFixed(2);
 
   return (
-    <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
+    <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1000px] mx-auto">
       <div className="flex-1">
         <div className="card border bg-base-100 w-full min-h-[200px]">
           <div className="card-body space-y-6">

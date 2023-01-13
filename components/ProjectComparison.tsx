@@ -24,14 +24,15 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   const hasProjectB = projectBData && projectBName;
 
   const Tabs: FunctionComponent = () => (
-    <div className="flex items-center justify-center px-4 mb-6 space-x-2 ">
-      <div className="text-sm text-neutral">Toggle View</div>
+    <div className="flex flex-col space-y-1 md:flex-row md:space-y-0 items-center justify-center px-4 mb-6 space-x-2 ">
+      <div className="text-xs md:text-sm text-neutral">Toggle View</div>
       <div className="tabs tabs-boxed bg-gray-100">
         <button
           className={`tab ${view === "side-by-side" && " tab-active"}`}
           onClick={() => setView("side-by-side")}
         >
-          Side by Side
+          <span className="lg:hidden">Individual</span>
+          <span className="hidden lg:inline-block">Side by Side</span>
         </button>
         <button
           className={`tab ${view === "combined" && " tab-active"}`}
@@ -63,15 +64,16 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
   return (
     <>
       <Tabs />
-      <div className="px-6 md:flex space-y-8 md:space-y-0 md:space-x-8 max-w-[1400px] mx-auto">
-        <div className="flex-1">
+      <div className="p-0 lg:px-6 lg:flex space-y-8 lg:space-y-0 lg:space-x-8 max-w-[1400px] mx-auto">
+        <div className="flex-1 lg:w-1/2">
           <Project
             data={projectAData}
             loading={projectALoading}
             name={projectAName}
           />
         </div>
-        <div className="flex-1">
+        <div className="divider lg:hidden" />
+        <div className="flex-1 lg:w-1/2">
           <Project
             data={hasProjectB ? projectBData : {}}
             loading={hasProjectB ? projectBLoading : true}

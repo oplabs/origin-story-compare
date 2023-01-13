@@ -20,7 +20,7 @@ export const Range = ({
   };
 
   return (
-    <div className="flex gap-1 text-sm">
+    <div className="flex gap-1 text-xs md:text-sm">
       <RangeOpt>1M</RangeOpt>
       <RangeOpt>3M</RangeOpt>
       <RangeOpt>1Y</RangeOpt>

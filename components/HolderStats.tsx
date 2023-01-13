@@ -13,7 +13,7 @@ export const HolderStats = ({
   return (
     <div>
       <div className="text-xl font-medium mb-2">Holder Stats</div>
-      <div className="py-5 space-x-4 divide-x p-4 rounded-xl flex flex-col sm:flex-row justify-between card border border-gray-150 bg-white">
+      <div className="space-y-2 md:space-y-0 sm:py-3 md:py-5 sm:space-x-4 sm:divide-x md:p-4 rounded-xl flex flex-col sm:flex-row justify-between card md:border border-gray-150 bg-white">
         <Stat label="Total holders">
           <>{formatNumber(totalHolders)}</>
         </Stat>
@@ -38,7 +38,7 @@ const Stat = ({
   label: string;
 }) => {
   return (
-    <div className="px-6">
+    <div className="sm:px-6">
       <div className="flex items-baseline leading-none">
         <div className="text-2xl font-medium text-primary">{children}</div>
         {!description ? null : (

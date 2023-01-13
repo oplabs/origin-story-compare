@@ -10,7 +10,7 @@ export const HolderDistribution = ({
   return (
     <div>
       <div className="text-xl font-medium mb-2">Distribution Of Holders</div>
-      <div className="p-4 card border rounded-xl border-gray-150 bg-white">
+      <div className="md:p-4 card md:border rounded-xl border-gray-150 bg-white">
         <ParentSize>
           {(parent) => (
             <BarChart

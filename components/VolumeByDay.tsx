@@ -7,8 +7,8 @@ export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
 
   return (
     <div>
-      <div className="text-xl font-medium mb-2">Volume By Day</div>
-      <div className="p-4 card border rounded-xl border-gray-150 bg-white">
+      <div className="text-xl font-medium md:mb-2">Volume By Day</div>
+      <div className="md:p-4 card md:border rounded-xl border-gray-150 bg-white">
         <ParentSize>
           {(parent) => (
             <BarChart

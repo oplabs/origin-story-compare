@@ -8,7 +8,7 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => (
   <>
-    <div className="mt-20 bg-white pb-24">
+    <div className="mt-10 lg:mt-20 bg-white pb-24">
       <Header />
       <main className="">{children}</main>
     </div>

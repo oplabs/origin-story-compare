@@ -147,10 +147,10 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
   return (
-    <div className="card border bg-base-100 w-full min-h-[200px]">
+    <div className="card lg:border bg-base-100 w-full min-h-[800px]">
       <div className="card-body space-y-6">
-        <div className="space-y-2 lg:flex lg:space-x-4 items-center">
-          <figure className="w-24 h-24 rounded-full border flex-shrink-0">
+        <div className="w-full flex flex-col space-y-2 xl:flex-row xl:space-x-4 items-center">
+          <figure className="w-16 h-16 md:w-20 md:h-20 xl:w-24 xl:h-24 rounded-full border flex-shrink-0">
             <Image
               src={data?.contract?.collection?.image_url}
               alt={data?.contract?.collection?.name}
@@ -158,11 +158,11 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
               height={100}
             />
           </figure>
-          <div className="space-y-2 lg:space-y-1">
-            <div className="font-medium text-2xl">
+          <div className="space-y-2 xl:space-y-1 w-full">
+            <div className="font-medium text-2xl text-center xl:text-left">
               {data?.contract?.collection?.name}
             </div>
-            <div className="-ml-4 flex justify-start divide-x">
+            <div className="max-w-[240px] md:max-w-full mx-auto grid grid-cols-2 gap-2 md:-ml-4 md:flex justify-start md:justify-center xl:justify-start md:divide-x">
               <Stat
                 value={formatNumber(data?.contractStats?.totalSupply)}
                 label="Items"

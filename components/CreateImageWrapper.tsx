@@ -122,15 +122,21 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
       >
         <div ref={imageWrapper}>{children}</div>
         {isHovering && (
-          <div className="absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex items-center justify-center -m-[4px] space-x-4">
-            <button className="btn space-x-1" onClick={handleShareOnTwitter}>
+          <div className="hidden md:flex absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex-col md:flex-row items-center justify-center -m-[4px] space-y-2 md:space-y-0 md:space-x-4">
+            <button
+              className="btn btn-sm md:btn space-x-1"
+              onClick={handleShareOnTwitter}
+            >
               {twitterStatus === "" && <Twitter />}
               {twitterStatus === "loading" && <Loading />}
               {twitterStatus === "success" && <Check />}
               {twitterStatus === "error" && <Error />}
               <span>Share on Twitter</span>
             </button>
-            <button className="btn space-x-1" onClick={handleDownloadImage}>
+            <button
+              className="btn btn-sm md:btn space-x-1"
+              onClick={handleDownloadImage}
+            >
               <Download />
               <span>Download image</span>
             </button>
@@ -138,7 +144,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
         )}
       </div>
       <div
-        className={`${isCombined ? "w-[1280px]" : "w-[600px]"}`}
+        className={`${isCombined ? "w-[1000px]" : "w-[600px]"}`}
         ref={cloneWrapper}
         style={{ position: "absolute", left: "-100vw", top: "-100vh" }}
       />

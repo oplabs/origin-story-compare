@@ -23,9 +23,9 @@ export const TopHolders = ({
 
   return (
     <div>
-      <div className="text-xl font-medium mb-2">Top Holders</div>
-      <div className="card border rounded-xl border-gray-150 bg-white">
-        <div className="m-6 grid grid-cols-7">
+      <div className="text-xl font-medium mb-4 md:mb-2">Top Holders</div>
+      <div className="card md:border rounded-xl border-gray-150 bg-white">
+        <div className="md:m-6 grid grid-cols-7">
           <div className="text-xs text-neutral pb-4 mb-3 border-b border-gray-300 col-span-1">
             Position
           </div>

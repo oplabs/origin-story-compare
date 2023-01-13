@@ -23,7 +23,7 @@ const useProjectData = (address:string) => {
     }, [address]);
     
     useEffect(() => {
-        if(topHolders?.result && highConvictionHolders?.result && uniqueOwners?.result && holderDistribution?.result && salesByDay?.result && contractData && contractStats && ownerAddresses?.ownerAddresses) {
+        if(topHolders?.result && highConvictionHolders?.result !== undefined && uniqueOwners?.result && holderDistribution?.result && salesByDay?.result && contractData && contractStats && ownerAddresses?.ownerAddresses) {
             setProjectData({
                 topHolders: topHolders?.result,
                 highConvictionHolders: highConvictionHolders?.result,

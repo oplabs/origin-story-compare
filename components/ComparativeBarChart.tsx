@@ -159,7 +159,7 @@ const ComparativeBarChart = ({
           />
         </Group>
       </svg>
-      <div className="absolute top-0 right-0 text-sm text-neutral">
+      <div className="absolute top-0 left-0 md:left-auto md:right-0 text-xs md:text-sm text-neutral">
         <LegendOrdinal
           scale={colorScale}
           direction="row"

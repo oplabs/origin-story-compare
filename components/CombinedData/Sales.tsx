@@ -51,12 +51,12 @@ export const Sales: FunctionComponent<Sales> = ({
 
   return (
     <div className="min-w-0">
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between items-center md:mb-2">
         <div className="text-xl font-medium">Sales</div>
         <Range {...{ range, setRange }} />
       </div>
       <CreateImageWrapper footer={imageFooter} tweetText={tweetText} isCombined>
-        <div className="px-5 py-4 rounded-xl card border border-gray-150 bg-white">
+        <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">
           <ParentSize>
             {(parent) => (
               <ComparativeAreaChart

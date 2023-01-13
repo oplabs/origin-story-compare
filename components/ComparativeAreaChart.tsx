@@ -114,7 +114,7 @@ export const ComparativeAreaChart = ({
           width={showLeftAxis && parentWidth ? parentWidth - 30 : undefined}
         />
       </XYChart>
-      <div className="absolute top-4 right-2 text-sm text-neutral">
+      <div className="absolute top-4 right-2 left-0 md:left-auto text-xs md:text-sm text-neutral">
         <LegendOrdinal
           scale={colorScale}
           direction="row"

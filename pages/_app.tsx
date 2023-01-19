@@ -13,8 +13,8 @@ interface NextWebVitalsMetric {
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   switch (metric.name) {
-    case "Next.js-hydration":
-      return pageview();
+    // case "Next.js-hydration":
+    // return pageview();
     case "Next.js-route-change-to-render":
       return pageview();
     default:

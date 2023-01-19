@@ -1,20 +1,27 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import Script from "next/script";
 import { GTM_ID, pageview } from "../lib/gtm";
 
-export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  useEffect(() => {
-    if (!GTM_ID) return;
-    router.events.on("routeChangeComplete", pageview);
-    return () => {
-      router.events.off("routeChangeComplete", pageview);
-    };
-  }, [router.events]);
+interface NextWebVitalsMetric {
+  id: string;
+  label: string;
+  name: string;
+  startTime: number;
+  value: number;
+}
 
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  switch (metric.name) {
+    case "Next.js-hydration":
+      return pageview();
+    case "Next.js-route-change-to-render":
+      return pageview();
+    default:
+  }
+}
+
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       {GTM_ID && (

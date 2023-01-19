@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { ProjectSelect } from "./ProjectSelect";
 import { useRouter } from "next/router";
 import { projects } from "../lib/projects";
+import Link from "next/link";
 
 interface ProjectSelectorProps {
   projectAValue?: string;
@@ -16,6 +17,13 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
   const [projectB, setProjectB] = useState(projectBValue ? projectBValue : "");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const projectAAddress = projects.find(
+    (project) => project.name === projectA
+  )?.address;
+  const projectBAddress = projects.find(
+    (project) => project.name === projectB
+  )?.address;
 
   return (
     <>
@@ -42,24 +50,18 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
             </div>
           </div>
           <div>
-            <button
+            <Link
               className="btn btn-primary whitespace-nowrap w-full md:w-[110px]"
               onClick={() => {
-                if (projectA && projectB) {
-                  const projectAAddress = projects.find(
-                    (project) => project.name === projectA
-                  )?.address;
-                  const projectBAddress = projects.find(
-                    (project) => project.name === projectB
-                  )?.address;
-                  router.push(`/${projectAAddress}/${projectBAddress}`);
-                } else {
+                if (!projectA || !projectB) {
                   setError("Please select two projects");
                 }
               }}
+              href={`/${projectAAddress}/${projectBAddress}`}
+              scroll={false}
             >
               Get data
-            </button>
+            </Link>
           </div>
         </div>
       </div>

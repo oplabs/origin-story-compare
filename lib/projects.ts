@@ -175,6 +175,10 @@ const projects = [
         name: 'Mutant Hound Collars',
         address: '0xaE99a698156eE8F8d07Cbe7F271c31EeaaC07087',
     },
+    {
+        name: 'Sewer Pass',
+        address: '0x764aeebcf425d56800ef2c84f2578689415a2daa',
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

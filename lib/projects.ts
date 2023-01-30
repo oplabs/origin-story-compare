@@ -179,6 +179,10 @@ const projects = [
         name: 'Sewer Pass',
         address: '0x764aeebcf425d56800ef2c84f2578689415a2daa',
     },
+    {
+        name: 'Checks',
+        address: '0x34eEBEE6942d8Def3c125458D1a86e0A897fd6f9',
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

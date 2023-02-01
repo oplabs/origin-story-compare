@@ -37,15 +37,22 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const projectA = projects.find(
+    (project) => project.address === params?.["project-a"]
+  );
+
+  const projectB = projects.find(
+    (project) => project.address === params?.["project-b"]
+  );
+
+  const notFound = !projectA || !projectB;
+
   return {
     props: {
-      projectA: projects.find(
-        (project) => project.address === params?.["project-a"]
-      ),
-      projectB: projects.find(
-        (project) => project.address === params?.["project-b"]
-      ),
+      projectA,
+      projectB,
     },
+    notFound,
   };
 };
 
@@ -59,6 +66,8 @@ interface IndexProps {
 }
 
 const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
+  if (!projectA || !projectB) return null;
+
   const { projectData: projectAData, loading: projectALoading } =
     useProjectData(projectA?.address);
 

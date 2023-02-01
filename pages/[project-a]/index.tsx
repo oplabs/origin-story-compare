@@ -20,12 +20,17 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const projectA = projects.find(
+    (project) => project.address === params?.["project-a"]
+  );
+
+  const notFound = !projectA;
+
   return {
     props: {
-      projectA: projects.find(
-        (project) => project.address === params?.["project-a"]
-      ),
+      projectA,
     },
+    notFound,
   };
 };
 

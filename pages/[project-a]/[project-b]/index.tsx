@@ -66,8 +66,6 @@ interface IndexProps {
 }
 
 const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
-  if (!projectA || !projectB) return null;
-
   const { projectData: projectAData, loading: projectALoading } =
     useProjectData(projectA?.address);
 

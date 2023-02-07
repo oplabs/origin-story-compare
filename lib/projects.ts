@@ -183,6 +183,10 @@ const projects = [
         name: 'Checks',
         address: '0x34eEBEE6942d8Def3c125458D1a86e0A897fd6f9',
     },
+    {
+        name: 'Checks - Pepe Edition',
+        address: '0xe70659b717112ac4e14284d0db2f5d5703df8e43',
+    }
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

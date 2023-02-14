@@ -180,9 +180,17 @@ const projects = [
         address: '0x764aeebcf425d56800ef2c84f2578689415a2daa',
     },
     {
-        name: 'Checks',
+        name: 'Checks Editions',
         address: '0x34eEBEE6942d8Def3c125458D1a86e0A897fd6f9',
     },
+    {
+        name: 'Checks Originals',
+        address: '0x036721e5a769cc48b3189efbb9cce4471e8a48b1',
+    },
+    {
+        name: 'Uints',
+        address: '0x7c10c8816575e8fdfb11463dd3811cc794a1d407',
+    }
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

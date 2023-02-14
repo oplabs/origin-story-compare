@@ -17,27 +17,17 @@ interface SalesByDay {
 }
 
 export const Volume = ({
-  allSalesByDay,
+  data,
   imageFooter,
   totalVolume,
 }: {
-  allSalesByDay: AllSalesByDay;
+  data: AllSalesByDay;
   imageFooter?: string;
   totalVolume: number;
 }) => {
-  const [range, setRange] = useState("1M");
-
   let salesByDay: SalesByDay[];
-  if (range === "3M") {
-    salesByDay = allSalesByDay?.byDay.slice(-90);
-  } else if (range === "1M") {
-    salesByDay = allSalesByDay?.byDay.slice(-30);
-  } else if (range === "1Y") {
-    salesByDay = allSalesByDay?.byDay.slice(-365);
-  } else {
-    salesByDay = allSalesByDay?.byDay;
-  }
-  salesByDay = salesByDay?.map(({ date, ethVolume }) => ({
+
+  salesByDay = data?.map(({ date, ethVolume }) => ({
     date,
     ethVolume,
     value: Math.round(ethVolume * 10000) / 10000,
@@ -47,7 +37,6 @@ export const Volume = ({
     <div className="min-w-0">
       <div className="flex justify-between items-center md:mb-2">
         <div className="text-xl font-medium">Volume</div>
-        <Range {...{ range, setRange }} />
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">

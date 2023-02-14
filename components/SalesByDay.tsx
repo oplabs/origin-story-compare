@@ -3,8 +3,6 @@ import { ParentSize } from "@visx/responsive";
 import { BarChart } from "./BarChart";
 
 export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
-  const data30 = data?.slice(Math.max(data.length - 30, 0));
-
   return (
     <div>
       <div className="text-xl font-medium md:mb-2">Sales By Day</div>
@@ -14,7 +12,7 @@ export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
             <BarChart
               height={300}
               width={parent.width}
-              data={data30?.map((r) => ({ label: r.date, value: r.sales }))}
+              data={data?.map((r) => ({ label: r.date, value: r.sales }))}
               axisBottomLabel="Day"
               axisLeftLabel="Sales"
               axisBottomIsDate

@@ -18,25 +18,15 @@ interface SalesByDay {
 }
 
 export const AveragePrice = ({
-  allSalesByDay,
+  data,
   imageFooter,
 }: {
-  allSalesByDay: AllSalesByDay;
+  data: AllSalesByDay;
   imageFooter?: string;
 }) => {
-  const [range, setRange] = useState("1M");
-
   let salesByDay: SalesByDay[];
-  if (range === "3M") {
-    salesByDay = allSalesByDay?.byDay.slice(-90);
-  } else if (range === "1M") {
-    salesByDay = allSalesByDay?.byDay.slice(-30);
-  } else if (range === "1Y") {
-    salesByDay = allSalesByDay?.byDay.slice(-365);
-  } else {
-    salesByDay = allSalesByDay?.byDay;
-  }
-  salesByDay = salesByDay?.map(({ date, averagePrice }) => ({
+
+  salesByDay = data?.map(({ date, averagePrice }) => ({
     date,
     averagePrice,
     value: Math.round(averagePrice * 10000) / 10000,
@@ -46,7 +36,6 @@ export const AveragePrice = ({
     <div className="min-w-0">
       <div className="flex justify-between items-center md:mb-2">
         <div className="text-xl font-medium">Average Price</div>
-        <Range {...{ range, setRange }} />
       </div>
       <CreateImageWrapper footer={imageFooter}>
         <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">

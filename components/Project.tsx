@@ -1,4 +1,9 @@
-import type { FunctionComponent, PropsWithChildren } from "react";
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  useState,
+  useEffect,
+} from "react";
 import Image from "next/image";
 import { BigNumber, ethers } from "ethers";
 import Skeleton from "react-loading-skeleton";
@@ -94,9 +99,33 @@ interface ProjectProps {
   data: object | undefined;
   loading: boolean | undefined;
   name: string | undefined;
+  range?: string | undefined;
 }
 
-const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
+const Project: FunctionComponent<ProjectProps> = ({
+  data,
+  loading,
+  name,
+  range,
+}) => {
+  const [salesByDayRanged, setSalesByDayRanged] = useState([]);
+
+  useEffect(() => {
+    if (data?.salesByDay?.byDay) {
+      if (range === "Last 7 days") {
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-7));
+      } else if (range === "Last 30 days") {
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-30));
+      } else if (range === "Last 90 days") {
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-90));
+      } else if (range === "Last year") {
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-365));
+      } else {
+        setSalesByDayRanged(data?.salesByDay?.byDay);
+      }
+    }
+  }, [data?.salesByDay?.byDay, range]);
+
   if (loading) {
     return <ProjectSkeleton />;
   }
@@ -146,6 +175,8 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
 
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
+  console.log(salesByDayRanged);
+
   return (
     <div className="card lg:border bg-base-100 w-full min-h-[800px]">
       <div className="card-body space-y-6">
@@ -192,30 +223,27 @@ const Project: FunctionComponent<ProjectProps> = ({ data, loading, name }) => {
           tweetText={`Sales by day ${tweetTextEnd}`}
           footer={imageFooter}
         >
-          <SalesByDay data={data?.salesByDay?.byDay} />
+          <SalesByDay data={salesByDayRanged} />
         </CreateImageWrapper>
         <CreateImageWrapper
           tweetText={`Volume by day ${tweetTextEnd}`}
           footer={imageFooter}
         >
-          <VolumeByDay data={data?.salesByDay?.byDay} />
+          <VolumeByDay data={salesByDayRanged} />
         </CreateImageWrapper>
         <CreateImageWrapper
           tweetText={`Average price by day ${tweetTextEnd}`}
           footer={imageFooter}
         >
-          <AveragePriceByDay data={data?.salesByDay?.byDay} />
+          <AveragePriceByDay data={salesByDayRanged} />
         </CreateImageWrapper>
-        <Sales allSalesByDay={data?.salesByDay} imageFooter={imageFooter} />
+        <Sales data={salesByDayRanged} imageFooter={imageFooter} />
         <Volume
-          allSalesByDay={data?.salesByDay}
+          data={salesByDayRanged}
           totalVolume={formatNumber(data?.contractStats?.totalVolume)}
           imageFooter={imageFooter}
         />
-        <AveragePrice
-          allSalesByDay={data?.salesByDay}
-          imageFooter={imageFooter}
-        />
+        <AveragePrice data={salesByDayRanged} imageFooter={imageFooter} />
         <CreateImageWrapper
           tweetText={`Holder stats ${tweetTextEnd}`}
           footer={imageFooter}

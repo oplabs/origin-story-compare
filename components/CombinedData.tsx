@@ -1,4 +1,4 @@
-import type { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { HolderDistribution } from "./CombinedData/HolderDistribution";
@@ -17,6 +17,7 @@ interface CombinedDataProps {
   projectBLoading?: boolean;
   projectAName: string;
   projectBName?: string;
+  range?: string;
 }
 
 const CombinedDataSkeleton: FunctionComponent = () => (
@@ -49,7 +50,29 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
   projectBLoading,
   projectAName,
   projectBName,
+  range,
 }) => {
+  const [rangeInDays, setRangeInDays] = useState(30);
+
+  useEffect(() => {
+    if (range === "Last 7 days") {
+      setRangeInDays(7);
+    } else if (range === "Last 30 days") {
+      setRangeInDays(30);
+    } else if (range === "Last 90 days") {
+      setRangeInDays(90);
+    } else if (range === "Last year") {
+      setRangeInDays(365);
+    } else {
+      setRangeInDays(
+        Math.max(
+          projectAData?.salesByDay?.byDay.length,
+          projectBData?.salesByDay?.byDay.length
+        )
+      );
+    }
+  }, [projectAData?.salesByDay?.byDay, projectBData?.salesByDay?.byDay, range]);
+
   if (projectALoading || projectBLoading) return <CombinedDataSkeleton />;
 
   const dataAEmpty =
@@ -125,18 +148,18 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  const projectASalesByDayData30 = projectAData?.salesByDay?.byDay.slice(
-    Math.max(projectAData?.salesByDay?.byDay.length - 30, 0)
+  const projectASalesByDayData = projectAData?.salesByDay?.byDay.slice(
+    Math.max(projectAData?.salesByDay?.byDay.length - rangeInDays, 0)
   );
-  const projectBSalesByDayData30 = projectBData?.salesByDay?.byDay.slice(
-    Math.max(projectBData?.salesByDay?.byDay.length - 30, 0)
+  const projectBSalesByDayData = projectBData?.salesByDay?.byDay.slice(
+    Math.max(projectBData?.salesByDay?.byDay.length - rangeInDays, 0)
   );
 
-  const salesByDayData = projectASalesByDayData30.map((d) => ({
+  const salesByDayData = projectASalesByDayData.map((d) => ({
     label: d.date,
     dataPoints: [{ label: projectAName, value: d.sales }],
   }));
-  projectBSalesByDayData30.forEach((d) => {
+  projectBSalesByDayData.forEach((d) => {
     const found = salesByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
@@ -151,11 +174,11 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  const volumeByDayData = projectASalesByDayData30.map((d) => ({
+  const volumeByDayData = projectASalesByDayData.map((d) => ({
     label: d.date,
     dataPoints: [{ label: projectAName, value: d.ethVolume }],
   }));
-  projectBSalesByDayData30.forEach((d) => {
+  projectBSalesByDayData.forEach((d) => {
     const found = volumeByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
@@ -170,11 +193,11 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
     }
   });
 
-  const averagePriceByDayData = projectASalesByDayData30.map((d) => ({
+  const averagePriceByDayData = projectASalesByDayData.map((d) => ({
     label: d.date,
     dataPoints: [{ label: projectAName, value: d.averagePrice }],
   }));
-  projectBSalesByDayData30.forEach((d) => {
+  projectBSalesByDayData.forEach((d) => {
     const found = averagePriceByDayData.find((e) => e.label === d.date);
     if (found) {
       found.dataPoints.push({
@@ -297,24 +320,24 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
             <Sales
-              dataA={salesDataA}
-              dataB={salesDataB}
+              dataA={salesDataA.slice(`-${rangeInDays}`)}
+              dataB={salesDataB.slice(`-${rangeInDays}`)}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}
               tweetText={`Sales ${tweetTextEnd}`}
             />
             <Volume
-              dataA={volumeDataA}
-              dataB={volumeDataB}
+              dataA={volumeDataA.slice(`-${rangeInDays}`)}
+              dataB={volumeDataB.slice(`-${rangeInDays}`)}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}
               tweetText={`Volume ${tweetTextEnd}`}
             />
             <AveragePrice
-              dataA={averagePriceDataA}
-              dataB={averagePriceDataB}
+              dataA={averagePriceDataA.slice(`-${rangeInDays}`)}
+              dataB={averagePriceDataB.slice(`-${rangeInDays}`)}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}

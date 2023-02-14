@@ -7,7 +7,6 @@ export const AveragePriceByDay = ({
 }: {
   data: Array<object> | undefined;
 }) => {
-  const data30 = data?.slice(Math.max(data.length - 30, 0));
   return (
     <div>
       <div className="text-xl font-medium md:mb-2">Average Price By Day</div>
@@ -17,7 +16,7 @@ export const AveragePriceByDay = ({
             <BarChart
               height={300}
               width={parent.width}
-              data={data30?.map((r) => ({
+              data={data?.map((r) => ({
                 label: r.date,
                 value: r.averagePrice,
               }))}

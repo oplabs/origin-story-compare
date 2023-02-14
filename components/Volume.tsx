@@ -25,7 +25,7 @@ export const Volume = ({
   imageFooter?: string;
   totalVolume: number;
 }) => {
-  let salesByDay: SalesByDay[];
+  const salesByDay: SalesByDay[];
 
   salesByDay = data?.map(({ date, ethVolume }) => ({
     date,

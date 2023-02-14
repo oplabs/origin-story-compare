@@ -64,8 +64,6 @@ const ComparativeBarChart = ({
     [yMax, data]
   );
 
-  let oddBar = false;
-
   let legendLabels = data.map((d) => d.dataPoints.map((dp) => dp.label)).flat();
   legendLabels = [...new Set(legendLabels)];
 
@@ -89,29 +87,29 @@ const ComparativeBarChart = ({
               pointerEvents="none"
             />
           )}
-          {data.map((d) =>
-            d.dataPoints.map((dp) => {
+          {data.map((d) => {
+            return d.dataPoints.map((dp, i) => {
               const letter = getX(dp);
               const barWidth = xScale.bandwidth() / 2;
               const barHeight = yMax - (yScale(getY(dp)) ?? 0);
               const barX = xScale(d.label);
               const barY = yMax - barHeight;
-              oddBar = !oddBar;
+
               if (!barX) {
                 return null;
               }
               return (
                 <Group key={`bar-${letter}-${d.label}`}>
                   <Bar
-                    x={oddBar ? barX : barX + barWidth}
+                    x={i % 2 ? barX + barWidth : barX}
                     y={barY}
                     width={barWidth}
                     height={barHeight}
-                    className={oddBar ? "fill-primary" : "fill-neutral"}
+                    className={i % 2 ? "fill-neutral" : "fill-primary"}
                   />
                   {appendCount && (
                     <Text
-                      x={oddBar ? barX : barX + barWidth}
+                      x={i % 2 ? barX + barWidth : barX}
                       y={barY}
                       width={barWidth}
                       className="fill-current"
@@ -125,8 +123,8 @@ const ComparativeBarChart = ({
                   )}
                 </Group>
               );
-            })
-          )}
+            });
+          })}
 
           <AxisBottom
             top={yMax}

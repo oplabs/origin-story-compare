@@ -175,8 +175,6 @@ const Project: FunctionComponent<ProjectProps> = ({
 
   const imageFooter = `${data?.contract?.collection?.name} at ${timestamp}`;
 
-  console.log(salesByDayRanged);
-
   return (
     <div className="card lg:border bg-base-100 w-full min-h-[800px]">
       <div className="card-body space-y-6">

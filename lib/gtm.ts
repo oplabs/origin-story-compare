@@ -8,7 +8,6 @@ declare const window: WindowWithDataLayer;
 
 export const pageview = () => {
   setTimeout(() => {
-    console.log(window.location.href, document.title);
     window?.dataLayer?.push({
       event: 'pageview',
       pageUrl: window.location.href,

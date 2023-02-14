@@ -24,7 +24,7 @@ export const AveragePrice = ({
   data: AllSalesByDay;
   imageFooter?: string;
 }) => {
-  const salesByDay: SalesByDay[];
+  let salesByDay: SalesByDay[] = [];
 
   salesByDay = data?.map(({ date, averagePrice }) => ({
     date,

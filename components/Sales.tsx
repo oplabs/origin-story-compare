@@ -24,7 +24,7 @@ export const Sales = ({
   data: AllSalesByDay;
   imageFooter?: string;
 }) => {
-  const salesByDay: SalesByDay[];
+  let salesByDay: SalesByDay[] = [];
 
   salesByDay = data?.map(({ date, sales }) => ({
     date,

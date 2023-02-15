@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 import { ProjectSelect } from "./ProjectSelect";
-import { useRouter } from "next/router";
 import { projects } from "../lib/projects";
 import Link from "next/link";
 
@@ -16,7 +15,6 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
   const [projectA, setProjectA] = useState(projectAValue ? projectAValue : "");
   const [projectB, setProjectB] = useState(projectBValue ? projectBValue : "");
   const [error, setError] = useState("");
-  const router = useRouter();
 
   const projectAAddress = projects.find(
     (project) => project.name === projectA
@@ -56,8 +54,15 @@ const ProjectSelector: FunctionComponent<ProjectSelectorProps> = ({
                 if (!projectA || !projectB) {
                   setError("Please select two projects");
                 }
+                if (projectA === projectB) {
+                  setError("Please select two different projects");
+                }
               }}
-              href={`/${projectAAddress}/${projectBAddress}`}
+              href={
+                !projectA || !projectB || projectA === projectB
+                  ? `#`
+                  : `/${projectAAddress}/${projectBAddress}`
+              }
               scroll={false}
             >
               Get data

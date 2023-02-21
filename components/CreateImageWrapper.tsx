@@ -123,7 +123,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
         <div ref={imageWrapper}>{children}</div>
         {isHovering && (
           <div className="hidden md:flex absolute h-100 w-100 top-0 left-0 bottom-0 right-0 bg-primary bg-opacity-40 flex-col md:flex-row items-center justify-center -m-[4px] space-y-2 md:space-y-0 md:space-x-4">
-            {/*<button
+            <button
               className="btn btn-sm md:btn space-x-1"
               onClick={handleShareOnTwitter}
             >
@@ -132,7 +132,7 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
               {twitterStatus === "success" && <Check />}
               {twitterStatus === "error" && <Error />}
               <span>Share on Twitter</span>
-            </button>*/}
+            </button>
             <button
               className="btn btn-sm md:btn space-x-1"
               onClick={handleDownloadImage}

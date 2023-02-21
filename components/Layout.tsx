@@ -19,7 +19,6 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(cookies.get("nipCtaHidden"));
       if (cookies.get("nipCtaHidden") !== "true") {
         setShowModal(true);
       }

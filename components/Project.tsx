@@ -231,13 +231,22 @@ const Project: FunctionComponent<ProjectProps> = ({
         >
           <AveragePriceByDay data={salesByDayRanged} />
         </CreateImageWrapper>
-        <Sales data={salesByDayRanged} imageFooter={imageFooter} />
+        <Sales
+          data={salesByDayRanged}
+          imageFooter={imageFooter}
+          tweetText={`Sales over time ${tweetTextEnd}`}
+        />
         <Volume
           data={salesByDayRanged}
           totalVolume={formatNumber(data?.contractStats?.totalVolume)}
           imageFooter={imageFooter}
+          tweetText={`Volume over time ${tweetTextEnd}`}
         />
-        <AveragePrice data={salesByDayRanged} imageFooter={imageFooter} />
+        <AveragePrice
+          data={salesByDayRanged}
+          imageFooter={imageFooter}
+          tweetText={`Average price over time ${tweetTextEnd}`}
+        />
         <CreateImageWrapper
           tweetText={`Holder stats ${tweetTextEnd}`}
           footer={imageFooter}

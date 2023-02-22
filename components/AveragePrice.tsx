@@ -20,9 +20,11 @@ interface SalesByDay {
 export const AveragePrice = ({
   data,
   imageFooter,
+  tweetText,
 }: {
   data: AllSalesByDay;
   imageFooter?: string;
+  tweetText?: string;
 }) => {
   let salesByDay: SalesByDay[] = [];
 
@@ -37,7 +39,7 @@ export const AveragePrice = ({
       <div className="flex justify-between items-center md:mb-2">
         <div className="text-xl font-medium">Average Price</div>
       </div>
-      <CreateImageWrapper footer={imageFooter}>
+      <CreateImageWrapper footer={imageFooter} tweetText={tweetText}>
         <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">
           {/*<AreaChartHeader description="All time average price">
             <Image

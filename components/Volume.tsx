@@ -20,10 +20,12 @@ export const Volume = ({
   data,
   imageFooter,
   totalVolume,
+  tweetText,
 }: {
   data: AllSalesByDay;
   imageFooter?: string;
   totalVolume: number;
+  tweetText?: string;
 }) => {
   let salesByDay: SalesByDay[] = [];
 
@@ -38,7 +40,7 @@ export const Volume = ({
       <div className="flex justify-between items-center md:mb-2">
         <div className="text-xl font-medium">Volume</div>
       </div>
-      <CreateImageWrapper footer={imageFooter}>
+      <CreateImageWrapper footer={imageFooter} tweetText={tweetText}>
         <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">
           {/*<AreaChartHeader description="All time total volume">
             <Image

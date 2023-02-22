@@ -27,6 +27,8 @@ const CreateImageWrapper: FunctionComponent<CreateImageWrapperProps> = ({
   const imageWrapper = useRef<HTMLDivElement>(null);
   const cloneWrapper = useRef<HTMLDivElement>(null);
 
+  console.log(tweetText);
+
   const handleCreateImage = async () => {
     if (!imageWrapper.current || !cloneWrapper.current) return;
 

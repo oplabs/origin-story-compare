@@ -40,6 +40,8 @@ export const Volume: FunctionComponent<Volume> = ({
                 dataAKey={dataAKey}
                 dataBKey={dataBKey}
                 parentWidth={parent.width}
+                showLeftAxis
+                leftAxisLabel="Volume (ETH)"
               />
             )}
           </ParentSize>

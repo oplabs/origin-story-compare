@@ -27,6 +27,8 @@ export const ComparativeAreaChart = ({
   parentWidth,
   dataAKey,
   dataBKey,
+  bottomAxisLabel,
+  leftAxisLabel,
 }: {
   showLeftAxis?: boolean;
   parentWidth?: number;
@@ -34,6 +36,8 @@ export const ComparativeAreaChart = ({
   dataB: DataItem[];
   dataAKey: string;
   dataBKey: string;
+  bottomAxisLabel?: string;
+  leftAxisLabel?: string;
 }) => {
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
@@ -53,8 +57,8 @@ export const ComparativeAreaChart = ({
   return (
     <div className="pt-8">
       <XYChart
-        height={height}
-        margin={{ top: 20, right: 0, bottom: 25, left: showLeftAxis ? 40 : 0 }}
+        height={height + 20}
+        margin={{ top: 20, right: 0, bottom: 45, left: showLeftAxis ? 50 : 0 }}
         xScale={{ type: "band" }}
         yScale={{ type: "linear" }}
         theme={customTheme}
@@ -67,7 +71,7 @@ export const ComparativeAreaChart = ({
           hideTicks
           top={height - 20}
           tickLabelProps={() => ({
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: 400,
             fill: "#000",
             textAnchor: "middle",
@@ -77,21 +81,37 @@ export const ComparativeAreaChart = ({
             if (d === dataA[0].date) return "";
             return d.slice(5).replace("-", "/");
           }}
+          label={bottomAxisLabel ? bottomAxisLabel : "Date"}
+          labelProps={{
+            fontSize: 10,
+            fontWeight: 400,
+            fill: "#000",
+            textAnchor: "middle",
+            verticalAnchor: "middle",
+          }}
         />
         {showLeftAxis && (
           <Axis
             orientation="left"
             numTicks={6}
             hideAxisLine
-            hideTicks
-            left={35}
+            left={48}
             tickLabelProps={() => ({
-              fontSize: 10,
+              fontSize: 9,
               fontWeight: 400,
               fill: "#000",
               textAnchor: "end",
               verticalAnchor: "end",
             })}
+            label={leftAxisLabel ? leftAxisLabel : "Sales"}
+            labelProps={{
+              fontSize: 10,
+              fontWeight: 400,
+              fill: "#000",
+              textAnchor: "middle",
+              verticalAnchor: "middle",
+              dx: -25,
+            }}
           />
         )}
         <Grid columns={false} numTicks={4} />

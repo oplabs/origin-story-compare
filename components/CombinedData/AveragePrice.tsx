@@ -40,6 +40,8 @@ export const AveragePrice: FunctionComponent<AveragePrice> = ({
                 dataAKey={dataAKey}
                 dataBKey={dataBKey}
                 parentWidth={parent.width}
+                showLeftAxis
+                leftAxisLabel="Average Price (ETH)"
               />
             )}
           </ParentSize>

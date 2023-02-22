@@ -74,7 +74,7 @@ const ComparativeBarChart = ({
 
   return width < 10 ? null : (
     <div className="relative">
-      <svg width="100%" height={height}>
+      <svg width="100%" height={height + 20}>
         <Group top={verticalMargin - 10} left={horizontalMargin}>
           {showGrid && (
             <GridRows

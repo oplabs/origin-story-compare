@@ -40,6 +40,8 @@ export const Sales: FunctionComponent<Sales> = ({
                 dataAKey={dataAKey}
                 dataBKey={dataBKey}
                 parentWidth={parent.width}
+                showLeftAxis
+                leftAxisLabel="Sales"
               />
             )}
           </ParentSize>

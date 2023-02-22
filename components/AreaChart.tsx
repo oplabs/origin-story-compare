@@ -72,7 +72,6 @@ export const AreaChart = ({
           fill: "#000",
           textAnchor: "middle",
           verticalAnchor: "middle",
-          dx: -15,
           dy: -5,
         }}
       />

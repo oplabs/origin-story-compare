@@ -161,11 +161,7 @@ const Project: FunctionComponent<ProjectProps> = ({
     );
   }
 
-  const totalHolders = data?.holderDistribution?.reduce((m, o) => m + o[1], 0);
-  const uniqueHoldersPercentage = (
-    (totalHolders / data?.contractStats?.totalSupply) *
-    100
-  ).toFixed(0);
+  const { totalHolders, uniqueOwners, highConvictionHolders } = data;
 
   const timestamp = new Date().toLocaleString("en-US", { timeZone: "UTC" });
   const twitterUsername = data?.contract?.collection?.twitter_username;
@@ -248,8 +244,8 @@ const Project: FunctionComponent<ProjectProps> = ({
         >
           <HolderStats
             totalHolders={totalHolders}
-            uniqueHolders={uniqueHoldersPercentage}
-            highConvictionHolders={data?.highConvictionHolders}
+            uniqueHolders={uniqueOwners}
+            highConvictionHolders={highConvictionHolders}
           />
         </CreateImageWrapper>
         <CreateImageWrapper

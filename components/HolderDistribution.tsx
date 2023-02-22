@@ -16,7 +16,7 @@ export const HolderDistribution = ({
             <BarChart
               height={300}
               width={parent.width}
-              data={data?.map((r) => ({ label: r[0], value: r[1] }))}
+              data={data?.map((r) => ({ label: r?.name, value: r?.value }))}
               axisBottomLabel="Tokens"
               axisLeftLabel="Holders"
               appendCount={true}

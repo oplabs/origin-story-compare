@@ -2,19 +2,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import useElWidth from "../hooks/useElWidth";
 
-interface TokenRow {
-  tokenId: string;
-  rarity?: number;
-}
-
 export const TopHolders = ({
   data,
   contract,
 }: {
   data: {
-    owner: string;
-    tokens: TokenRow[];
-    total: number;
+    address: string;
+    tokenIds: string[];
   }[];
   contract: string;
 }) => {
@@ -38,14 +32,16 @@ export const TopHolders = ({
           >
             Tokens
           </div>
-          {data?.map((d, idx) => (
+          {data?.map((d, i) => (
             <Row
-              key={d.owner}
-              position={idx + 1}
+              key={d.address}
+              position={i + 1}
               width={width}
-              {...d}
-              last={idx === data?.length - 1}
+              address={d.address}
+              tokenIds={d.tokenIds}
+              last={i === data?.length - 1}
               assetTemplate={assetTemplate}
+              total={d.tokenIds.length}
             />
           ))}
         </div>
@@ -55,25 +51,25 @@ export const TopHolders = ({
 };
 
 const Row = ({
-  owner,
+  address,
   position,
   total,
   last,
   assetTemplate,
-  tokens,
+  tokenIds,
   width,
 }: {
-  owner: string;
+  address: string;
   position: number;
   total: number;
   assetTemplate: string;
   last?: boolean;
   width: number;
-  tokens: TokenRow[];
+  tokenIds: string[];
 }) => {
   const showTokens = Math.floor(width / 30);
   const [hiddenIds, setHiddenIds] = useState<string[]>([]);
-  const profileToken = tokens.find((t) => !hiddenIds.includes(t.tokenId));
+  const profileToken = tokenIds.find((t) => !hiddenIds.includes(t));
 
   return (
     <>
@@ -92,21 +88,21 @@ const Row = ({
         {profileToken && (
           <Image
             className="rounded-full mr-3 w-14 h-14 sm:w-16 sm:h-16 "
-            src={assetTemplate.replace("TOKEN_ID", profileToken.tokenId)}
-            alt={owner}
+            src={assetTemplate.replace("TOKEN_ID", profileToken)}
+            alt={address}
             height={64}
             width={64}
             onError={() => {
-              setHiddenIds([...hiddenIds, profileToken.tokenId]);
+              setHiddenIds([...hiddenIds, profileToken]);
             }}
           />
         )}
 
         <div className="min-w-0 truncate hover:opacity-90 text-sm">
-          <a href={`https://etherscan.io/address/${owner}`}>{`${owner.slice(
+          <a href={`https://etherscan.io/address/${address}`}>{`${address.slice(
             0,
             5
-          )}...${owner.slice(-3)}`}</a>
+          )}...${address.slice(-3)}`}</a>
         </div>
       </div>
       <div
@@ -114,19 +110,19 @@ const Row = ({
           last ? "" : "border-b border-gray-300 pb-3 mb-3"
         }`}
       >
-        {tokens
-          .filter((t) => !hiddenIds.includes(t.tokenId))
+        {tokenIds
+          .filter((t) => !hiddenIds.includes(t))
           .slice(0, showTokens)
           .map((t) => (
-            <div className="flex-1 relative h-8 sm:h-11" key={t.tokenId}>
+            <div className="flex-1 relative h-8 sm:h-11" key={t}>
               <Image
                 className={`absolute w-8 sm:w-11 h-8 sm:h-11 rounded-full max-w-none`}
-                src={assetTemplate.replace("TOKEN_ID", t.tokenId)}
-                alt={t.tokenId}
+                src={assetTemplate.replace("TOKEN_ID", t)}
+                alt={t}
                 height={44}
                 width={44}
                 onError={() => {
-                  setHiddenIds([...hiddenIds, t.tokenId]);
+                  setHiddenIds([...hiddenIds, t]);
                 }}
               />
             </div>

@@ -190,7 +190,11 @@ const projects = [
     {
         name: 'Uints',
         address: '0x7c10c8816575e8fdfb11463dd3811cc794a1d407',
-    }
+    },
+    {
+        name: 'Joey Mob',
+        address: '0x9d46C1bFDB45b0e751D70c1baA777536392E215C',
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

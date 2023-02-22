@@ -10,6 +10,7 @@ import { Sales } from "./CombinedData/Sales";
 import { Volume } from "./CombinedData/Volume";
 import { AveragePrice } from "./CombinedData/AveragePrice";
 import { HolderOverlap } from "./CombinedData/HolderOverlap";
+import { sortBy } from "lodash";
 interface CombinedDataProps {
   projectAData: object;
   projectALoading: boolean;
@@ -130,20 +131,20 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
   const imageFooter = `${projectAData?.contract?.collection?.name} vs. ${projectBData?.contract?.collection?.name} at ${timestamp}`;
 
   const holderDistributionData = projectAData?.holderDistribution.map((d) => ({
-    label: d[0],
-    dataPoints: [{ label: projectAName, value: d[1] }],
+    label: d.name,
+    dataPoints: [{ label: projectAName, value: d.value }],
   }));
   projectBData?.holderDistribution.forEach((d) => {
-    const found = holderDistributionData.find((e) => e.label === d[0]);
+    const found = holderDistributionData.find((e) => e.label === d.name);
     if (found) {
       found.dataPoints.push({
         label: projectBName,
-        value: d[1],
+        value: d.value,
       });
     } else {
       holderDistributionData.push({
-        label: d[0],
-        dataPoints: [{ label: projectBName, value: d[1] }],
+        label: d.name,
+        dataPoints: [{ label: projectBName, value: d.value }],
       });
     }
   });
@@ -166,11 +167,6 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
         label: projectBName,
         value: d.sales,
       });
-    } else {
-      salesByDayData.push({
-        label: d.date,
-        dataPoints: [{ label: projectBName, value: d.sales }],
-      });
     }
   });
 
@@ -184,11 +180,6 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
       found.dataPoints.push({
         label: projectBName,
         value: d.ethVolume,
-      });
-    } else {
-      volumeByDayData.push({
-        label: d.date,
-        dataPoints: [{ label: projectBName, value: d.ethVolume }],
       });
     }
   });
@@ -204,11 +195,6 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
         label: projectBName,
         value: d.averagePrice,
       });
-    } else {
-      volumeByDayData.push({
-        label: d.date,
-        dataPoints: [{ label: projectBName, value: d.averagePrice }],
-      });
     }
   });
 
@@ -223,42 +209,37 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
         label: projectBName,
         value: d.sales,
       });
-    } else {
-      salesData.push({
-        label: d.date,
-        dataPoints: [{ label: projectBName, value: d.sales }],
-      });
     }
   });
 
   const salesDataA = projectAData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.sales,
+    value: d.sales || 0,
   }));
 
   const salesDataB = projectBData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.sales,
+    value: d.sales || 0,
   }));
 
   const volumeDataA = projectAData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.ethVolume,
+    value: d.ethVolume || 0,
   }));
 
   const volumeDataB = projectBData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.ethVolume,
+    value: d.ethVolume || 0,
   }));
 
   const averagePriceDataA = projectAData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.averagePrice,
+    value: d.averagePrice || 0,
   }));
 
   const averagePriceDataB = projectBData?.salesByDay?.byDay.map((d) => ({
     date: d.date,
-    value: d.averagePrice,
+    value: d.averagePrice || 0,
   }));
 
   const projectAOwnerAddressess = projectAData?.ownerAddresses;

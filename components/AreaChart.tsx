@@ -22,10 +22,14 @@ export const AreaChart = ({
   data,
   showLeftAxis,
   parentWidth,
+  leftAxisLabel,
+  bottomAxisLabel,
 }: {
   data: Array<Item>;
   showLeftAxis?: boolean;
   parentWidth?: number;
+  leftAxisLabel?: string;
+  bottomAxisLabel?: string;
 }) => {
   const customTheme = buildChartTheme({
     backgroundColor: "#fff",
@@ -39,8 +43,8 @@ export const AreaChart = ({
 
   return (
     <XYChart
-      height={height}
-      margin={{ top: 20, right: 0, bottom: 25, left: showLeftAxis ? 40 : 0 }}
+      height={height + 20}
+      margin={{ top: 20, right: 0, bottom: 45, left: showLeftAxis ? 50 : 0 }}
       xScale={{ type: "band" }}
       yScale={{ type: "linear" }}
       theme={customTheme}
@@ -53,15 +57,23 @@ export const AreaChart = ({
         hideTicks
         top={height - 20}
         tickLabelProps={() => ({
+          fontSize: 9,
+          fontWeight: 400,
+          fill: "#000",
+        })}
+        tickFormat={(d) => {
+          if (d === data[0].date) return "";
+          return d.slice(5).replace("-", "/");
+        }}
+        label={bottomAxisLabel ? bottomAxisLabel : "Date"}
+        labelProps={{
           fontSize: 10,
           fontWeight: 400,
           fill: "#000",
           textAnchor: "middle",
           verticalAnchor: "middle",
-        })}
-        tickFormat={(d) => {
-          if (d === data[0].date) return "";
-          return d.slice(5).replace("-", "/");
+          dx: -15,
+          dy: -5,
         }}
       />
       {showLeftAxis && (
@@ -69,15 +81,23 @@ export const AreaChart = ({
           orientation="left"
           numTicks={6}
           hideAxisLine
-          hideTicks
-          left={35}
+          left={48}
           tickLabelProps={() => ({
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: 400,
             fill: "#000",
             textAnchor: "end",
             verticalAnchor: "end",
           })}
+          label={leftAxisLabel ? leftAxisLabel : "Sales"}
+          labelProps={{
+            fontSize: 10,
+            fontWeight: 400,
+            fill: "#000",
+            textAnchor: "middle",
+            verticalAnchor: "middle",
+            dx: -25,
+          }}
         />
       )}
       <Grid columns={false} numTicks={4} />

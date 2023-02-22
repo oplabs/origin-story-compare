@@ -51,7 +51,12 @@ export const Volume = ({
   </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
-              <AreaChart data={salesByDay} parentWidth={parent.width} />
+              <AreaChart
+                data={salesByDay}
+                parentWidth={parent.width}
+                showLeftAxis
+                leftAxisLabel="Volume (ETH)"
+              />
             )}
           </ParentSize>
         </div>

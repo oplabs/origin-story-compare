@@ -52,7 +52,12 @@ export const AveragePrice = ({
   </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
-              <AreaChart data={salesByDay} parentWidth={parent.width} />
+              <AreaChart
+                data={salesByDay}
+                parentWidth={parent.width}
+                showLeftAxis
+                leftAxisLabel="Average Price (ETH)"
+              />
             )}
           </ParentSize>
         </div>

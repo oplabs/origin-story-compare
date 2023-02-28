@@ -195,6 +195,34 @@ const projects = [
         name: 'Joey Mob',
         address: '0x9d46C1bFDB45b0e751D70c1baA777536392E215C',
     },
+    {
+        name: 'The Doge Pound',
+        address: '0xf4ee95274741437636e748ddac70818b4ed7d043',
+    },
+    {
+        name: 'Doge Pound Puppies',
+        address: '0x73883743dd9894bd2d43e975465b50df8d3af3b2',
+    },
+    {
+        name: 'The Alien Girl',
+        address: '0x481bdca8a568efe05aecf1fe1f8ca26986ce22d4',
+    },
+    {
+        name: 'The Alien UFO',
+        address: '0xec830414d73c7289027203fb7546bc296aa55b5e2',
+    },
+    {
+        name: 'The Alien Doogle',
+        address: '0x08E795c30476bac6052b28fcDa04e44792C7151f',
+    },
+    {
+        name: 'Mega Toads',
+        address: '0x735eff20E5CfcA52d72a9e5Eba5A2EB6cC92357a',
+    },
+    {
+        name: 'King Frogs',
+        address: '0xd668a2e001f3385b8bbc5a8682ac3c0d83c19122',
+    },
 ];
 
 const sortedProjects = projects.sort((a, b) => a.name.localeCompare(b.name));

@@ -6,9 +6,18 @@ interface SalesByDayDataItem {
     averagePrice: number;
 }
 
+interface ComparativeSalesByDayData {
+    label: string;
+    date?: string | undefined;
+    dataPoints: {
+        label: string;
+        value: number;
+    }[];
+}
 interface DataItem {
-    date: string;
+    date?: string;
     value: number;
+    label?: string;
 }
 
-export type { SalesByDayDataItem, DataItem }
+export type { SalesByDayDataItem, ComparativeSalesByDayData, DataItem }

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { BarChart } from "./BarChart";
+import type { SalesByDayDataItem } from "../types/d.data";
+interface VolumeByDayProps {
+  data: SalesByDayDataItem[];
+}
 
-export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
+const VolumeByDay: FunctionComponent<VolumeByDayProps> = ({ data }) => {
   return (
     <div>
       <div className="text-xl font-medium md:mb-2">Volume By Day</div>
@@ -12,7 +16,7 @@ export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
             <BarChart
               height={300}
               width={parent.width}
-              data={data?.map((r) => ({ label: r.date, value: r.ethVolume }))}
+              data={data?.map((d) => ({ label: d.date, value: d.ethVolume }))}
               axisBottomLabel="Day"
               axisLeftLabel="Volume (ETH)"
               axisBottomIsDate
@@ -24,3 +28,5 @@ export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
     </div>
   );
 };
+
+export { VolumeByDay };

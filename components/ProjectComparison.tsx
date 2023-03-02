@@ -6,11 +6,11 @@ import type { ProjectData } from "../types/d.project";
 
 interface ProjectComparisonProps {
   projectAData: ProjectData;
-  projectALoading?: boolean;
+  projectALoading: boolean;
   projectBData: ProjectData;
-  projectBLoading?: boolean;
-  projectAName?: string;
-  projectBName?: string;
+  projectBLoading: boolean;
+  projectAName: string;
+  projectBName: string;
 }
 
 const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({

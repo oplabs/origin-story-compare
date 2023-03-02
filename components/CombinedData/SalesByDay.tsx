@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { ComparativeBarChart } from "../ComparativeBarChart";
+import { ComparativeSalesByDayData } from "../../types/d.data";
 
-export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
+interface SalesByDayProps {
+  data: ComparativeSalesByDayData[];
+}
+
+const SalesByDay: FunctionComponent<SalesByDayProps> = ({ data }) => {
   return (
     <div>
       <div className="text-xl font-medium mb-2">Sales By Day</div>
@@ -26,3 +31,5 @@ export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
     </div>
   );
 };
+
+export { SalesByDay };

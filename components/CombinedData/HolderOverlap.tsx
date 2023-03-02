@@ -37,8 +37,8 @@ export const HolderOverlap = ({
                 {(parent) => (
                   <DonutChart
                     data={[
-                      percentageOfProjectAOwnersWhoOwnProjectB,
-                      percentageOfProjectBOwnersWhoOwnProjectA,
+                      parseInt(percentageOfProjectAOwnersWhoOwnProjectB),
+                      100 - parseInt(percentageOfProjectAOwnersWhoOwnProjectB),
                     ]}
                     height={parent.height}
                     width={parent.width}
@@ -57,8 +57,8 @@ export const HolderOverlap = ({
                 {(parent) => (
                   <DonutChart
                     data={[
-                      percentageOfProjectBOwnersWhoOwnProjectA,
-                      percentageOfProjectAOwnersWhoOwnProjectB,
+                      parseInt(percentageOfProjectBOwnersWhoOwnProjectA),
+                      100 - parseInt(percentageOfProjectBOwnersWhoOwnProjectA),
                     ]}
                     height={parent.height}
                     width={parent.width}

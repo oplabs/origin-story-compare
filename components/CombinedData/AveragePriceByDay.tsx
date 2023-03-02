@@ -1,11 +1,14 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { ComparativeBarChart } from "../ComparativeBarChart";
+import { ComparativeSalesByDayData } from "../../types/d.data";
 
-export const AveragePriceByDay = ({
+interface AveragePriceByDayProps {
+  data: ComparativeSalesByDayData[];
+}
+
+const AveragePriceByDay: FunctionComponent<AveragePriceByDayProps> = ({
   data,
-}: {
-  data: Array<object> | undefined;
 }) => {
   return (
     <div>
@@ -30,3 +33,5 @@ export const AveragePriceByDay = ({
     </div>
   );
 };
+
+export { AveragePriceByDay };

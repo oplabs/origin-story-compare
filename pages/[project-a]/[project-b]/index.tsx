@@ -7,6 +7,7 @@ import { ProjectSelector } from "../../../components/ProjectSelector";
 import { projects } from "../../../lib/projects";
 import { ProjectComparison } from "../../../components/ProjectComparison";
 import { useProjectData } from "../../../hooks/useProjectData";
+import { ProjectData } from "../../../types/d.project";
 
 type ProjectPath = {
   "project-a": string;
@@ -65,7 +66,10 @@ interface IndexProps {
   projectB: Project;
 }
 
-const Index: NextPage<IndexProps> = ({ projectA = {}, projectB = {} }) => {
+const Index: NextPage<IndexProps> = ({
+  projectA = {} as Project,
+  projectB = {} as Project,
+}) => {
   const { projectData: projectAData, loading: projectALoading } =
     useProjectData(projectA?.address);
 

@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import useSWR from 'swr';
 import { OPENSEA_API_CONTRACT_URL, API_COLLECTIONS_URL, INTERNAL_API_ALCHEMY_URL, API_DASHBOARD_URL, API_SALES_BY_DAY_URL } from '../lib/api';
+import type { ProjectData } from '../types/d.project';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const useProjectData = (address:string | undefined) => {
     const [loading, setLoading] = useState(true)
-    const [projectData, setProjectData] = useState({})
+    const [projectData, setProjectData] = useState({} as ProjectData)
 
     const nipArgs = `?contract=${address}`;
     const { data: dashboard } = useSWR(`${API_DASHBOARD_URL}/${address}`, fetcher);
@@ -45,7 +46,7 @@ const useProjectData = (address:string | undefined) => {
             setLoading(false);
         }
     }, [dashboard, salesByDay?.result, contractData, contractStats, ownerAddresses?.ownerAddresses])
-    
+
     return { projectData, loading }
 };
 

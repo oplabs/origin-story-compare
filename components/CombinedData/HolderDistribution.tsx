@@ -1,11 +1,14 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { ComparativeBarChart } from "../ComparativeBarChart";
+import type { ComparativeSalesByDayData } from "../../types/d.data";
 
-export const HolderDistribution = ({
+interface HolderDistributionProps {
+  data: ComparativeSalesByDayData[];
+}
+
+const HolderDistribution: FunctionComponent<HolderDistributionProps> = ({
   data,
-}: {
-  data: Array<object> | undefined;
 }) => {
   return (
     <div>
@@ -27,3 +30,5 @@ export const HolderDistribution = ({
     </div>
   );
 };
+
+export { HolderDistribution };

@@ -7,6 +7,7 @@ import { ProjectSelector } from "../../components/ProjectSelector";
 import { projects } from "../../lib/projects";
 import { ProjectComparison } from "../../components/ProjectComparison";
 import { useProjectData } from "../../hooks/useProjectData";
+import { ProjectData } from "../../types/d.project";
 
 type ProjectPath = {
   "project-a": string;
@@ -44,14 +45,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 type Project = {
-  name?: string;
-  address?: string;
+  name: string;
+  address: string;
 };
 interface IndexProps {
   projectA: Project;
 }
 
-const Index: NextPage<IndexProps> = ({ projectA = {} }) => {
+const Index: NextPage<IndexProps> = ({ projectA = {} as Project }) => {
   const { projectData: projectAData, loading: projectALoading } =
     useProjectData(projectA?.address);
 
@@ -71,7 +72,7 @@ const Index: NextPage<IndexProps> = ({ projectA = {} }) => {
       </div>
       <div className="mt-8">
         <ProjectComparison
-          projectAData={projectAData}
+          projectAData={projectAData as ProjectData}
           projectALoading={projectALoading}
           projectAName={projectA?.name}
         />

@@ -4,7 +4,7 @@ import { BarChart } from "./BarChart";
 import type { SalesByDayDataItem } from "../types/d.data";
 
 interface SalesByDayProps {
-  data: SalesByDayDataItem[] | undefined;
+  data: SalesByDayDataItem[];
 }
 
 const SalesByDay: FunctionComponent<SalesByDayProps> = ({ data }) => {

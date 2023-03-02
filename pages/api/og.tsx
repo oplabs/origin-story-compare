@@ -33,6 +33,10 @@ export default async function handler(req: NextRequest) {
   const hasContractB = searchParams.has("contract-b");
   const contractB = hasContractB ? searchParams.get("contract-b") : "";
 
+  if (!contractA || !contractB) {
+    return;
+  }
+
   const fetchOptions = {
     method: "GET",
     headers: {

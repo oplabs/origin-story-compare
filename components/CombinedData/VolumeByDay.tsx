@@ -1,8 +1,12 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { ComparativeBarChart } from "../ComparativeBarChart";
+import type { ComparativeSalesByDayData } from "../../types/d.data";
+interface VolumeByDayProps {
+  data: ComparativeSalesByDayData[];
+}
 
-export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
+const VolumeByDay: FunctionComponent<VolumeByDayProps> = ({ data }) => {
   return (
     <div>
       <div className="text-xl font-medium mb-2">Volume By Day</div>
@@ -26,3 +30,5 @@ export const VolumeByDay = ({ data }: { data: Array<object> | undefined }) => {
     </div>
   );
 };
+
+export { VolumeByDay };

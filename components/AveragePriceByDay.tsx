@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { BarChart } from "./BarChart";
 
-export const AveragePriceByDay = ({
+import type { SalesByDayDataItem } from "../types/d.data";
+
+interface AveragePriceByDayProps {
+  data: SalesByDayDataItem[];
+}
+
+const AveragePriceByDay: FunctionComponent<AveragePriceByDayProps> = ({
   data,
-}: {
-  data: Array<object> | undefined;
 }) => {
   return (
     <div>
@@ -16,9 +20,9 @@ export const AveragePriceByDay = ({
             <BarChart
               height={300}
               width={parent.width}
-              data={data?.map((r) => ({
-                label: r.date,
-                value: r.averagePrice,
+              data={data?.map((d) => ({
+                label: d.date,
+                value: d.averagePrice,
               }))}
               axisBottomLabel="Day"
               axisLeftLabel="Average Price (ETH)"
@@ -31,3 +35,5 @@ export const AveragePriceByDay = ({
     </div>
   );
 };
+
+export { AveragePriceByDay };

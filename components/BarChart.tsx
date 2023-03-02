@@ -5,17 +5,18 @@ import { scaleBand, scaleLinear } from "@visx/scale";
 import { Text } from "@visx/text";
 import { AxisBottom, AxisLeft } from "@visx/axis";
 import { GridRows } from "@visx/grid";
+import { DataItem } from "../types/d.data";
 
 const verticalMargin = 60;
 
-const getX = (d: any) => d.label;
-const getY = (d: any) => d.value;
+const getX = (d: DataItem) => d.label;
+const getY = (d: DataItem) => d.value;
 
 export type BarsProps = {
   width: number;
   height: number;
   events?: boolean;
-  data?: { label: string; value: number }[];
+  data: DataItem[];
   axisLeftLabel?: string;
   axisBottomLabel?: string;
   appendCount?: boolean;

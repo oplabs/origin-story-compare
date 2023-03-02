@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { AreaChart, AreaChartHeader } from "./AreaChart";
-import { Range } from "./Range";
+import React from "react";
+import { AreaChart } from "./AreaChart";
 import { CreateImageWrapper } from "./CreateImageWrapper";
 import { ParentSize } from "@visx/responsive";
 
@@ -19,7 +17,6 @@ interface SalesByDay {
 export const Volume = ({
   data,
   imageFooter,
-  totalVolume,
   tweetText,
 }: {
   data: AllSalesByDay;

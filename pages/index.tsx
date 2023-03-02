@@ -10,6 +10,7 @@ const Index: NextPage = () => (
   <Layout>
     <Seo
       title="Compare Top NFT Projects | Data by Origin Protocol"
+      ogTitle="Compare Top NFT Projects"
       description="See how your favourite collection is doing and make informed buying decisions with side-by-side project data"
     />
     <PageHeader>

@@ -8,8 +8,17 @@ import { projects } from "../../lib/projects";
 import { ProjectComparison } from "../../components/ProjectComparison";
 import { useProjectData } from "../../hooks/useProjectData";
 
+type ProjectPath = {
+  "project-a": string;
+};
+
+type Path = {
+  params: ProjectPath;
+};
+
 export const getStaticPaths = async () => {
-  const paths = projects.map((project) => ({
+  let paths: Path[] = [];
+  paths = projects.map((project) => ({
     params: { "project-a": project.address },
   }));
 
@@ -35,8 +44,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 type Project = {
-  name: string;
-  address: string;
+  name?: string;
+  address?: string;
 };
 interface IndexProps {
   projectA: Project;
@@ -50,7 +59,9 @@ const Index: NextPage<IndexProps> = ({ projectA = {} }) => {
     <Layout>
       <Seo
         title={`Comparing ${projectA?.name} with... | Data by Origin Protocol`}
+        ogTitle={`Comparing ${projectA?.name} with...`}
         description={`See how your ${projectA?.name} is doing and make informed buying decisions with side-by-side project data`}
+        contractA={projectA?.address}
       />
       <PageHeader>
         <PageTitle>Comparing {projectA?.name} with...</PageTitle>

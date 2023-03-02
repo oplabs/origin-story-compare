@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Project } from "./Project";
 import { CombinedData } from "./CombinedData";
 interface ProjectComparisonProps {
-  projectAData: object;
-  projectALoading: boolean;
+  projectAData?: object;
+  projectALoading?: boolean;
   projectBData?: object;
   projectBLoading?: boolean;
-  projectAName: string;
+  projectAName?: string;
   projectBName?: string;
 }
 

@@ -11,6 +11,10 @@ const font = fetch(new URL("../../assets/Helvetica.ttf", import.meta.url)).then(
 );
 
 export default async function handler(req: NextRequest) {
+  if (!process.env.OPENSEA_KEY) {
+    return;
+  }
+
   const fontData = await font;
 
   const { searchParams } = new URL(req.url);

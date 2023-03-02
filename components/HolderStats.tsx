@@ -2,12 +2,12 @@ import { ReactElement } from "react";
 import { formatNumber } from "../lib/utils";
 
 export const HolderStats = ({
-  totalHolders = 10000,
-  uniqueHolders = 5000,
-  highConvictionHolders = 10,
+  totalHolders,
+  uniqueHolders,
+  highConvictionHolders,
 }: {
   totalHolders: number;
-  uniqueHolders: number;
+  uniqueHolders: string;
   highConvictionHolders: number;
 }) => {
   return (

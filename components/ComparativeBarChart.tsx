@@ -16,7 +16,11 @@ export type ComparativeBarChartProps = {
   width: number;
   height: number;
   events?: boolean;
-  data: { label: string; dataPoints: { label: string; value: number }[] }[];
+  data: {
+    label: string;
+    date?: string;
+    dataPoints: { label: string; value: number }[];
+  }[];
   axisLeftLabel?: string;
   axisBottomLabel?: string;
   appendCount?: boolean;

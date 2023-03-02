@@ -10,15 +10,16 @@ import { Sales } from "./CombinedData/Sales";
 import { Volume } from "./CombinedData/Volume";
 import { AveragePrice } from "./CombinedData/AveragePrice";
 import { HolderOverlap } from "./CombinedData/HolderOverlap";
-import { sortBy } from "lodash";
+import type { ProjectData } from "../types/d.project";
+
 interface CombinedDataProps {
-  projectAData: object;
+  projectAData: ProjectData;
   projectALoading: boolean;
-  projectBData?: object;
-  projectBLoading?: boolean;
+  projectBData: ProjectData;
+  projectBLoading: boolean;
   projectAName: string;
-  projectBName?: string;
-  range?: string;
+  projectBName: string;
+  range: string;
 }
 
 const CombinedDataSkeleton: FunctionComponent = () => (
@@ -301,24 +302,24 @@ const CombinedData: FunctionComponent<CombinedDataProps> = ({
               <AveragePriceByDay data={averagePriceByDayData} />
             </CreateImageWrapper>
             <Sales
-              dataA={salesDataA.slice(`-${rangeInDays}`)}
-              dataB={salesDataB.slice(`-${rangeInDays}`)}
+              dataA={salesDataA.slice(parseInt(`-${rangeInDays}`))}
+              dataB={salesDataB.slice(parseInt(`-${rangeInDays}`))}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}
               tweetText={`Sales ${tweetTextEnd}`}
             />
             <Volume
-              dataA={volumeDataA.slice(`-${rangeInDays}`)}
-              dataB={volumeDataB.slice(`-${rangeInDays}`)}
+              dataA={volumeDataA.slice(parseInt(`-${rangeInDays}`))}
+              dataB={volumeDataB.slice(parseInt(`-${rangeInDays}`))}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}
               tweetText={`Volume ${tweetTextEnd}`}
             />
             <AveragePrice
-              dataA={averagePriceDataA.slice(`-${rangeInDays}`)}
-              dataB={averagePriceDataB.slice(`-${rangeInDays}`)}
+              dataA={averagePriceDataA.slice(parseInt(`-${rangeInDays}`))}
+              dataB={averagePriceDataB.slice(parseInt(`-${rangeInDays}`))}
               dataAKey={projectAName}
               dataBKey={projectBName}
               imageFooter={imageFooter}

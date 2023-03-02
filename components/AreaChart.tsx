@@ -8,14 +8,11 @@ import {
   buildChartTheme,
 } from "@visx/xychart";
 
-interface Item {
-  date: Date;
-  value: number;
-}
+import type { DataItem } from "../types/d.data";
 
 const accessors = {
-  xAccessor: (d: Item) => d.date,
-  yAccessor: (d: Item) => d.value,
+  xAccessor: (d: DataItem) => d.date,
+  yAccessor: (d: DataItem) => d.value,
 };
 
 export const AreaChart = ({
@@ -25,7 +22,7 @@ export const AreaChart = ({
   leftAxisLabel,
   bottomAxisLabel,
 }: {
-  data: Array<Item>;
+  data: DataItem[];
   showLeftAxis?: boolean;
   parentWidth?: number;
   leftAxisLabel?: string;

@@ -2,10 +2,12 @@ import type { FunctionComponent } from "react";
 import { useState } from "react";
 import { Project } from "./Project";
 import { CombinedData } from "./CombinedData";
+import type { ProjectData } from "../types/d.project";
+
 interface ProjectComparisonProps {
-  projectAData?: object;
+  projectAData: ProjectData;
   projectALoading?: boolean;
-  projectBData?: object;
+  projectBData: ProjectData;
   projectBLoading?: boolean;
   projectAName?: string;
   projectBName?: string;
@@ -21,7 +23,12 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
 }) => {
   const [view, setView] = useState<"side-by-side" | "combined">("side-by-side");
   const [range, setRange] = useState<
-    "Last 7 days" | "Last 30 days" | "Last 90 days" | "Last year" | "All time"
+    | "Last 7 days"
+    | "Last 30 days"
+    | "Last 90 days"
+    | "Last year"
+    | "All time"
+    | string
   >("Last 30 days");
   const hasProjectB = projectBData && projectBName;
 
@@ -110,12 +117,14 @@ const ProjectComparison: FunctionComponent<ProjectComparisonProps> = ({
         </div>
         <div className="divider lg:hidden" />
         <div className="flex-1 lg:w-1/2">
-          <Project
-            data={hasProjectB ? projectBData : {}}
-            loading={hasProjectB ? projectBLoading : true}
-            name={hasProjectB ? projectBName : ""}
-            range={range}
-          />
+          {hasProjectB && (
+            <Project
+              data={projectBData}
+              loading={projectBLoading}
+              name={projectBName}
+              range={range}
+            />
+          )}
         </div>
       </div>
     </>

@@ -1,13 +1,8 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { ComparativeAreaChart } from "../ComparativeAreaChart";
-import { Range } from "../Range";
 import { CreateImageWrapper } from "../CreateImageWrapper";
 import { ParentSize } from "@visx/responsive";
-
-interface DataItem {
-  label: string;
-  value: number;
-}
+import type { DataItem } from "../../types/d.data";
 interface Sales {
   dataA: DataItem[];
   dataB: DataItem[];

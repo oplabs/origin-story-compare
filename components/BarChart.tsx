@@ -60,7 +60,6 @@ export const BarChart = ({
 
   return width < 10 ? null : (
     <svg width="100%" height={height} className="text-primary">
-      {/* <GridRows scale={xScale} tickValues={data?.map((d) => getX(d))} width={innerWidth} /> */}
       <Group top={verticalMargin - 30} left={horizontalMargin}>
         {showGrid && (
           <GridRows
@@ -99,7 +98,6 @@ export const BarChart = ({
                   className="fill-current"
                   fontSize={countFontSize || 16}
                   textAnchor="middle"
-                  // dx={'-.2em'}
                   dy={"-0.5em"}
                 >
                   {getY(d).toFixed(0)}

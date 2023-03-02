@@ -9,11 +9,7 @@ import {
 } from "@visx/xychart";
 import { LegendOrdinal } from "@visx/legend";
 import { scaleOrdinal } from "@visx/scale";
-
-interface DataItem {
-  date: Date;
-  value: number;
-}
+import { DataItem } from "../types/d.data";
 
 const accessors = {
   xAccessor: (d: DataItem) => d.date,

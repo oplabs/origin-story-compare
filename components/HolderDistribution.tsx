@@ -5,7 +5,10 @@ import { BarChart } from "./BarChart";
 export const HolderDistribution = ({
   data,
 }: {
-  data: Array<object> | undefined;
+  data: {
+    name: string;
+    value: number;
+  }[];
 }) => {
   return (
     <div>
@@ -16,7 +19,7 @@ export const HolderDistribution = ({
             <BarChart
               height={300}
               width={parent.width}
-              data={data?.map((r) => ({ label: r?.name, value: r?.value }))}
+              data={data?.map((d) => ({ label: d?.name, value: d?.value }))}
               axisBottomLabel="Tokens"
               axisLeftLabel="Holders"
               appendCount={true}

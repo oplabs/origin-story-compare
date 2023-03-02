@@ -2,33 +2,21 @@ import React from "react";
 import { AreaChart } from "./AreaChart";
 import { CreateImageWrapper } from "./CreateImageWrapper";
 import { ParentSize } from "@visx/responsive";
-
-interface AllSalesByDay {
-  byDay: SalesByDay[];
-  stats: object;
-}
-
-interface SalesByDay {
-  date: string;
-  ethVolume: number;
-  value: number;
-}
+import type { SalesByDayDataItem, DataItem } from "../types/d.data";
 
 export const Volume = ({
   data,
   imageFooter,
   tweetText,
 }: {
-  data: AllSalesByDay;
+  data: SalesByDayDataItem[];
   imageFooter?: string;
-  totalVolume: number;
   tweetText?: string;
 }) => {
-  let salesByDay: SalesByDay[] = [];
+  let salesByDay: DataItem[] = [];
 
   salesByDay = data?.map(({ date, ethVolume }) => ({
     date,
-    ethVolume,
     value: Math.round(ethVolume * 10000) / 10000,
   }));
 
@@ -39,15 +27,6 @@ export const Volume = ({
       </div>
       <CreateImageWrapper footer={imageFooter} tweetText={tweetText}>
         <div className="md:px-5 md:py-4 rounded-xl card md:border border-gray-150 bg-white">
-          {/*<AreaChartHeader description="All time total volume">
-            <Image
-              src="/eth-icon.svg"
-              alt="All time total volume"
-              width={12}
-              height={12}
-            />
-            <span className="ml-2 text-primary">{totalVolume}</span>
-  </AreaChartHeader>*/}
           <ParentSize>
             {(parent) => (
               <AreaChart

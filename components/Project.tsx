@@ -19,6 +19,8 @@ import { SalesByDay } from "./SalesByDay";
 import { VolumeByDay } from "./VolumeByDay";
 import { AveragePriceByDay } from "./AveragePriceByDay";
 import "react-loading-skeleton/dist/skeleton.css";
+import type { ProjectData } from "../types/d.project";
+
 interface StatProps {
   value: number | string;
   label: string;
@@ -96,7 +98,7 @@ const ProjectSkeleton: FunctionComponent = () => (
 );
 
 interface ProjectProps {
-  data: object | undefined;
+  data: ProjectData;
   loading: boolean | undefined;
   name: string | undefined;
   range?: string | undefined;
@@ -113,15 +115,15 @@ const Project: FunctionComponent<ProjectProps> = ({
   useEffect(() => {
     if (data?.salesByDay?.byDay) {
       if (range === "Last 7 days") {
-        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-7));
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-7) as []);
       } else if (range === "Last 30 days") {
-        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-30));
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-30) as []);
       } else if (range === "Last 90 days") {
-        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-90));
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-90) as []);
       } else if (range === "Last year") {
-        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-365));
+        setSalesByDayRanged(data?.salesByDay?.byDay.slice(-365) as []);
       } else {
-        setSalesByDayRanged(data?.salesByDay?.byDay);
+        setSalesByDayRanged(data?.salesByDay?.byDay as []);
       }
     }
   }, [data?.salesByDay?.byDay, range]);
@@ -238,7 +240,6 @@ const Project: FunctionComponent<ProjectProps> = ({
         />
         <Volume
           data={salesByDayRanged}
-          totalVolume={formatNumber(data?.contractStats?.totalVolume)}
           imageFooter={imageFooter}
           tweetText={`Volume over time ${tweetTextEnd}`}
         />

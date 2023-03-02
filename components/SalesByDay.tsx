@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { ParentSize } from "@visx/responsive";
 import { BarChart } from "./BarChart";
+import type { SalesByDayDataItem } from "../types/d.data";
 
-export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
+interface SalesByDayProps {
+  data: SalesByDayDataItem[] | undefined;
+}
+
+const SalesByDay: FunctionComponent<SalesByDayProps> = ({ data }) => {
   return (
     <div>
       <div className="text-xl font-medium md:mb-2">Sales By Day</div>
@@ -12,7 +17,7 @@ export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
             <BarChart
               height={300}
               width={parent.width}
-              data={data?.map((r) => ({ label: r.date, value: r.sales }))}
+              data={data?.map((d) => ({ label: d.date, value: d.sales }))}
               axisBottomLabel="Day"
               axisLeftLabel="Sales"
               axisBottomIsDate
@@ -24,3 +29,5 @@ export const SalesByDay = ({ data }: { data: Array<object> | undefined }) => {
     </div>
   );
 };
+
+export { SalesByDay };
